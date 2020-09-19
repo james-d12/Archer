@@ -15,7 +15,7 @@ If you do not want to install pip packages for example you can simply remove all
 6. Login to new user account.
 7. A folder 'arch-linux-scripts/' should've been created in the home folder of the new user.
 8. Run the 'arch-install-03.sh' script to install the desktop environment specified in the config
-file and to install the packages in the '*-packages*.sh' files.
+file and to install the packages in the 'resources/packages' files.
 9. Reboot machine. 
 10. If all goes well, you should be greeted with the login manager of your choice. NOTE if no 
 login manager appears it may mean that the login manager you wanted to install did not get 
