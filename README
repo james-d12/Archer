@@ -1,7 +1,4 @@
-CONFIGURATION:
-You should configure the 'arch-config.sh' and 'resources/packages' file before running any scripts. The 
-'arch-config.sh' file contains parameters needed to ensure the installation process runs correctly.
-
+# Overview
 The 'resources/packages' contains a list of packages for the following areas:
     - Packages within the standard repositories.
     - Packages within the AUR.
@@ -9,10 +6,10 @@ The 'resources/packages' contains a list of packages for the following areas:
     - Visual Studio Code Extensions.
 If you do not want to install pip packages for example you can simply remove all the items within the list.
 
-STEPS:
+# STEPS:
 1. Connect to the internet.
 2. Partition drive in one of the supported layouts.
-3. Run 'bash arch-install-01.sh'
+3. Run 'bash arch-install-00.sh'
 4. Answer any prompts.
 5. After script has finished, reboot machine.
 6. Login to new user account.
