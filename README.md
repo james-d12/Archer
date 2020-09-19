@@ -26,7 +26,7 @@ arch wiki page concerning your chosen login manager about enabling the service.
 This installation script currently is quite specific in the setup for the parititions. This aims to 
 be fixed by allowing users to specify in the config file the SWAP, EFI, ROOT, ETC partitions.
 
-************************************* SUPPORTED LAYOUTS *****************************************
+# Supported DRIVE Layouts
 
 WHERE DRIVE NAME = SDA (SUBSTITUTE SDA FOR YOUR DRIVE NAME)
 
