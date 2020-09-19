@@ -30,13 +30,13 @@ be fixed by allowing users to specify in the config file the SWAP, EFI, ROOT, ET
 
 WHERE DRIVE NAME = SDA (SUBSTITUTE SDA FOR YOUR DRIVE NAME)
 
-UEFI: 
+## UEFI: 
 
 /dev/sda1 = EFI Partition       TYPE: EFI FILESYSTEM
 /dev/sda2 = SWAP Partition      TYPE: LINUX SWAP 
 /dev/sda3 = ROOT Partition      TYPE: LINUX FILESYSTEM
 
-UEFI ENCRYPTED:
+## UEFI ENCRYPTED:
 
 /dev/sda1 = EFI Partition       TYPE: EFI FILESYSTEM 
 /dev/sda2 = BOOT Partition      TYPE: LINUX FILESYSTEM
@@ -44,12 +44,12 @@ UEFI ENCRYPTED:
 
 SWAP is created within the ROOT partition so that it's contents are encrypted
 
-BIOS: 
+## BIOS: 
 
 /dev/sda1 = SWAP Partition      TYPE: LINUX SWAP / SOLARIS
 /dev/sda2 = ROOT Partition      TYPE: LINUX 
 
-BIOS ENCRYPTED: 
+## BIOS ENCRYPTED: 
 
 /dev/sda1 = BOOT Partition      TYPE: LINUX | MARK AS *BOOTABLE*
 /dev/sda2 = ROOT Partition      TYPE: LINUX
