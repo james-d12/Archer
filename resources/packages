@@ -90,12 +90,11 @@ packages=(
     #'ttf-roboto'                   # Adds Roboto Fonts
 
     #*********** APPLICATIONS SETUP ************#
-    'zsh'                           # Alternative Shell to Bash
-    'zsh-completions'               # Auto Completions For ZSH
-    #'bash-completions'             # Auto completions for BASH
+    #'zsh'                           # Alternative Shell to Bash
+    #'zsh-completions'               # Auto Completions For ZSH
     'firefox'                       # Firefox Browser
     #'chromium'                     # Chromium Web Browser
-    'discord'                       # Communication
+    #'discord'                       # Communication
     #'code'                          # VSCode Editor 
     #'plank'                         # A Docker
     #'flameshot'                     # Screenshot software
@@ -112,10 +111,10 @@ packages=(
 
 # AUR PACKAGES
 packagesaur=(
-    'protonvpn-cli-ng'                     # ProtonVPN CLI Client
-    'zeal-git'                             # Offline Documentation Viewer
-    'timeshift'                            # Backup Tool
-    'bitwarden-bin'                        # Password Manager
+    #'protonvpn-cli-ng'                     # ProtonVPN CLI Client
+    #'zeal-git'                             # Offline Documentation Viewer
+    #'timeshift'                            # Backup Tool
+    #'bitwarden-bin'                        # Password Manager
     #'breeze-obsidian-cursor-theme'        # Obsidian Cursor Theme
     #'gnome-shell-pomodoro'                # Pomodoro Timer for Gnome
     #'gnome-shell-extension-pop-shell-git' # Tiling Windows for Gnome

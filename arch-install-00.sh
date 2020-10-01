@@ -64,7 +64,7 @@ PS3='Choose Desktop Environment: '
 options=(
     "gnome" "gnome-minimal" 
     "xfce" "xfce-minimal"
-    "custom" "NONE"
+    "i3" "custom" "NONE"
 )
 select o in "${options[@]}"; do
     case $o in
@@ -72,6 +72,7 @@ select o in "${options[@]}"; do
         "gnome-minimal") desktopenvironment=$o; break;;
         "xfce") desktopenvironment=$o; break;;
         "xfce-minimal") desktopenvironment=$o; break;;
+        "i3") desktopenvironment=$o; break;;
         "custom") desktopenvironment=$o; break;;
         "NONE") desktopenvironment=""; break;;
         *) echo "Invalid option $REPLY";;

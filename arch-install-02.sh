@@ -2,7 +2,31 @@
 
 . /arch-install-scripts/arch-config.sh
 
-##************************** Encrypted Install - Add SWAP ******************************##
+
+echo "-----------------------------------------"
+echo "--      Setting ROOT Password          --"
+echo "-----------------------------------------"
+echo -e "${MSGCOLOUR}Setting root password.....${NC}"
+until passwd
+do
+    echo "Try setting root password again."
+    sleep 2
+done
+
+echo "-----------------------------------------"
+echo "--            Adding User              --"
+echo "-----------------------------------------"
+echo -e "${MSGCOLOUR}Creating the user $user for group wheel.....${NC}"
+useradd -m -G wheel $user 
+until passwd $user
+do
+    echo "Try setting user password again."
+    sleep 2
+done
+echo -e "${MSGCOLOUR}Backing up /etc/sudoers to /etc/sudoers.bak....${NC}"
+cp /etc/sudoers /etc/sudoers.bak
+echo "$user ALL=(ALL) ALL" >> /etc/sudoers
+
 if [ "$encrypted" == "YES" ]; then
     echo "-----------------------------------------"
     echo "--      Adding Encrypted Swap File     --"
@@ -47,16 +71,6 @@ echo "$host" >> /etc/hosts
 
 
 echo "-----------------------------------------"
-echo "--      Setting ROOT Password          --"
-echo "-----------------------------------------"
-echo -e "${MSGCOLOUR}Setting root password.....${NC}"
-until passwd
-do
-    echo "Try setting root password again."
-    sleep 2
-done
-
-echo "-----------------------------------------"
 echo "--  Installing Bootloader and Network  --"
 echo "-----------------------------------------"
 systemctl enable --now NetworkManager
@@ -97,20 +111,6 @@ else
     grub-mkconfig -o /boot/grub/grub.cfg
     mkinitcpio -p $kernel
 fi
-
-echo "-----------------------------------------"
-echo "--            Adding User              --"
-echo "-----------------------------------------"
-echo -e "${MSGCOLOUR}Creating the user $user for group wheel.....${NC}"
-useradd -m -G wheel $user 
-until passwd $user
-do
-    echo "Try setting user password again."
-    sleep 2
-done
-echo -e "${MSGCOLOUR}Backing up /etc/sudoers to /etc/sudoers.bak....${NC}"
-cp /etc/sudoers /etc/sudoers.bak
-echo "$user ALL=(ALL) ALL" >> /etc/sudoers
 
 echo "-----------------------------------------"
 echo "--         Finishing up Script         --"
