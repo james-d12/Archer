@@ -18,6 +18,7 @@ packages=(
     #'linux-hardened-headers'       # Headers For Hardened Kernel   
 
     #'nvidia'                       # Nvidia Graphics Driver
+    #'nvidia-dkms'
     #'nvidia-lts'                   # Nvidia LTS Graphics Driver
     #'lib32-nvidia-utils'           # Nvidia OpenGL Library - Needed For Games and Steam
     #'xf86-video-amdgpu'            # AMD Driver
