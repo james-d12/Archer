@@ -2,8 +2,6 @@
 
 . /arch-install-scripts/arch-config.sh
 
-
-
 setup_root_password(){
     echo -e "${MSGCOLOUR}Setting root password.....${NC}"
     until passwd

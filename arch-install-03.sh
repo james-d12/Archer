@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 . ./arch-config.sh
-. resources/packages
 
 check_network_connection(){
     if ! ping -c 1 -q google.com >&/dev/null; then
