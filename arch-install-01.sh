@@ -2,6 +2,8 @@
 
 . ./arch-config.sh
 
+cfdisk /dev/$drive
+
 encrypt_format_and_mount_drives(){
     if [ "$system" == "BIOS" ]; then 
         echo -e "${MSGCOLOUR}Setting up cryptsetup...${NC}"
