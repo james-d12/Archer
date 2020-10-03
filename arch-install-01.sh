@@ -9,7 +9,7 @@ encrypt_format_and_mount_drives(){
         echo -e "${MSGCOLOUR}Setting up cryptsetup...${NC}"
         modprobe dm-crypt
         modprobe dm-mod
-        cryptsetup luksFormat -v -s 512 -h sha512 /dev/"${drive}2"
+        echo "$encryptionpass" | cryptsetup luksFormat -v -s 512 -h sha512 /dev/"${drive}2"
         cryptsetup open /dev/"${drive}2" cr_root
 
         echo -e "${MSGCOLOUR}Formatting encrypted install partitions...${NC}"
@@ -24,7 +24,7 @@ encrypt_format_and_mount_drives(){
         echo -e "${MSGCOLOUR}Setting up cryptsetup...${NC}"
         modprobe dm-crypt
         modprobe dm-mod
-        cryptsetup luksFormat -v -s 512 -h sha512 /dev/"${drive}3"
+        echo "$encryptionpass" | cryptsetup luksFormat -v -s 512 -h sha512 /dev/"${drive}3"
         cryptsetup open /dev/"${drive}3" cr_root
 
         echo -e "${MSGCOLOUR}Formatting encrypted install partitions...${NC}"
@@ -41,24 +41,12 @@ encrypt_format_and_mount_drives(){
     fi 
 }
 
+
 format_and_mount_drives(){
-    if [ "$system" == "BIOS" ]; then
-        if [ "$encrypted" == "YES" ]; then
-            echo -e "${MSGCOLOUR}Setting up cryptsetup...${NC}"
-            modprobe dm-crypt
-            modprobe dm-mod
-            cryptsetup luksFormat -v -s 512 -h sha512 /dev/"${drive}2"
-            cryptsetup open /dev/"${drive}2" cr_root
-
-            echo -e "${MSGCOLOUR}Formatting encrypted install partitions...${NC}"
-            mkfs.ext4 -L BOOT /dev/"${drive}1"
-            mkfs.ext4 /dev/mapper/cr_root
-
-            echo -e "${MSGCOLOUR}Mounting encrypted install partitions...${NC}"
-            mount /dev/mapper/cr_root /mnt
-            mkdir /mnt/boot
-            mount /dev/"${drive}1" /mnt/boot
-        else
+    if [ "$encrypted" == "YES" ]; then
+        encrypt_format_and_mount_drives 
+    else 
+        if [ "$system" == "BIOS" ]; then
             echo -e "${MSGCOLOUR}Formatting install partitions...${NC}"
             mkswap -L SWAP /dev/"${drive}1"
             mkfs.ext4 -L ROOT /dev/"${drive}2"
@@ -66,26 +54,6 @@ format_and_mount_drives(){
             echo -e "${MSGCOLOUR}Mounting install partitions...${NC}"
             swapon /dev/"${drive}1"
             mount /dev/"${drive}2" /mnt
-        fi
-    else 
-        if [ "$encrypted" == "YES" ]; then
-            echo -e "${MSGCOLOUR}Setting up cryptsetup...${NC}"
-            modprobe dm-crypt
-            modprobe dm-mod
-            cryptsetup luksFormat -v -s 512 -h sha512 /dev/"${drive}3"
-            cryptsetup open /dev/"${drive}3" cr_root
-
-            echo -e "${MSGCOLOUR}Formatting encrypted install partitions...${NC}"
-            mkfs.fat -F32 /dev/"${drive}1"
-            mkfs.ext4 -L BOOT /dev/"${drive}2"
-            mkfs.ext4 -L ROOT /dev/mapper/cr_root
-
-            echo -e "${MSGCOLOUR}Mounting encrypted install partitions...${NC}"
-            mount /dev/mapper/cr_root /mnt
-            mkdir -p /mnt/boot
-            mount /dev/"${drive}2" /mnt/boot
-            mkdir -p /mnt/boot/efi
-            mount /dev/"${drive}1" /mnt/boot/efi
         else
             echo -e "${MSGCOLOUR}Formatting install partitions...${NC}"
             mkfs.fat -F32 /dev/"${drive}1"
@@ -98,8 +66,8 @@ format_and_mount_drives(){
             mkdir -p /mnt/boot 
             mkdir -p /mnt/boot/efi
             mount /dev/"${drive}1" /mnt/boot/efi
-        fi
-    fi
+        fi 
+    fi 
 }
 
 install_core_packages(){

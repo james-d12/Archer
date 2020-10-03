@@ -16,6 +16,15 @@ get_user_input(){
             echo -n "Enter Encrypted Swap Size(MB): "; 
             read encryptedswapsize
         done
+
+        echo "Enter encryption password: "; read -s pass1; 
+        echo "Reenter password: "; read -s pass2;
+        while [[ -z $pass1 && "$pass1" != "$pass2" ]]; do 
+            echo "Passwords do not match, retry."
+            echo "Enter encryption password: "; read -s pass1;
+            echo "Reenter password: "; read -s pass2;
+        done 
+        encryptionpass=$pass1
     fi
 
     while [ -z $drive ]; do
@@ -145,6 +154,7 @@ output_to_config_file(){
     echo -e "
     drive="'"'${drive}'"'"
     encrypted="'"'${encrypted}'"'"
+    encryptionpass="'"'${encryptionpass}'"'"
     encryptedswapsize="'"'${encryptedswapsize}'"'"
     system="'"'${system}'"'" 
     kernel="'"'${kernel}'"'"
