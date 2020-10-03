@@ -79,21 +79,23 @@ get_user_input(){
     done
     username=$(echo "$username" | awk '{print tolower($0)}')
 
-    echo -e "Enter $user password: "; read $pass1 
-    echo -e "Re-enter password: "; read $pass2 
-    while [ -z $username && $pass1 != $pass2 ]; do
-        echo -e "Enter $user password: "; read $pass1 
-        echo -e "Re-enter password: "; read $pass2 
+    echo "Enter $username Password: "; read -s pass1; 
+    echo "Reenter password: "; read -s pass2;
+    while [[ "$pass1" != "$pass2" ]]; do 
+        echo "Passwords do not match, retry."
+        echo "Enter $username Password: "; read -s pass1;
+        echo "Reenter password: "; read -s pass2;
     done 
-    userpass=$pass1 
+    userpass=$pass1
 
-    echo -e "Enter root password: "; read $pass1 
-    echo -e "Re-enter password: "; read $pass2 
-    while [ -z $username && $pass1 != $pass2 ]; do
-        echo -e "Enter $user password: "; read $pass1 
-        echo -e "Re-enter password: "; read $pass2 
+    echo "Enter root user Password: "; read -s pass1;
+    echo "Reenter password: "; read -s pass2;
+    while [[ "$pass1" != "$pass2" ]]; do 
+        echo "Passwords do not match, retry."
+        echo "Enter root user Password: "; read -s pass1;
+        echo "Reenter password: "; read -s pass2;
     done 
-    rootpass=$pass1 
+    rootpass=$pass1
 
     PS3='Choose Locale: '
     options=("en_GB" "en_US")
@@ -162,5 +164,5 @@ output_to_config_file(){
 get_user_input
 output_to_config_file
 
-bash arch-install-01.sh 
-reboot 
+#bash arch-install-01.sh 
+#reboot 
