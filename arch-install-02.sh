@@ -4,18 +4,12 @@
 
 setup_root_password(){
     echo -e "${MSGCOLOUR}Setting root password.....${NC}"
-    until passwd
-    do
-        echo "Try setting root password again."
-        sleep 2
-    done
+    echo -e "$rootpass" | passwd 
 }
 setup_user_password(){
     echo -e "${MSGCOLOUR}Creating the user $user for group wheel.....${NC}"
     useradd -m -G wheel $user 
-    until passwd $user; do
-        echo "Try setting user password again."; sleep 2
-    done
+    echo -e "$userpass" | passwd $user 
     cp /etc/sudoers /etc/sudoers.bak
     echo "$user ALL=(ALL) ALL" >> /etc/sudoers
 }

@@ -79,6 +79,22 @@ get_user_input(){
     done
     username=$(echo "$username" | awk '{print tolower($0)}')
 
+    echo -e "Enter $user password: "; read $pass1 
+    echo -e "Re-enter password: "; read $pass2 
+    while [ -z $username && $pass1 != $pass2 ]; do
+        echo -e "Enter $user password: "; read $pass1 
+        echo -e "Re-enter password: "; read $pass2 
+    done 
+    userpass=$pass1 
+
+    echo -e "Enter root password: "; read $pass1 
+    echo -e "Re-enter password: "; read $pass2 
+    while [ -z $username && $pass1 != $pass2 ]; do
+        echo -e "Enter $user password: "; read $pass1 
+        echo -e "Re-enter password: "; read $pass2 
+    done 
+    rootpass=$pass1 
+
     PS3='Choose Locale: '
     options=("en_GB" "en_US")
     select o in "${options[@]}"; do
@@ -133,6 +149,8 @@ output_to_config_file(){
     microcode="'"'${microcode}'"'"
     desktopenvironment="'"'${desktopenvironment}'"'"
     user="'"'${username}'"'"
+    userpass="'"'${userpass}'"'"
+    rootpass="'"'${rootpass}'"'"
     locale="'"'${locale}'"'"
     region="'"'${region}'"'"
     city="'"'${city}'"'"
