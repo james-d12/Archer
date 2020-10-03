@@ -61,12 +61,14 @@ enable_systemd_service(){
 
 enable_systemd_services(){
     echo -e "${MSGCOLOUR}Enabling systemd services....${NC}"
+    su 
     enable_systemd_service "gdm"
     enable_systemd_service "sddm"
     enable_systemd_service "lightdm"
     enable_systemd_service "NetworkManager"
     enable_systemd_service "ufw"
     enable_systemd_service "apparmor"
+    exit 
 }
 
 configure_firewall(){
