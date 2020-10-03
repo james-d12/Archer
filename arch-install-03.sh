@@ -61,7 +61,7 @@ enable_systemd_service(){
 
 enable_systemd_services(){
     echo -e "${MSGCOLOUR}Enabling systemd services....${NC}"
-    su 
+    echo -e "$rootpass" | su
     enable_systemd_service "gdm"
     enable_systemd_service "sddm"
     enable_systemd_service "lightdm"
