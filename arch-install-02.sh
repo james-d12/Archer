@@ -57,6 +57,7 @@ setup_host_settings(){
     echo -e "${MSGCOLOUR}Setting up host and hostname settings.....${NC}"
     echo "$hostname" > /etc/hostname 
     echo "$host" >> /etc/hosts  
+    systemctl enable --now NetworkManager
 }
 
 setup_grub_and_mkinitcpio(){
