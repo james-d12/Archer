@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-# Specify what Login and Window Managers along with any desktop 
-# Environments you want to install.
-depackages=(
-)

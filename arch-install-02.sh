@@ -100,8 +100,10 @@ cleanup_script(){
 setup_root_password
 setup_user_password
 encrypt_add_swap_file
+
 setup_local_time_and_date
 setup_localisation
 setup_host_settings
 setup_grub_and_mkinitcpio
+
 cleanup_script

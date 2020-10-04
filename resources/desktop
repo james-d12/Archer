@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+
+. ../arch-config.sh
+
+case "$desktopenvironment" in
+    "gnome") 
+        depackages=(
+            'gnome'
+        );;
+    "gnome-minimal")
+        depackages=(
+            'gdm'
+            'evince'
+            'file-roller'
+            'gnome-calculator'
+            'gnome-color-manager'
+            'gnome-control-center'
+            'gnome-disk-utility'
+            'gnome-keyring'
+            'gnome-logs'
+            'gnome-menus'
+            'gnome-session'
+            'gnome-settings-daemon'
+            'gnome-shell'
+            'gnome-shell-extensions'
+            'gnome-system-monitor'
+            'gnome-terminal'
+            'gnome-themes-extra'
+            'grilo-plugins'
+            'mutter'
+            'nautilus'
+            'networkmanager'
+            'sushi'
+            'tracker'
+            'tracker-miners'
+            'xdg-user-dirs-gtk'
+            'gnome-tweaks'   
+            'chrome-gnome-shell'
+        );;
+    "xfce")
+        depackages=(
+            'lightdm'
+            'lightdm-gtk-greeter'
+            'xdg-user-dirs'
+            'xfce4'
+            'xfce4-goodies'
+        );;
+    "xfce-minimal")
+        depackages=(
+            'lightdm'
+            'lightdm-gtk-greeter'
+            'xdg-user-dirs'
+            'xfce4'
+        );;
+    *)
+        depackages=(
+
+        );;
+esac 

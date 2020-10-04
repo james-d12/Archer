@@ -5,10 +5,10 @@
 cfdisk /dev/$drive
 
 encrypt_format_and_mount_drives(){
+    modprobe dm-crypt
+    modprobe dm-mod
     if [ "$system" == "BIOS" ]; then 
         echo -e "${MSGCOLOUR}Setting up cryptsetup...${NC}"
-        modprobe dm-crypt
-        modprobe dm-mod
         cryptsetup luksFormat -v -s 512 -h sha512 /dev/"${drive}2"
         cryptsetup open /dev/"${drive}2" cr_root
 
@@ -22,8 +22,6 @@ encrypt_format_and_mount_drives(){
         mount /dev/"${drive}1" /mnt/boot
     else  
         echo -e "${MSGCOLOUR}Setting up cryptsetup...${NC}"
-        modprobe dm-crypt
-        modprobe dm-mod
         cryptsetup luksFormat -v -s 512 -h sha512 /dev/"${drive}3"
         cryptsetup open /dev/"${drive}3" cr_root
 
@@ -40,7 +38,6 @@ encrypt_format_and_mount_drives(){
         mount /dev/"${drive}1" /mnt/boot/efi
     fi 
 }
-
 
 format_and_mount_drives(){
     if [ "$encrypted" == "YES" ]; then

@@ -16,15 +16,6 @@ get_user_input(){
             echo -n "Enter Encrypted Swap Size(MB): "; 
             read encryptedswapsize
         done
-
-        echo "Enter encryption password: "; read -s pass1; 
-        echo "Reenter password: "; read -s pass2;
-        while [[ -z $pass1 && "$pass1" != "$pass2" ]]; do 
-            echo "Passwords do not match, retry."
-            echo "Enter encryption password: "; read -s pass1;
-            echo "Reenter password: "; read -s pass2;
-        done 
-        encryptionpass=$pass1
     fi
 
     while [ -z $drive ]; do
@@ -88,24 +79,6 @@ get_user_input(){
     done
     username=$(echo "$username" | awk '{print tolower($0)}')
 
-    echo "Enter $username Password: "; read -s pass1; 
-    echo "Reenter password: "; read -s pass2;
-    while [[ "$pass1" != "$pass2" ]]; do 
-        echo "Passwords do not match, retry."
-        echo "Enter $username Password: "; read -s pass1;
-        echo "Reenter password: "; read -s pass2;
-    done 
-    userpass=$pass1
-
-    echo "Enter root user Password: "; read -s pass1;
-    echo "Reenter password: "; read -s pass2;
-    while [[ "$pass1" != "$pass2" ]]; do 
-        echo "Passwords do not match, retry."
-        echo "Enter root user Password: "; read -s pass1;
-        echo "Reenter password: "; read -s pass2;
-    done 
-    rootpass=$pass1
-
     PS3='Choose Locale: '
     options=("en_GB" "en_US")
     select o in "${options[@]}"; do
@@ -154,15 +127,12 @@ output_to_config_file(){
     echo -e "
     drive="'"'${drive}'"'"
     encrypted="'"'${encrypted}'"'"
-    encryptionpass="'"'${encryptionpass}'"'"
     encryptedswapsize="'"'${encryptedswapsize}'"'"
     system="'"'${system}'"'" 
     kernel="'"'${kernel}'"'"
     microcode="'"'${microcode}'"'"
     desktopenvironment="'"'${desktopenvironment}'"'"
     user="'"'${username}'"'"
-    userpass="'"'${userpass}'"'"
-    rootpass="'"'${rootpass}'"'"
     locale="'"'${locale}'"'"
     region="'"'${region}'"'"
     city="'"'${city}'"'"
@@ -175,15 +145,12 @@ check_if_details_correct(){
     echo "
     Drive: $drive
     Encrypted: $encrypted
-    EncryptionPass: $encryptionpass
     EncryptionSwapSize: $encryptedswapsize
     System: $system
     Kernel: $kernel
     Microcode: $microcode
     Desktop-Environment: $desktopenvironment
     User: $user
-    UserPass: $userpass
-    RootPass: $rootpass
     Locale: $locale
     Region: $region
     City: $city

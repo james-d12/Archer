@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-. ./arch-config.sh
+. resources/desktop 
 
 check_network_connection(){
     if ! ping -c 1 -q google.com >&/dev/null; then
@@ -15,6 +15,7 @@ check_network_connection(){
 pacman_packages=()
 aur_packages=()
 pip_packages=()
+git_packages=()
 vscode_packages=()
 
 add_package_to_list(){
@@ -23,6 +24,7 @@ add_package_to_list(){
         "AUR") aur_packages+=("$2");;
         "PIP") pip_packages+=("$2");;
         "VSCODE") vscode_packages+=("$2");;
+        "GIT") git_packages+=("$2");;
         *);;
     esac  
 }
@@ -37,6 +39,9 @@ install_pacman_packages(){
 install_aur_packages(){
     if ! command -v yay > /dev/null; then 
         echo -e "${MSGCOLOUR}Installing YAY.....${NC}"
+        if ! command -v git > /dev/null; then 
+            sudo pacman -S --noconfirm --needed git 
+        fi 
         git clone https://aur.archlinux.org/yay.git
         cd yay 
         makepkg -si
@@ -77,7 +82,6 @@ install_packages(){
     rm -rf temp.csv
 }
 
-
 enable_systemd_service(){
     if sudo pacman -Qs "$1" > /dev/null; then
         echo -e "${MSGCOLOUR}Enabling "$1" systemd service....${NC}"; 
@@ -87,7 +91,7 @@ enable_systemd_service(){
 
 enable_systemd_services(){
     echo -e "${MSGCOLOUR}Enabling systemd services....${NC}"
-    echo -e "$rootpass" | su
+    su 
     enable_systemd_service "gdm"
     enable_systemd_service "sddm"
     enable_systemd_service "lightdm"
@@ -98,7 +102,7 @@ enable_systemd_services(){
 }
 
 configure_firewall(){
-    if sudo pacman -Qs ufw > /dev/null; then
+    if command -v ufw > /dev/null; then
         echo -e "${MSGCOLOUR}Configuring the firewall....${NC}"
         sudo ufw limit 22/tcp  
         sudo ufw limit ssh
@@ -114,7 +118,7 @@ configure_firewall(){
 }
 
 configure_sysctl(){
-    if sudo pacman -Qs sysctl > /dev/null; then
+    if command -v sysctl > /dev/null; then
         echo -e "${MSGCOLOUR}Hardening sysctl....${NC}"
         sudo sysctl kernel.modules_disabled=1
         sudo sysctl -a
@@ -126,7 +130,7 @@ configure_sysctl(){
 }
 
 configure_fail2ban(){
-    if sudo pacman -Qs fail2ban > /dev/null; then
+    if command -v fail2ban > /dev/null; then
         echo -e "${MSGCOLOUR}Setting up fail2ban....${NC}"
         sudo cp fail2ban.local /etc/fail2ban/
         sudo systemctl enable fail2ban

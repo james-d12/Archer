@@ -74,6 +74,8 @@ PACMAN,      ttf-ubuntu-font-family,                Adds Ubuntu Fonts.
 PACMAN,      ttf-roboto,                            Adds Roboto Fonts.
 PACMAN,      plank,                                 A Docker.
 
+PACMAN,      pulseaudio                             Audio Controller.
+PACMAN,      pavucontrol                            GUI Frontend for PulseAudio.
 PACMAN,      zsh,                                   Alternative Shell to Bash.
 PACMAN,      zsh-completions,                       Auto Completions For ZSH.
 PACMAN,      firefox,                               Firefox Browser.
@@ -96,7 +98,7 @@ AUR,         zeal-git,                              Offline Documentation Viewer
 AUR,         timeshift,                             Backup Tool.
 AUR,         bitwarden-bin,                         Password Manager.
 AUR,         breeze-obsidian-cursor-theme,          Obsidian Cursor Theme.
-AUR,         gnome-shell-pomodoro                   Pomodoro Timer for Gnome.
+AUR,         gnome-shell-pomodoro,                  Pomodoro Timer for Gnome.
 AUR,         gnome-shell-extension-pop-shell-git,   Tiling Windows for Gnome.
 
 PIP,         PyQt5,                                 Python wrapper of QT UI Library.
