@@ -10,6 +10,7 @@ setup_root_password(){
         sleep 2
     done
 }
+
 setup_user_password(){
     echo -e "${MSGCOLOUR}Creating the user $user for group wheel.....${NC}"
     useradd -m -G wheel $user 

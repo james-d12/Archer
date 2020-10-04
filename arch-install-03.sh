@@ -17,7 +17,6 @@ aur_packages=()
 pip_packages=()
 vscode_packages=()
 
-
 add_package_to_list(){
     case "$1" in
         "PACMAN") pacman_packages+=("$2");;

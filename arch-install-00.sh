@@ -171,7 +171,34 @@ output_to_config_file(){
     " >> arch-config.sh 
 }
 
+check_if_details_correct(){
+    echo "
+    Drive: $drive
+    Encrypted: $encrypted
+    EncryptionPass: $encryptionpass
+    EncryptionSwapSize: $encryptedswapsize
+    System: $system
+    Kernel: $kernel
+    Microcode: $microcode
+    Desktop-Environment: $desktopenvironment
+    User: $user
+    UserPass: $userpass
+    RootPass: $rootpass
+    Locale: $locale
+    Region: $region
+    City: $city
+    Hostname: $hostname"
+    echo "Are these details correct? [Y/n]" > read answer
+    if [[ $answer == "n" || $answer == "N" ]]; then
+        get_user_input()
+    elif [[ $answer == "Y" || $answer == "y" ]]; then 
+        output_to_config_file
+    else 
+        check_if_details_correct
+    fi 
+}
+
 get_user_input
-output_to_config_file
+check_if_details_correct
 
 bash arch-install-01.sh 
