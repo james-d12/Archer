@@ -159,7 +159,7 @@ check_if_details_correct(){
     Hostname: $hostname"
     echo "Are these details correct? [Y/n]"; read answer
     if [[ $answer == "n" || $answer == "N" ]]; then
-        get_user_input
+        main
     elif [[ $answer == "Y" || $answer == "y" ]]; then 
         output_to_config_file
     else 
@@ -167,7 +167,11 @@ check_if_details_correct(){
     fi 
 }
 
-get_user_input
-check_if_details_correct
+main(){
+    get_user_input
+    check_if_details_correct
 
-bash arch-install-01.sh 
+    bash arch-install-01.sh 
+}
+
+main
