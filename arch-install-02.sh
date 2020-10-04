@@ -9,7 +9,6 @@ setup_root_password(){
         echo "Try setting root password again."
         sleep 2
     done
-    #echo -e "$rootpass" | passwd 
 }
 setup_user_password(){
     echo -e "${MSGCOLOUR}Creating the user $user for group wheel.....${NC}"

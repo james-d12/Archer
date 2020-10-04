@@ -9,7 +9,7 @@ encrypt_format_and_mount_drives(){
         echo -e "${MSGCOLOUR}Setting up cryptsetup...${NC}"
         modprobe dm-crypt
         modprobe dm-mod
-        echo "$encryptionpass" | cryptsetup luksFormat -v -s 512 -h sha512 /dev/"${drive}2"
+        cryptsetup luksFormat -v -s 512 -h sha512 /dev/"${drive}2"
         cryptsetup open /dev/"${drive}2" cr_root
 
         echo -e "${MSGCOLOUR}Formatting encrypted install partitions...${NC}"
@@ -24,7 +24,7 @@ encrypt_format_and_mount_drives(){
         echo -e "${MSGCOLOUR}Setting up cryptsetup...${NC}"
         modprobe dm-crypt
         modprobe dm-mod
-        echo "$encryptionpass" | cryptsetup luksFormat -v -s 512 -h sha512 /dev/"${drive}3"
+        cryptsetup luksFormat -v -s 512 -h sha512 /dev/"${drive}3"
         cryptsetup open /dev/"${drive}3" cr_root
 
         echo -e "${MSGCOLOUR}Formatting encrypted install partitions...${NC}"
@@ -88,3 +88,5 @@ chroot_into_mount_point(){
 format_and_mount_drives
 install_core_packages
 chroot_into_mount_point
+
+reboot

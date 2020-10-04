@@ -12,42 +12,55 @@ check_network_connection(){
     fi
 }
 
+pacman_packages=()
+aur_packages=()
+pip_packages=()
+vscode_packages=()
 
-install_package(){
+add_package_to_list(){
     case "$1" in
-        "PACMAN") 
-            sudo pacman -S "$2" --needed --noconfirm;;
-        "AUR")
-            if ! command -v yay > /dev/null; then 
-                echo -e "${MSGCOLOUR}Installing YAY.....${NC}"
-                git clone https://aur.archlinux.org/yay.git
-                cd yay 
-                makepkg -si
-            fi  
-            yay -S --cleanafter --noconfirm --needed "$2";;
-        "PIP") 
-            if ! command -v pip > /dev/null; then 
-                sudo pacman -S --needed --noconfirm python-pip
-            fi 
-            pip install "$2";;
-        "VSCODE") 
-            if ! command -v code > /dev/null; then 
-                sudo pacman -S --needed --noconfirm code 
-            fi 
-            code --install-extension "$2";;
+        "PACMAN") pacman_packages+=("$2");;
+        "AUR") aur_packages+=("$2");;
+        "PIP") pip_packages+=("$2");;
+        "VSCODE") vscode_packages+=("$2");;
         *);;
     esac  
 }
 
-install_packages(){
+install_packages_from_lists(){
     echo -e "${MSGCOLOUR}Installing desktop environment packages.....${NC}"
     sudo pacman -S --noconfirm --needed ${depackages[@]}
+    echo -e "${MSGCOLOUR}Installing pacman packages.....${NC}"
+    sudo pacman -S --noconfirm --needed ${pacman_packages[@]}    
+    if ! command -v yay > /dev/null; then 
+        echo -e "${MSGCOLOUR}Installing YAY.....${NC}"
+        git clone https://aur.archlinux.org/yay.git
+        cd yay 
+        makepkg -si
+    fi 
+    echo -e "${MSGCOLOUR}Installing aur packages.....${NC}"
+    yay -S --batchinstall --cleanafter --noconfirm --needed ${aur_packages[@]}
 
-    echo -e "${MSGCOLOUR}Installing individual packages.....${NC}"
+    if ! command -v pip > /dev/null; then 
+        sudo pacman -S --noconfirm -needed python-pip 
+    fi 
+    echo -e "${MSGCOLOUR}Installing pip packages.....${NC}"
+    pip install ${pip_packages[@]}
+
+    if ! command -v code > /dev/null; then 
+        sudo pacman -S --noconfirm -needed code 
+    fi 
+    echo -e "${MSGCOLOUR}Installing vscode packages.....${NC}"
+    code --install-extension ${vscode_packages[@]}
+
+}
+
+install_packages(){
     touch temp.csv; cat resources/programs.csv | tr -d " \t\r" > temp.csv
     while IFS=, read -r installer package description; do
-        install_package $installer $package 
+        add_package_to_list $installer $package 
     done < temp.csv; 
+    install_packages_from_lists
     rm -rf temp.csv
 }
 
