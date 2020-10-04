@@ -91,25 +91,25 @@ PACMAN,      virtualbox,                            Virtual Machine.
 #PACMAN,      virtualbox-host-modules-arch,          Virtual Machine Dependency for standard kernel.  
 PACMAN,      virtualbox-host-dkms,                  Virtual Machine Dependency for Other kernels.    
 
-#AUR,         protonvpn-cli-ng,                      ProtonVPN CLI Client.
-#AUR,         zeal-git,                              Offline Documentation Viewer.
-#AUR,         timeshift,                             Backup Tool.
+AUR,         protonvpn-cli-ng,                      ProtonVPN CLI Client.
+AUR,         zeal-git,                              Offline Documentation Viewer.
+AUR,         timeshift,                             Backup Tool.
 AUR,         bitwarden-bin,                         Password Manager.
-#AUR,         breeze-obsidian-cursor-theme,          Obsidian Cursor Theme.
-#AUR,         gnome-shell-pomodoro                   Pomodoro Timer for Gnome.
-#AUR,         gnome-shell-extension-pop-shell-git,   Tiling Windows for Gnome.
+AUR,         breeze-obsidian-cursor-theme,          Obsidian Cursor Theme.
+AUR,         gnome-shell-pomodoro                   Pomodoro Timer for Gnome.
+AUR,         gnome-shell-extension-pop-shell-git,   Tiling Windows for Gnome.
 
-#PIP,         PyQt5,                                 Python wrapper of QT UI Library.
-#PIP,         selenium,                              Python Library For Web Engine Automation.
-#PIP,         numpy,                                 Pythson Math Library.
-#PIP,         matplotlib,                            Python Graph Plotting Library.
-#PIP,         gym,                                   Comparing reinforcement learning algorithms.
-#PIP,         opencv-python,                         Library for Real Time Applications.
-#PIP,         pandas,                                Data Anaylsis Tool.
+PIP,         PyQt5,                                 Python wrapper of QT UI Library.
+PIP,         selenium,                              Python Library For Web Engine Automation.
+PIP,         numpy,                                 Pythson Math Library.
+PIP,         matplotlib,                            Python Graph Plotting Library.
+PIP,         gym,                                   Comparing reinforcement learning algorithms.
+PIP,         opencv-python,                         Library for Real Time Applications.
+PIP,         pandas,                                Data Anaylsis Tool.
 
-#VSCODE,      ms-python.python,                      Python Language. 
-#VSCODE,      ms-vscode.cpptools,                    C/C++ Language.
-#VSCODE,      ms-dotnettools.csharp,                 C# Language.
-#VSCODE,      twxs.cmake,                            CMake Support.
-#VSCODE,      alefragnani.project-manager,           Project Manager.
-#VSCODE,      miqh.core-theme,                       Core Themes.
+VSCODE,      ms-python.python,                      Python Language. 
+VSCODE,      ms-vscode.cpptools,                    C/C++ Language.
+VSCODE,      ms-dotnettools.csharp,                 C# Language.
+VSCODE,      twxs.cmake,                            CMake Support.
+VSCODE,      alefragnani.project-manager,           Project Manager.
+VSCODE,      miqh.core-theme,                       Core Themes.
