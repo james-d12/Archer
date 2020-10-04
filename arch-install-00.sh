@@ -143,6 +143,21 @@ host="'"'${host}'"'"
 " >> arch-config.sh 
 }
 
+clear_values(){
+    unset $drive
+    unset $encrypted
+    unset $encryptedswapsize
+    unset $system
+    unset $kernel
+    unset $microcode
+    unset $desktopenvironment
+    unset $username
+    unset $locale
+    unset $region
+    unset $city
+    unset $hostname
+}
+
 check_if_details_correct(){
     clear
     echo "
@@ -169,6 +184,7 @@ Hostname: $hostname"
 }
 
 main(){
+    clear_values
     get_user_input
     check_if_details_correct
 
