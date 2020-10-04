@@ -57,7 +57,6 @@ setup_host_settings(){
     echo -e "${MSGCOLOUR}Setting up host and hostname settings.....${NC}"
     echo "$hostname" > /etc/hostname 
     echo "$host" >> /etc/hosts  
-    systemctl enable --now NetworkManager
 }
 
 setup_grub_and_mkinitcpio(){
@@ -94,7 +93,6 @@ cleanup_script(){
     cp -r /arch-install-scripts/ /home/$user/
     sudo chmod -R 700 /home/$user/arch-install-scripts
     sudo chown -R $user:wheel /home/$user/arch-install-scripts/
-    echo -e "${MSGCOLOUR}Reboot and run 'arch-install-03.sh'...${NC}"
 }
 
 setup_root_password

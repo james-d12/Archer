@@ -86,4 +86,5 @@ format_and_mount_drives
 install_core_packages
 chroot_into_mount_point
 
+umount -R /mnt
 reboot

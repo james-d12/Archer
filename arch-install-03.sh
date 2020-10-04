@@ -6,9 +6,9 @@ check_network_connection(){
     if ! ping -c 1 -q google.com >&/dev/null; then
         echo -e "${MSGCOLOUR}You are not connected to the internet, attempting connection solutions.....${NC}"
         echo -e "${MSGCOLOUR}Attempting connection via nmtui....${NC}"
-        nmtui 
+        sudo nmtui 
         echo -e "${MSGCOLOUR}Attempting connection via wifi-menu....${NC}"
-        wifi-menu
+        sudo wifi-menu
     fi
 }
 
