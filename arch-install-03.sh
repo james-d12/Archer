@@ -101,47 +101,6 @@ enable_systemd_services(){
     exit 
 }
 
-configure_firewall(){
-    if command -v ufw > /dev/null; then
-        echo -e "${MSGCOLOUR}Configuring the firewall....${NC}"
-        sudo ufw limit 22/tcp  
-        sudo ufw limit ssh
-        sudo ufw allow 80/tcp  
-        sudo ufw allow 443/tcp  
-        sudo ufw default deny
-        sudo ufw default deny incoming  
-        sudo ufw default allow outgoing
-        sudo ufw allow from 192.168.0.0/24
-        sudo ufw allow Deluge
-        sudo ufw enable
-    fi
-}
-
-configure_sysctl(){
-    if command -v sysctl > /dev/null; then
-        echo -e "${MSGCOLOUR}Hardening sysctl....${NC}"
-        sudo sysctl kernel.modules_disabled=1
-        sudo sysctl -a
-        sudo sysctl -A
-        sudo sysctl mib
-        sudo sysctl net.ipv4.conf.all.rp_filter
-        sudo sysctl -a --pattern 'net.ipv4.conf.(eth|wlan)0.arp'
-    fi
-}
-
-configure_fail2ban(){
-    if command -v fail2ban > /dev/null; then
-        echo -e "${MSGCOLOUR}Setting up fail2ban....${NC}"
-        sudo cp fail2ban.local /etc/fail2ban/
-        sudo systemctl enable fail2ban
-        sudo systemctl start fail2ban
-    fi
-}
-
 check_network_connection
 install_packages
 enable_systemd_services
-
-configure_firewall
-configure_sysctl
-configure_fail2ban

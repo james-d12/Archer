@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-
-get_user_input(){ 
+get_user_input(){
     clear
     PS3='Encrypt Drive?'
     options=("YES" "NO")
@@ -127,52 +126,37 @@ output_to_config_file(){
     NC='\033[0m'" >> arch-config.sh
 
     echo -e "
-drive="'"'${drive}'"'"
-encrypted="'"'${encrypted}'"'"
-encryptedswapsize="'"'${encryptedswapsize}'"'"
-system="'"'${system}'"'" 
-kernel="'"'${kernel}'"'"
-microcode="'"'${microcode}'"'"
-desktopenvironment="'"'${desktopenvironment}'"'"
-user="'"'${username}'"'"
-locale="'"'${locale}'"'"
-region="'"'${region}'"'"
-city="'"'${city}'"'"
-hostname="'"'${hostname}'"'"
-host="'"'${host}'"'"
-" >> arch-config.sh 
-}
-
-clear_values(){
-    unset $drive
-    unset $encrypted
-    unset $encryptedswapsize
-    unset $system
-    unset $kernel
-    unset $microcode
-    unset $desktopenvironment
-    unset $username
-    unset $locale
-    unset $region
-    unset $city
-    unset $hostname
+    drive="'"'${drive}'"'"
+    encrypted="'"'${encrypted}'"'"
+    encryptedswapsize="'"'${encryptedswapsize}'"'"
+    system="'"'${system}'"'" 
+    kernel="'"'${kernel}'"'"
+    microcode="'"'${microcode}'"'"
+    desktopenvironment="'"'${desktopenvironment}'"'"
+    user="'"'${username}'"'"
+    locale="'"'${locale}'"'"
+    region="'"'${region}'"'"
+    city="'"'${city}'"'"
+    hostname="'"'${hostname}'"'"
+    host="'"'${host}'"'"
+    " >> arch-config.sh 
 }
 
 check_if_details_correct(){
     clear
     echo "
-Drive: $drive
-Encrypted: $encrypted
-EncryptionSwapSize: $encryptedswapsize
-System: $system
-Kernel: $kernel
-Microcode: $microcode
-Desktop-Environment: $desktopenvironment
-User: $username
-Locale: $locale
-Region: $region
-City: $city
-Hostname: $hostname"
+    Drive: $drive
+    Encrypted: $encrypted
+    EncryptionSwapSize: $encryptedswapsize
+    System: $system
+    Kernel: $kernel
+    Microcode: $microcode
+    Desktop-Environment: $desktopenvironment
+    User: $username
+    Locale: $locale
+    Region: $region
+    City: $city
+    Hostname: $hostname"
     echo "Are these details correct? [Y/n]"; read answer
     if [[ $answer == "n" || $answer == "N" ]]; then
         main
@@ -182,12 +166,10 @@ Hostname: $hostname"
         check_if_details_correct
     fi 
 }
-
+ 
 main(){
-    clear_values
     get_user_input
     check_if_details_correct
-
     bash arch-install-01.sh 
 }
 

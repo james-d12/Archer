@@ -61,6 +61,7 @@ PACMAN,      python-pip,                            Python3 PIP.
 PACMAN,      glfw,                                  OpenGL Library.
 PACMAN,      glew,                                  OpenGL Library.
 
+AUR,         hardened_malloc                        A secure version of C's malloc.
 PACMAN,      openvpn,                               For VPN Connections.
 PACMAN,      ufw,                                   Firewall.
 PACMAN,      apparmor,                              Security Software.
