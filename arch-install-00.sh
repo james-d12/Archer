@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 get_user_input(){
+    clear
     PS3='Encrypt Drive? '
     options=("YES" "NO")
     select o  in "${options[@]}"; do
@@ -142,6 +143,7 @@ output_to_config_file(){
 }
 
 check_if_details_correct(){
+    clear
     echo "
     Drive: $drive
     Encrypted: $encrypted
@@ -150,14 +152,14 @@ check_if_details_correct(){
     Kernel: $kernel
     Microcode: $microcode
     Desktop-Environment: $desktopenvironment
-    User: $user
+    User: $username
     Locale: $locale
     Region: $region
     City: $city
     Hostname: $hostname"
-    echo "Are these details correct? [Y/n]" > read answer
+    echo "Are these details correct? [Y/n]"; read answer
     if [[ $answer == "n" || $answer == "N" ]]; then
-        get_user_input()
+        get_user_input
     elif [[ $answer == "Y" || $answer == "y" ]]; then 
         output_to_config_file
     else 
