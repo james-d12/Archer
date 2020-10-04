@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
-get_user_input(){
+
+get_user_input(){ 
     clear
-    PS3='Encrypt Drive? '
+    PS3='Encrypt Drive?'
     options=("YES" "NO")
     select o  in "${options[@]}"; do
         case $o in
@@ -126,37 +127,37 @@ output_to_config_file(){
     NC='\033[0m'" >> arch-config.sh
 
     echo -e "
-    drive="'"'${drive}'"'"
-    encrypted="'"'${encrypted}'"'"
-    encryptedswapsize="'"'${encryptedswapsize}'"'"
-    system="'"'${system}'"'" 
-    kernel="'"'${kernel}'"'"
-    microcode="'"'${microcode}'"'"
-    desktopenvironment="'"'${desktopenvironment}'"'"
-    user="'"'${username}'"'"
-    locale="'"'${locale}'"'"
-    region="'"'${region}'"'"
-    city="'"'${city}'"'"
-    hostname="'"'${hostname}'"'"
-    host="'"'${host}'"'"
-    " >> arch-config.sh 
+drive="'"'${drive}'"'"
+encrypted="'"'${encrypted}'"'"
+encryptedswapsize="'"'${encryptedswapsize}'"'"
+system="'"'${system}'"'" 
+kernel="'"'${kernel}'"'"
+microcode="'"'${microcode}'"'"
+desktopenvironment="'"'${desktopenvironment}'"'"
+user="'"'${username}'"'"
+locale="'"'${locale}'"'"
+region="'"'${region}'"'"
+city="'"'${city}'"'"
+hostname="'"'${hostname}'"'"
+host="'"'${host}'"'"
+" >> arch-config.sh 
 }
 
 check_if_details_correct(){
     clear
     echo "
-    Drive: $drive
-    Encrypted: $encrypted
-    EncryptionSwapSize: $encryptedswapsize
-    System: $system
-    Kernel: $kernel
-    Microcode: $microcode
-    Desktop-Environment: $desktopenvironment
-    User: $username
-    Locale: $locale
-    Region: $region
-    City: $city
-    Hostname: $hostname"
+Drive: $drive
+Encrypted: $encrypted
+EncryptionSwapSize: $encryptedswapsize
+System: $system
+Kernel: $kernel
+Microcode: $microcode
+Desktop-Environment: $desktopenvironment
+User: $username
+Locale: $locale
+Region: $region
+City: $city
+Hostname: $hostname"
     echo "Are these details correct? [Y/n]"; read answer
     if [[ $answer == "n" || $answer == "N" ]]; then
         main
