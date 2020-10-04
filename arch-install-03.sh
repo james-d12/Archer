@@ -17,6 +17,7 @@ aur_packages=()
 pip_packages=()
 vscode_packages=()
 
+
 add_package_to_list(){
     case "$1" in
         "PACMAN") pacman_packages+=("$2");;
@@ -27,11 +28,14 @@ add_package_to_list(){
     esac  
 }
 
-install_packages_from_lists(){
+install_pacman_packages(){
     echo -e "${MSGCOLOUR}Installing desktop environment packages.....${NC}"
     sudo pacman -S --noconfirm --needed ${depackages[@]}
     echo -e "${MSGCOLOUR}Installing pacman packages.....${NC}"
-    sudo pacman -S --noconfirm --needed ${pacman_packages[@]}    
+    sudo pacman -S --noconfirm --needed ${pacman_packages[@]}   
+}
+
+install_aur_packages(){
     if ! command -v yay > /dev/null; then 
         echo -e "${MSGCOLOUR}Installing YAY.....${NC}"
         git clone https://aur.archlinux.org/yay.git
@@ -40,19 +44,29 @@ install_packages_from_lists(){
     fi 
     echo -e "${MSGCOLOUR}Installing aur packages.....${NC}"
     yay -S --batchinstall --cleanafter --noconfirm --needed ${aur_packages[@]}
+}
 
+install_pip_packages(){
     if ! command -v pip > /dev/null; then 
         sudo pacman -S --noconfirm -needed python-pip 
     fi 
     echo -e "${MSGCOLOUR}Installing pip packages.....${NC}"
     pip install ${pip_packages[@]}
+}
 
+install_vscode_packages(){
     if ! command -v code > /dev/null; then 
         sudo pacman -S --noconfirm -needed code 
     fi 
     echo -e "${MSGCOLOUR}Installing vscode packages.....${NC}"
     code --install-extension ${vscode_packages[@]}
+}
 
+install_packages_from_lists(){
+    install_pacman_packages
+    install_aur_packages
+    install_pip_packages
+    install_vscode_packages
 }
 
 install_packages(){
