@@ -27,7 +27,7 @@ setup_user_password(){
 encrypt_add_swap_file(){
     if [ "$encrypted" == "YES" ]; then
         echo -e "${MSGCOLOUR}Adding encrypted SWAP file....${NC}"
-        dd if=/dev/zero of=/swapfile bs=1M count=$encryptedswapsize status=progress
+        dd if=/dev/zero of=/swapfile bs=1M count=$swapsize status=progress
         chmod 600 /swapfile
         mkswap -L SWAP /swapfile
         swapon /swapfile

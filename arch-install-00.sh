@@ -13,9 +13,14 @@ get_user_input(){
     done
 
     if [ "$encrypted" == "YES" ]; then
-        while [ -z $encryptedswapsize ]; do
+        while [ -z $swapsize ]; do
             echo -n "Enter Encrypted Swap Size(MB): "; 
-            read encryptedswapsize
+            read swapsize
+        done
+    else 
+        while [ -z $swapsize ]; do
+            echo -n "Enter Swap Size(MB): "; 
+            read swapsize
         done
     fi
 
@@ -128,7 +133,7 @@ output_to_config_file(){
     echo -e "
     drive="'"'${drive}'"'"
     encrypted="'"'${encrypted}'"'"
-    encryptedswapsize="'"'${encryptedswapsize}'"'"
+    swapsize="'"'${swapsize}'"'"
     system="'"'${system}'"'" 
     kernel="'"'${kernel}'"'"
     microcode="'"'${microcode}'"'"
@@ -138,39 +143,8 @@ output_to_config_file(){
     region="'"'${region}'"'"
     city="'"'${city}'"'"
     hostname="'"'${hostname}'"'"
-    host="'"'${host}'"'"
-    " >> arch-config.sh 
-}
-
-check_if_details_correct(){
-    clear
-    echo "
-    Drive: $drive
-    Encrypted: $encrypted
-    EncryptionSwapSize: $encryptedswapsize
-    System: $system
-    Kernel: $kernel
-    Microcode: $microcode
-    Desktop-Environment: $desktopenvironment
-    User: $username
-    Locale: $locale
-    Region: $region
-    City: $city
-    Hostname: $hostname"
-    echo "Are these details correct? [Y/n]"; read answer
-    if [[ $answer == "n" || $answer == "N" ]]; then
-        main
-    elif [[ $answer == "Y" || $answer == "y" ]]; then 
-        output_to_config_file
-    else 
-        check_if_details_correct
-    fi 
+    host="'"'${host}'"'"" >> arch-config.sh 
 }
  
-main(){
-    get_user_input
-    check_if_details_correct
-    bash arch-install-01.sh 
-}
-
-main
+get_user_input
+bash arch-install-01.sh 
