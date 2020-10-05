@@ -37,8 +37,8 @@ format_and_mount_uefi_encrypted() {
     mkfs.ext4 -L ROOT /dev/mapper/cr_root
     mount /dev/mapper/cr_root /mnt
     mkdir -p /mnt/boot 
-    mkdir -p /mnt/boot/efi 
     mount /dev/"${drive}2" /mnt/boot
+    mkdir -p /mnt/boot/efi 
     mount /dev/"${drive}1" /mnt/boot/efi
 }
 
