@@ -60,6 +60,6 @@ genfstab -U /mnt >> /mnt/etc/fstab
 
 mkdir -p /mnt/arch-install-scripts/
 cp -r * /mnt/arch-install-scripts/
-arch-chroot /mnt /bin/bash -c "bash ./arch-install-02.sh"
+arch-chroot /mnt /bin/bash -c "bash arch-install-scripts/arch-install-02.sh"
 
 umount -R /mnt
