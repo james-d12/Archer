@@ -17,7 +17,7 @@ format_and_mount_bios_encrypted() {
     mkfs.ext4 -L BOOT /dev/"${drive}1"
     mkfs.ext4 /dev/mapper/cr_root
     mount /dev/mapper/cr_root /mnt
-    mkdir /mnt/boot
+    mkdir -p /mnt/boot
     mount /dev/"${drive}1" /mnt/boot
 }
 format_and_mount_uefi() {
@@ -63,4 +63,3 @@ cp -r * /mnt/arch-install-scripts/
 arch-chroot /mnt /bin/bash -c "bash ./arch-install-02.sh"
 
 umount -R /mnt
-reboot
