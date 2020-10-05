@@ -56,11 +56,7 @@ get_user_input(){
     done
 
     PS3='Choose Desktop Environment: '
-    options=(
-        "gnome" "gnome-minimal" 
-        "xfce" "xfce-minimal"
-        "i3" "custom" "NONE"
-    )
+    options=("gnome" "gnome-minimal" "xfce" "xfce-minimal" "NONE")
     select o in "${options[@]}"; do
         case $o in
             "gnome") desktopenvironment=$o; break;;
@@ -78,19 +74,21 @@ get_user_input(){
     done
     username=$(echo "$username" | awk '{print tolower($0)}')
 
-    echo -n "Enter root password: "; read -sp pass1 
-    echo -n "Re-enter root password: "; read -sp pass2 
-    while [ -$pass1 != $pass2 ]; do
-        echo -n "Enter root password: "; read -sp pass1 
-        echo -n "Re-enter root password: "; read -sp pass2
+    echo "Enter root password: "; read -s pass1;
+    echo "Re-enter root password: "; read -s pass2; 
+    while [ $pass1 != $pass2 ]; do
+        echo "Passwords do not match, please retry."
+        echo "Enter root password: "; read -s pass1 
+        echo "Re-enter root password: "; read -s pass2
     done
     rootpass=$pass1 
 
-    echo -n "Enter user password: "; read -sp pass1 
-    echo -n "Re-enter user password: "; read -sp pass2 
-    while [ -$pass1 != $pass2 ]; do
-        echo -n "Enter user password: "; read -sp pass1 
-        echo -n "Re-enter user password: "; read -sp pass2
+    echo "Enter user password: "; read -s pass1 
+    echo "Re-enter user password: "; read -s pass2 
+    while [ $pass1 != $pass2 ]; do
+        echo "Passwords do not match, please retry."
+        echo "Enter user password: "; read -s pass1 
+        echo "Re-enter user password: "; read -s pass2
     done
     userpass=$pass1 
 
@@ -155,5 +153,5 @@ EOF
 }
  
 get_user_input
-output_to_config_file
-bash arch-install-01.sh 
+#output_to_config_file
+#bash arch-install-01.sh 
