@@ -147,4 +147,5 @@ output_to_config_file(){
 }
  
 get_user_input
+output_to_config_file
 bash arch-install-01.sh 
