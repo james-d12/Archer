@@ -120,7 +120,7 @@ output_to_config_file(){
 cat <<EOF > arch-config.sh
 #!/usr/bin/env bash
 
-msg(){ echo -e "${MSGCOLOUR} $1 ${NC}" }
+msg(){ echo -e "${MSGCOLOUR} $1 ${NC}"; sleep 1; }
 
 MSGCOLOUR='\033[0;33m'
 PROMPTCOLOUR='\033[0;32m'
@@ -147,4 +147,4 @@ EOF
  
 get_user_input
 output_to_config_file
-#bash arch-install-01.sh 
+bash arch-install-01.sh 
