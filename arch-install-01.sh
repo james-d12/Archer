@@ -16,7 +16,7 @@ format_drive_uefi(){
         sgdisk -t 3:8300 /dev/$drive 
     else
         sgdisk -n 1:0:+100M /dev/$drive 
-        sgdisk -n 2:0:+2048M /dev/$drive 
+        sgdisk -n 2:0:+$swapsize"M" /dev/$drive 
         sgdisk -n 3:0:0 /dev/$drive 
         sgdisk -t 1:ef00 /dev/$drive 
         sgdisk -t 2:8200 /dev/$drive 
@@ -33,7 +33,7 @@ format_drive_bios(){
         sgdisk -t 1:8300 /dev/$drive 
         sgdisk -t 2:8300 /dev/$drive 
     else
-        sgdisk -n 1:0:+2048M /dev/$drive 
+        sgdisk -n 1:0:+$swapsize"M" /dev/$drive 
         sgdisk -n 2:0:0 /dev/$drive 
         sgdisk -t 1:8200 /dev/$drive 
         sgdisk -t 2:8300 /dev/$drive
