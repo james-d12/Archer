@@ -61,7 +61,7 @@ PACMAN,      python-pip,                            Python3 PIP.
 PACMAN,      glfw,                                  OpenGL Library.
 PACMAN,      glew,                                  OpenGL Library.
 
-AUR,         hardened_malloc                        A secure version of C's malloc.
+AUR,         hardened-malloc-git,                   A secure version of C's malloc.
 PACMAN,      openvpn,                               For VPN Connections.
 PACMAN,      ufw,                                   Firewall.
 PACMAN,      apparmor,                              Security Software.
@@ -75,8 +75,8 @@ PACMAN,      ttf-ubuntu-font-family,                Adds Ubuntu Fonts.
 PACMAN,      ttf-roboto,                            Adds Roboto Fonts.
 PACMAN,      plank,                                 A Docker.
 
-PACMAN,      pulseaudio                             Audio Controller.
-PACMAN,      pavucontrol                            GUI Frontend for PulseAudio.
+PACMAN,      pulseaudio,                            Audio Controller.
+PACMAN,      pavucontrol,                           GUI Frontend for PulseAudio.
 PACMAN,      zsh,                                   Alternative Shell to Bash.
 PACMAN,      zsh-completions,                       Auto Completions For ZSH.
 PACMAN,      firefox,                               Firefox Browser.

@@ -23,7 +23,6 @@ add_package_to_list(){
         "PACMAN") pacman_packages+=("$2");;
         "AUR") aur_packages+=("$2");;
         "PIP") pip_packages+=("$2");;
-        "VSCODE") vscode_packages+=("$2");;
         "GIT") git_packages+=("$2");;
         *);;
     esac  
@@ -52,15 +51,26 @@ install_aur_packages(){
 
 install_pip_packages(){
     if ! command -v pip > /dev/null; then 
-        sudo pacman -S --noconfirm -needed python-pip 
+        sudo pacman -S --noconfirm --needed python-pip 
     fi 
     echo -e "${MSGCOLOUR}Installing pip packages.....${NC}"
     pip install ${pip_packages[@]}
 }
 
+install_git_packages(){
+    if ! command -v git > /dev/null; then 
+        sudo pacman -S --noconfirm --needed git 
+    fi 
+    for package in ${git_packages[@]}; do 
+        git clone $package $package 
+        cd $package 
+        makepkg -si 
+    done 
+}
+
 install_vscode_packages(){
     if ! command -v code > /dev/null; then 
-        sudo pacman -S --noconfirm -needed code 
+        sudo pacman -S --noconfirm --needed code 
     fi 
     echo -e "${MSGCOLOUR}Installing vscode packages.....${NC}"
     code --install-extension ${vscode_packages[@]}
@@ -84,21 +94,19 @@ install_packages(){
 
 enable_systemd_service(){
     if sudo pacman -Qs "$1" > /dev/null; then
-        echo -e "${MSGCOLOUR}Enabling "$1" systemd service....${NC}"; 
-        systemctl enable "$1".service;
+        echo -e "${MSGCOLOUR}Enabling "$1" systemd service....${NC}"
+        sudo systemctl enable "$1".service
     fi
 }
 
 enable_systemd_services(){
     echo -e "${MSGCOLOUR}Enabling systemd services....${NC}"
-    su 
     enable_systemd_service "gdm"
     enable_systemd_service "sddm"
     enable_systemd_service "lightdm"
     enable_systemd_service "NetworkManager"
     enable_systemd_service "ufw"
     enable_systemd_service "apparmor"
-    exit 
 }
 
 check_network_connection
