@@ -1,8 +1,14 @@
 #!/usr/bin/env bash
 
-restrict_kernel_log_access() { echo "kernel.dmesg_restrict = 1" >> /etc/sysctl.d/51-dmesg-restrict.conf }
-increase_user_login_timeout() { echo "auth optional pam_faildelay.so delay=4000000" >> /etc/pam.d/system-login }
-deny_ip_spoofs(){ echo "order bind, hosts\n multi on" >> /etc/host.conf }
+restrict_kernel_log_access() { 
+    echo "kernel.dmesg_restrict = 1" >> /etc/sysctl.d/51-dmesg-restrict.conf 
+}
+increase_user_login_timeout() { 
+    echo "auth optional pam_faildelay.so delay=4000000" >> /etc/pam.d/system-login 
+}
+deny_ip_spoofs(){ 
+    echo "order bind, hosts\n multi on" >> /etc/host.conf 
+}
 
 configure_apparmor_and_firejail(){
     command -v firejail > /dev/null && command -v apparmor > /dev/null &&
