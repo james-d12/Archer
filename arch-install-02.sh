@@ -4,7 +4,7 @@
 
 setup_users(){
     useradd -m -G wheel $user 
-    ( echo "$rootpass"; echo "$rootpass" ) | passwd --stdin
+    ( echo "$rootpass"; echo "$rootpass" ) | passwd
     ( echo "$userpass"; echo "$userpass" ) | passwd $user
     cp /etc/sudoers /etc/sudoers.bak
     echo "$user ALL=(ALL) ALL" >> /etc/sudoers
