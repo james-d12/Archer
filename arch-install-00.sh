@@ -113,34 +113,38 @@ get_user_input(){
         read hostname
     done
     hostname=$(echo "$hostname" | awk '{print tolower($0)}')
-    host="\n127.0.0.1	localhost\n::1		localhost\n127.0.1.1	$hostname.localdomain   $hostname"
+    clear
 }
 
 output_to_config_file(){
-    rm -rf arch-config.sh
-    touch arch-config.sh
+cat <<EOF > arch-config.sh
+#!/usr/bin/env bash
 
-    echo "#!/usr/bin/env bash
-    MSGCOLOUR='\033[0;33m'
-    PROMPTCOLOUR='\033[0;32m'
-    NC='\033[0m'" >> arch-config.sh
+msg(){ echo -e "${MSGCOLOUR} $1 ${NC}" }
 
-    echo -e "
-    drive="'"'${drive}'"'"
-    encrypted="'"'${encrypted}'"'"
-    swapsize="'"'${swapsize}'"'"
-    system="'"'${system}'"'" 
-    kernel="'"'${kernel}'"'"
-    microcode="'"'${microcode}'"'"
-    desktopenvironment="'"'${desktopenvironment}'"'"
-    user="'"'${username}'"'"
-    locale="'"'${locale}'"'"
-    region="'"'${region}'"'"
-    city="'"'${city}'"'"
-    hostname="'"'${hostname}'"'"
-    host="'"'${host}'"'"" >> arch-config.sh 
+MSGCOLOUR='\033[0;33m'
+PROMPTCOLOUR='\033[0;32m'
+NC='\033[0m'
+
+drive="${drive}"
+encrypted="${encrypted}"
+swapsize="${swapsize}"
+system="${system}" 
+kernel="${kernel}"
+microcode="${microcode}"
+desktopenvironment="${desktopenvironment}"
+user="${username}"
+locale="${locale}"
+region="${region}"
+city="${city}"
+hostname="${hostname}"
+host="
+127.0.0.1	localhost
+::1		    localhost
+127.0.1.1	$hostname.localdomain	$hostname"
+EOF
 }
  
 get_user_input
 output_to_config_file
-bash arch-install-01.sh 
+#bash arch-install-01.sh 

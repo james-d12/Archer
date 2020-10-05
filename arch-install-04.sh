@@ -1,27 +1,17 @@
 #!/usr/bin/env bash
 
-restrict_kernel_log_access(){
-    echo "kernel.dmesg_restrict = 1" >> /etc/sysctl.d/51-dmesg-restrict.conf
-}
-
-set_user_login_timeout(){
-    echo "auth optional pam_faildelay.so delay=4000000" >> /etc/pam.d/system-login
-}
-
-deny_ip_spoofs(){
-    echo "order bind, hosts\n multi on" >> /etc/host.conf
-}
+restrict_kernel_log_access() { echo "kernel.dmesg_restrict = 1" >> /etc/sysctl.d/51-dmesg-restrict.conf }
+increase_user_login_timeout() { echo "auth optional pam_faildelay.so delay=4000000" >> /etc/pam.d/system-login }
+deny_ip_spoofs(){ echo "order bind, hosts\n multi on" >> /etc/host.conf }
 
 configure_apparmor_and_firejail(){
-    if [[ command -v firejail > /dev/null && command -v apparmor ]]; then 
-        firecfg
-        sudo apparmor_parser -r /etc/apparmor.d/firejail-default
-    fi 
+    command -v firejail > /dev/null && command -v apparmor > /dev/null &&
+    firecfg && sudo apparmor_parser -r /etc/apparmor.d/firejail-default
 }
 
 configure_firewall(){
     if command -v ufw > /dev/null; then
-        echo -e "${MSGCOLOUR}Configuring the firewall....${NC}"
+        msg "Configuring the firewall...."
         sudo ufw limit 22/tcp  
         sudo ufw limit ssh
         sudo ufw allow 80/tcp  
@@ -37,8 +27,7 @@ configure_firewall(){
 
 configure_sysctl(){
     if command -v sysctl > /dev/null; then
-        echo -e "${MSGCOLOUR}Hardening sysctl....${NC}"
-        sudo sysctl kernel.modules_disabled=1
+        msg "Hardening sysctl...."
         sudo sysctl -a
         sudo sysctl -A
         sudo sysctl mib
@@ -49,9 +38,21 @@ configure_sysctl(){
 
 configure_fail2ban(){
     if command -v fail2ban > /dev/null; then
-        echo -e "${MSGCOLOUR}Setting up fail2ban....${NC}"
+        msg "Setting up fail2ban...."
         sudo cp fail2ban.local /etc/fail2ban/
         sudo systemctl enable fail2ban
         sudo systemctl start fail2ban
     fi
 }
+
+harden_security(){
+    restrict_kernel_log_access
+    increase_user_login_timeout
+    deny_ip_spoofs
+    configure_firewall
+    configure_sysctl
+    configure_fail2ban
+    configure_apparmor_and_firejail
+}
+
+harden_security

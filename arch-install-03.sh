@@ -4,10 +4,10 @@
 
 check_network_connection(){
     if ! ping -c 1 -q google.com >&/dev/null; then
-        echo -e "${MSGCOLOUR}You are not connected to the internet, attempting connection solutions.....${NC}"
-        echo -e "${MSGCOLOUR}Attempting connection via nmtui....${NC}"
+        msg "You are not connected to the internet, attempting connection solutions....."
+        msg "Attempting connection via nmtui...."
         sudo nmtui 
-        echo -e "${MSGCOLOUR}Attempting connection via wifi-menu....${NC}"
+        msg "Attempting connection via wifi-menu...."
         sudo wifi-menu
     fi
 }
@@ -29,15 +29,15 @@ add_package_to_list(){
 }
 
 install_pacman_packages(){
-    echo -e "${MSGCOLOUR}Installing desktop environment packages.....${NC}"
+    msg "Installing desktop environment packages....."
     sudo pacman -S --noconfirm --needed ${depackages[@]}
-    echo -e "${MSGCOLOUR}Installing pacman packages.....${NC}"
+    msg "Installing pacman packages....."
     sudo pacman -S --noconfirm --needed ${pacman_packages[@]}   
 }
 
 install_aur_packages(){
     if ! command -v yay > /dev/null; then 
-        echo -e "${MSGCOLOUR}Installing YAY.....${NC}"
+        msg "Installing YAY....."
         if ! command -v git > /dev/null; then 
             sudo pacman -S --noconfirm --needed git 
         fi 
@@ -45,7 +45,7 @@ install_aur_packages(){
         cd yay 
         makepkg -si
     fi 
-    echo -e "${MSGCOLOUR}Installing aur packages.....${NC}"
+    msg "Installing aur packages....."
     yay -S --batchinstall --cleanafter --noconfirm --needed ${aur_packages[@]}
 }
 
@@ -53,7 +53,7 @@ install_pip_packages(){
     if ! command -v pip > /dev/null; then 
         sudo pacman -S --noconfirm --needed python-pip 
     fi 
-    echo -e "${MSGCOLOUR}Installing pip packages.....${NC}"
+    msg "Installing pip packages....."
     pip install ${pip_packages[@]}
 }
 
@@ -72,7 +72,7 @@ install_vscode_packages(){
     if ! command -v code > /dev/null; then 
         sudo pacman -S --noconfirm --needed code 
     fi 
-    echo -e "${MSGCOLOUR}Installing vscode packages.....${NC}"
+    msg "Installing vscode packages....."
     code --install-extension ${vscode_packages[@]}
 }
 
@@ -93,14 +93,10 @@ install_packages(){
 }
 
 enable_systemd_service(){
-    if command -v $1 > /dev/null; then
-        echo -e "${MSGCOLOUR}Enabling "$1" systemd service....${NC}"
-        sudo systemctl enable "$1".service
-    fi
+    sudo systemctl enable "$1".service >/dev/null 2>&1 && msg "Enabling $1 systemd service...." 
 }
 
 enable_systemd_services(){
-    echo -e "${MSGCOLOUR}Enabling systemd services....${NC}"
     enable_systemd_service "gdm"
     enable_systemd_service "sddm"
     enable_systemd_service "lightdm"
