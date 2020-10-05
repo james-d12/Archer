@@ -60,7 +60,9 @@ install_packages(){
     rm -rf temp.csv
 }
 
-enable_systemd_service(){ sudo systemctl enable "$1".service >/dev/null 2>&1 && echo -e "Enabling $1.service.." }
+enable_systemd_service(){ 
+    sudo systemctl enable "$1".service >/dev/null 2>&1 && echo -e "Enabling $1.service.." 
+}
 enable_systemd_services(){
     services=("gdm" "sddm" "lightdm" "NetworkManager" "ufw" "apparmor")
     for service in ${services[@]}; do enable_systemd_service $service; done 

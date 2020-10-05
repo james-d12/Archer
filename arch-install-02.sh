@@ -4,8 +4,8 @@
 
 setup_users(){
     useradd -m -G wheel $user 
-    until passwd; do echo "Try setting root password again."; sleep 2; done
-    until passwd $user; do echo "Try setting user password again."; sleep 2; done
+    ( echo "$rootpass"; echo "$rootpass" ) | passwd --stdin
+    ( echo "$userpass"; echo "$userpass" ) | passwd $user
     cp /etc/sudoers /etc/sudoers.bak
     echo "$user ALL=(ALL) ALL" >> /etc/sudoers
 }
@@ -16,7 +16,7 @@ add_encrypted_swap_file(){
         chmod 600 /swapfile
         mkswap -L SWAP /swapfile
         swapon /swapfile
-        cp /etc/fstab /etc/fstab.bak
+        cp /etc/fstab /etc/fstab.bakreb
         echo "/swapfile none swap sw 0 0" >> /etc/fstab
     fi
 }
