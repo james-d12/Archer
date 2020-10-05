@@ -11,7 +11,6 @@ configure_apparmor_and_firejail(){
 
 configure_firewall(){
     if command -v ufw > /dev/null; then
-        msg "Configuring the firewall...."
         sudo ufw limit 22/tcp  
         sudo ufw limit ssh
         sudo ufw allow 80/tcp  
@@ -27,7 +26,6 @@ configure_firewall(){
 
 configure_sysctl(){
     if command -v sysctl > /dev/null; then
-        msg "Hardening sysctl...."
         sudo sysctl -a
         sudo sysctl -A
         sudo sysctl mib
@@ -38,7 +36,6 @@ configure_sysctl(){
 
 configure_fail2ban(){
     if command -v fail2ban > /dev/null; then
-        msg "Setting up fail2ban...."
         sudo cp fail2ban.local /etc/fail2ban/
         sudo systemctl enable fail2ban
         sudo systemctl start fail2ban

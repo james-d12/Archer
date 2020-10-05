@@ -67,8 +67,6 @@ get_user_input(){
             "gnome-minimal") desktopenvironment=$o; break;;
             "xfce") desktopenvironment=$o; break;;
             "xfce-minimal") desktopenvironment=$o; break;;
-            "i3") desktopenvironment=$o; break;;
-            "custom") desktopenvironment=$o; break;;
             "NONE") desktopenvironment=""; break;;
             *) echo "Invalid option $REPLY";;
         esac
@@ -119,13 +117,6 @@ get_user_input(){
 output_to_config_file(){
 cat <<EOF > arch-config.sh
 #!/usr/bin/env bash
-
-msg(){ echo -e "${MSGCOLOUR} $1 ${NC}"; sleep 1; }
-
-MSGCOLOUR='\033[0;33m'
-PROMPTCOLOUR='\033[0;32m'
-NC='\033[0m'
-
 drive="${drive}"
 encrypted="${encrypted}"
 swapsize="${swapsize}"
