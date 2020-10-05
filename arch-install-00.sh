@@ -17,11 +17,6 @@ get_user_input(){
             echo -n "Enter Encrypted Swap Size(MB): "; 
             read swapsize
         done
-    else 
-        while [ -z $swapsize ]; do
-            echo -n "Enter Swap Size(MB): "; 
-            read swapsize
-        done
     fi
 
     while [ -z $drive ]; do
