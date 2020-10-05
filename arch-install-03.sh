@@ -93,7 +93,7 @@ install_packages(){
 }
 
 enable_systemd_service(){
-    if sudo pacman -Qs "$1" > /dev/null; then
+    if command -v $1 > /dev/null; then
         echo -e "${MSGCOLOUR}Enabling "$1" systemd service....${NC}"
         sudo systemctl enable "$1".service
     fi
