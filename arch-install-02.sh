@@ -5,7 +5,7 @@
 setup_users(){
     useradd -m -G wheel $user 
     until passwd; do echo "Try setting root password again."; sleep 2; done
-    until passwd $user; do echo "Try setting user password again."; sleep 2 done
+    until passwd $user; do echo "Try setting user password again."; sleep 2; done
     cp /etc/sudoers /etc/sudoers.bak
     echo "$user ALL=(ALL) ALL" >> /etc/sudoers
 }
