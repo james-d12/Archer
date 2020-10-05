@@ -24,7 +24,8 @@ format_and_mount_uefi() {
     mkfs.ext4 -L ROOT /dev/"${drive}3"
     swapon /dev/"${drive}2"
     mount /dev/"${drive}3" /mnt
-    mkdir -p /mnt/boot && mkdir -p /mnt/boot/efi 
+    mkdir -p /mnt/boot 
+    mkdir -p /mnt/boot/efi 
     mount /dev/"${drive}1" /mnt/boot/efi  
 }
 format_and_mount_uefi_encrypted() {
@@ -35,7 +36,8 @@ format_and_mount_uefi_encrypted() {
     mkfs.ext4 -L BOOT /dev/"${drive}2"
     mkfs.ext4 -L ROOT /dev/mapper/cr_root
     mount /dev/mapper/cr_root /mnt
-    mkdir -p /mnt/boot && mkdir -p /mnt/boot/efi 
+    mkdir -p /mnt/boot 
+    mkdir -p /mnt/boot/efi 
     mount /dev/"${drive}2" /mnt/boot
     mount /dev/"${drive}1" /mnt/boot/efi
 }
