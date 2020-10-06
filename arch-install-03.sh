@@ -77,10 +77,10 @@ enable_systemd_service(){
     sudo systemctl enable "$1".service >/dev/null 2>&1 && echo -e "Enabling $1.service.." 
 }
 enable_systemd_services(){
-    services=("gdm" "sddm" "lightdm" "NetworkManager" "ufw" "apparmor")
+    services=("gdm" "sddm" "lightdm" "NetworkManager" "ufw" "apparmor" "cronie")
     for service in ${services[@]}; do enable_systemd_service $service; done 
 }
 
 check_network_connection
 install_packages
-enable_systemd_services
+enable_systemd_servicesd
