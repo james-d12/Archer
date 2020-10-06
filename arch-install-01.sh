@@ -2,6 +2,21 @@
 
 . ./arch-config.sh
 
+partition_uefi(){
+    sgdisk -Z /dev/$drive 
+    sgdisk -a 2048 -o /dev/$drive 
+    sgdisk -n 1:0:+512M -t 1:ef00 /dev/$drive 
+    sgdisk -n 2:0:+$swapsize"M" -t 2:8200 /dev/$drive 
+    sgdisk -n 3:0:0 -t 3:8300 /dev/$drive
+}
+partition_uefi_encrypted(){
+    sgdisk -Z /dev/$drive 
+    sgdisk -a 2048 -o /dev/$drive 
+    sgdisk -n 1:0:+100M -t 1:ef00 /dev/$drive 
+    sgdisk -n 2:0:+512M -t 2:8300 /dev/$drive 
+    sgdisk -n 3:0:0 -t 3:8300 /dev/$drive 
+}
+
 format_and_mount_bios() {
     echo "Formatting and mounting for BIOS......"
     mkswap -L SWAP /dev/"${drive}1"
@@ -46,13 +61,11 @@ format_and_mount_uefi_encrypted() {
     mount /dev/"${drive}1" /mnt/boot/efi
 }
 
-cfdisk /dev/$drive
-
 case "$system $encrypted" in 
-     "BIOS NO") format_and_mount_bios;;
-     "BIOS YES") format_and_mount_bios_encrypted;;
-     "UEFI NO") format_and_mount_uefi;;
-     "UEFI YES") format_and_mount_uefi_encrypted;;
+     "BIOS NO") cfdisk /dev/$drive; format_and_mount_bios;;
+     "BIOS YES") cfdisk /dev/$drive; format_and_mount_bios_encrypted;;
+     "UEFI NO") partition_uefi; format_and_mount_uefi;;
+     "UEFI YES") partition_uefi_encrypted; format_and_mount_uefi_encrypted;;
 esac 
 
 pacstrap /mnt base base-devel $kernel linux-firmware nano networkmanager wireless_tools wpa_supplicant netctl dialog iwd dhclient
@@ -63,3 +76,4 @@ cp -r * /mnt/arch-install-scripts/
 arch-chroot /mnt /bin/bash -c "bash arch-install-scripts/arch-install-02.sh"
 
 umount -R /mnt
+reboot

@@ -12,13 +12,6 @@ get_user_input(){
         esac
     done
 
-    if [ "$encrypted" == "YES" ]; then
-        while [ -z $swapsize ]; do
-            echo -n "Enter Encrypted Swap Size(MB): "; 
-            read swapsize
-        done
-    fi
-
     while [ -z $drive ]; do
         echo -n "Enter Drive Name: "; 
         read drive
@@ -33,6 +26,12 @@ get_user_input(){
             *) echo "Invalid option $REPLY";;
         esac
     done
+
+    if [ "$system" == "UEFI" ]; then while [ -z $swapsize ]; do
+        echo -n "Enter Swap Size(MB): "; 
+        read swapsize
+    done fi 
+
 
     PS3='Choose Kernel: '
     options=("linux" "linux-lts" "linux-hardened")
