@@ -28,8 +28,7 @@ add_package_to_list(){
     esac  
 }
 
-install_dependencies(){
-    sudo pacman -S --noconfirm --needed git python-pip code 
+install_aur_helper(){
     git clone https://aur.archlinux.org/yay.git
     cd yay && makepkg -si --noconfirm --needed
 }
@@ -41,14 +40,28 @@ install_package(){
 install_packages_from_lists(){
     sudo pacman -S --noconfirm --needed ${depackages[@]}
     sudo pacman -S --noconfirm --needed ${pacman_packages[@]} 
-    yay -S --batchinstall --cleanafter --noconfirm --needed ${aur_packages[@]}
-    pip install ${pip_packages[@]} || install_package python-pip >/dev/null 2>&1 && pip install ${pip_packages[@]]}
-    code --install-extension ${vscode_packages[@]} || install_package code >/dev/null 2>&1 && code --install-extension ${vscode_packages[@]} 
-    for package in ${git_packages[@]}; do 
+
+    if [ ${#aur_packages[@]} -ne 0 ]; then
+        ! command -v yay >/dev/null 2>&1 && install_aur_helper
+        yay -S --batchinstall --cleanafter --noconfirm --needed ${aur_packages[@]}
+    fi
+
+    if [ ${#git_packages[@]} -ne 0 ]; then for package in ${git_packages[@]}; do 
         git clone $package $package; 
         cd $package; 
         makepkg -si --noconfirm --needed; 
-    done 
+    done fi 
+
+    if [ ! ${#pip_packages[@]} -eq 0 ]; then 
+        ! command -v python-pip >/dev/null 2>&1 && install_package python-pip 
+        pip install ${pip_packages[@]}
+    fi 
+    
+    if [ ! ${#vscode_packages[@]} -eq 0 ]; then 
+        ! command -v code >/dev/null 2>&1 && install_package code 
+        code --install-extension ${vscode_packages[@]}
+    fi 
+
 }
 
 install_packages(){
