@@ -48,8 +48,8 @@ format_and_mount_bios() {
 format_and_mount_bios_encrypted() {
     echo "Formatting and mounting for encrypted BIOS......"
     modprobe dm-crypt && modprobe dm-mod 
-    cryptsetup luksFormat -v -s 512 -h sha512 /dev/"${drive}2"
-    cryptsetup open /dev/"${drive}2" cr_root
+    ( echo "$encryptionpass"; ) | cryptsetup luksFormat -v -s 512 -h sha512 /dev/"${drive}2"
+    ( echo "$encryptionpass"; ) | cryptsetup open /dev/"${drive}2" cr_root
     mkfs.ext4 -L BOOT /dev/"${drive}1"
     mkfs.ext4 /dev/mapper/cr_root
     mount /dev/mapper/cr_root /mnt
