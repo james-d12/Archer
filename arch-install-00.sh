@@ -38,7 +38,7 @@ get_user_input(){
         esac
     done
 
-    if [ "$system" == "UEFI" ]; then 
+    if [ "$encrypted" == "NO" ]; then 
         while [ -z $swapsize ]; do
             echo -n "Enter Swap Size(MB): "; 
             read swapsize
