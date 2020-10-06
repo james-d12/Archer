@@ -2,6 +2,28 @@
 
 . ./arch-config.sh
 
+partition_bios(){
+sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk /dev/"$drive"
+    o # clear the in memory partition table
+    n # new partition
+    p # primary partition
+    1 # partition number 1
+      # default - start at beginning of disk 
+    +"$swapsize"M # swap parttion
+    t
+    1
+    82
+    n # new partition
+    p # primary partition
+    2 # partion number 2
+      # default, start immediately after preceding partition
+      # default, extend partition to end of disk
+    p # print the in-memory partition table
+    w # write the partition table
+    q # and we're done
+EOF
+}
+
 partition_bios_encrypted(){
 sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk /dev/"$drive"
     o # clear the in memory partition table
@@ -83,7 +105,7 @@ format_and_mount_uefi_encrypted() {
 }
 
 case "$system $encrypted" in 
-     "BIOS NO") cfdisk /dev/$drive; format_and_mount_bios;;
+     "BIOS NO") partition_bios; format_and_mount_bios;;
      "BIOS YES") partition_bios_encrypted; format_and_mount_bios_encrypted;;
      "UEFI NO") partition_uefi; format_and_mount_uefi;;
      "UEFI YES") partition_uefi_encrypted; format_and_mount_uefi_encrypted;;
