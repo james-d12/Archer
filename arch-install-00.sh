@@ -46,11 +46,12 @@ get_user_input(){
     fi 
 
     PS3='Choose Kernel: '
-    options=("linux" "linux-lts" "linux-hardened")
+    options=("linux" "linux-lts" "linux-zen" "linux-hardened")
     select o in "${options[@]}"; do
         case $o in
             "linux") kernel=$o; break;;
             "linux-lts") kernel=$o; break;;
+            "linux-zen") kernel=$o; break;;
             "linux-hardened") kernel=$o; break;;
             *) echo "Invalid option $REPLY";;
         esac
@@ -67,13 +68,15 @@ get_user_input(){
     done
 
     PS3='Choose Desktop Environment: '
-    options=("gnome" "gnome-minimal" "xfce" "xfce-minimal" "NONE")
+    options=("gnome" "gnome-minimal" "xfce" "xfce-minimal" "kde" "kde-minimal" "NONE")
     select o in "${options[@]}"; do
         case $o in
             "gnome") desktopenvironment=$o; break;;
             "gnome-minimal") desktopenvironment=$o; break;;
             "xfce") desktopenvironment=$o; break;;
             "xfce-minimal") desktopenvironment=$o; break;;
+            "kde") desktopenvironment=$o; break;;
+            "kde-minimal") desktopenvironment=$o; break;;
             "NONE") desktopenvironment=""; break;;
             *) echo "Invalid option $REPLY";;
         esac

@@ -52,6 +52,18 @@ case "$desktopenvironment" in
             'xdg-user-dirs'
             'xfce4'
         );;
+    "kde")
+        depackages=(
+            'sddm'
+            'plasma'
+        )
+    "kde-minimal")
+        depackages=(
+            'sddm'
+            'sddm-kcm'
+            'plasma-desktop'
+            'alacritty'
+        )
     *)
         depackages=(
 
