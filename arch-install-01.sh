@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash 
 
 . ./arch-config.sh
 
@@ -49,8 +49,8 @@ format_and_mount_uefi() {
 format_and_mount_uefi_encrypted() {
     echo "Formatting and mounting for encrypted UEFI......"
     modprobe dm-crypt && modprobe dm-mod 
-    cryptsetup luksFormat -v -s 512 -h sha512 /dev/"${drive}3"
-    cryptsetup open /dev/"${drive}3" cr_root
+    ( echo "$encryptionpass"; ) | cryptsetup luksFormat -v -s 512 -h sha512 /dev/"${drive}3"
+    ( echo "$encryptionpass"; ) | cryptsetup open /dev/"${drive}3" cr_root
     mkfs.fat -F32 /dev/"${drive}1"
     mkfs.ext4 -L BOOT /dev/"${drive}2"
     mkfs.ext4 -L ROOT /dev/mapper/cr_root

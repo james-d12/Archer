@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash 
 
 get_user_input(){
     clear
@@ -27,11 +27,21 @@ get_user_input(){
         esac
     done
 
-    if [ "$system" == "UEFI" ]; then while [ -z $swapsize ]; do
-        echo -n "Enter Swap Size(MB): "; 
-        read swapsize
-    done fi 
-
+    if [ "$system" == "UEFI" ]; then 
+        while [ -z $swapsize ]; do
+            echo -n "Enter Swap Size(MB): "; 
+            read swapsize
+        done 
+        
+        echo "Enter encryption password: "; read -s pass1;
+        echo "Re-enter encryption password: "; read -s pass2; 
+        while [ $pass1 != $pass2 ]; do
+            echo "Passwords do not match, please retry."
+            echo "Enter encryption password: "; read -s pass1;
+            echo "Re-enter encryption password: "; read -s pass2; 
+        done
+        encryptionpass=$pass1 
+    fi 
 
     PS3='Choose Kernel: '
     options=("linux" "linux-lts" "linux-hardened")
@@ -132,6 +142,7 @@ cat <<EOF > arch-config.sh
 #!/usr/bin/env bash
 drive="${drive}"
 encrypted="${encrypted}"
+encryptionpass="${encryptionpass}"
 swapsize="${swapsize}"
 system="${system}" 
 kernel="${kernel}"

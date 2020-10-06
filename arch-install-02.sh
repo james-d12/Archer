@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash 
 
 . /arch-install-scripts/arch-config.sh
 
