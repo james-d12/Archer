@@ -12,6 +12,17 @@ get_user_input(){
         esac
     done
 
+    if [ "$encrypted" == "YES" ]; then 
+        echo "Enter encryption password: "; read -s pass1;
+        echo "Re-enter encryption password: "; read -s pass2; 
+        while [ $pass1 != $pass2 ]; do
+            echo "Passwords do not match, please retry."
+            echo "Enter encryption password: "; read -s pass1;
+            echo "Re-enter encryption password: "; read -s pass2; 
+        done
+        encryptionpass=$pass1 
+    fi
+
     while [ -z $drive ]; do
         echo -n "Enter Drive Name: "; 
         read drive
@@ -32,15 +43,6 @@ get_user_input(){
             echo -n "Enter Swap Size(MB): "; 
             read swapsize
         done 
-        
-        echo "Enter encryption password: "; read -s pass1;
-        echo "Re-enter encryption password: "; read -s pass2; 
-        while [ $pass1 != $pass2 ]; do
-            echo "Passwords do not match, please retry."
-            echo "Enter encryption password: "; read -s pass1;
-            echo "Re-enter encryption password: "; read -s pass2; 
-        done
-        encryptionpass=$pass1 
     fi 
 
     PS3='Choose Kernel: '
