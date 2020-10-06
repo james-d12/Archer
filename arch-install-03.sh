@@ -66,7 +66,7 @@ install_packages_from_lists(){
 
 install_packages(){
     touch temp.csv; cat resources/programs.csv | tr -d " \t\r" > temp.csv
-    while IFS=, read -r installer package; do
+    while IFS=, read -r installer package description; do
         add_package_to_list $installer $package 
     done < temp.csv; 
     install_packages_from_lists
