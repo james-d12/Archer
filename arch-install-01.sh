@@ -9,7 +9,7 @@ sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk /dev/"$drive"
     p # primary partition
     1 # partition number 1
       # default - start at beginning of disk 
-    +$swapsizeM # swap parttion
+    +$swapsize"M" # swap parttion
     t
     82
     n # new partition
