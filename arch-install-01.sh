@@ -3,13 +3,14 @@
 . ./arch-config.sh
 
 partition_bios(){
+newsize=$(($swapsize*2))
 sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk /dev/"$drive"
     o # clear the in memory partition table
     n # new partition
     p # primary partition
     1 # partition number 1
       # default - start at beginning of disk 
-    +$swapsize"M" # swap parttion
+    +$newsize"M" # swap parttion
     t
     82
     n # new partition
