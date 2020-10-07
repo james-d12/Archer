@@ -56,14 +56,14 @@ case "$desktopenvironment" in
         depackages=(
             'sddm'
             'plasma'
-        )
+        );;
     "kde-minimal")
         depackages=(
             'sddm'
             'sddm-kcm'
             'plasma-desktop'
             'alacritty'
-        )
+        );;
     *)
         depackages=(
 
