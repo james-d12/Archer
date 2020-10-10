@@ -77,10 +77,8 @@ PACMAN,      plank,                                 A Docker.
 
 PACMAN,      pulseaudio,                            Audio Controller.
 PACMAN,      pavucontrol,                           GUI Frontend for PulseAudio.
-PACMAN,      zsh,                                   Alternative Shell to Bash.
-PACMAN,      zsh-completions,                       Auto Completions For ZSH.
 PACMAN,      firefox,                               Firefox Browser.
-PACMAN,      chromium,                              Chromium Web Browser.
+PACMAN,      audacity,                              Audio Recorder and Manipulator tool.
 PACMAN,      discord,                               Communication.
 PACMAN,      code,                                  VSCode Editor. 
 PACMAN,      flameshot,                             Screenshot software.
@@ -116,6 +114,7 @@ PACMAN,      virtualbox-host-dkms,                  Virtual Machine Dependency f
 #VSCODE,      twxs.cmake,                            CMake Support.
 #VSCODE,      alefragnani.project-manager,           Project Manager.
 #VSCODE,      miqh.core-theme,                       Core Themes.
+#VSCODE,      robbowen.synthwave-vscode,             Synthwave Theme.
 
 # Gaming Libraries 
 #PACMAN,      wine-staging,                          Runs Windows Software.
