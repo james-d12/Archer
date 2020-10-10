@@ -83,5 +83,3 @@ setup_localisation
 setup_network
 setup_grub
 cleanup_script
-
-su $user ./arch-install-03.sh 
