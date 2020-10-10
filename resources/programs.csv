@@ -94,25 +94,72 @@ PACMAN,      virtualbox,                            Virtual Machine.
 #PACMAN,      virtualbox-host-modules-arch,          Virtual Machine Dependency for standard kernel.  
 PACMAN,      virtualbox-host-dkms,                  Virtual Machine Dependency for Other kernels.    
 
-AUR,         protonvpn-cli-ng,                      ProtonVPN CLI Client.
-AUR,         zeal-git,                              Offline Documentation Viewer.
-AUR,         timeshift,                             Backup Tool.
-AUR,         bitwarden-bin,                         Password Manager.
-AUR,         breeze-obsidian-cursor-theme,          Obsidian Cursor Theme.
-AUR,         gnome-shell-pomodoro,                  Pomodoro Timer for Gnome.
-AUR,         gnome-shell-extension-pop-shell-git,   Tiling Windows for Gnome.
+#AUR,         protonvpn-cli-ng,                      ProtonVPN CLI Client.
+#AUR,         zeal-git,                              Offline Documentation Viewer.
+#AUR,         timeshift,                             Backup Tool.
+#AUR,         bitwarden-bin,                         Password Manager.
+#AUR,         breeze-obsidian-cursor-theme,          Obsidian Cursor Theme.
+#AUR,         gnome-shell-pomodoro,                  Pomodoro Timer for Gnome.
+#AUR,         gnome-shell-extension-pop-shell-git,   Tiling Windows for Gnome.
+#
+#PIP,         PyQt5,                                 Python wrapper of QT UI Library.
+#PIP,         selenium,                              Python Library For Web Engine Automation.
+#PIP,         numpy,                                 Pythson Math Library.
+#PIP,         matplotlib,                            Python Graph Plotting Library.
+#PIP,         gym,                                   Comparing reinforcement learning algorithms.
+#PIP,         opencv-python,                         Library for Real Time Applications.
+#PIP,         pandas,                                Data Anaylsis Tool.
+#
+#VSCODE,      ms-python.python,                      Python Language. 
+#VSCODE,      ms-vscode.cpptools,                    C/C++ Language.
+#VSCODE,      ms-dotnettools.csharp,                 C# Language.
+#VSCODE,      twxs.cmake,                            CMake Support.
+#VSCODE,      alefragnani.project-manager,           Project Manager.
+#VSCODE,      miqh.core-theme,                       Core Themes.
 
-PIP,         PyQt5,                                 Python wrapper of QT UI Library.
-PIP,         selenium,                              Python Library For Web Engine Automation.
-PIP,         numpy,                                 Pythson Math Library.
-PIP,         matplotlib,                            Python Graph Plotting Library.
-PIP,         gym,                                   Comparing reinforcement learning algorithms.
-PIP,         opencv-python,                         Library for Real Time Applications.
-PIP,         pandas,                                Data Anaylsis Tool.
-
-VSCODE,      ms-python.python,                      Python Language. 
-VSCODE,      ms-vscode.cpptools,                    C/C++ Language.
-VSCODE,      ms-dotnettools.csharp,                 C# Language.
-VSCODE,      twxs.cmake,                            CMake Support.
-VSCODE,      alefragnani.project-manager,           Project Manager.
-VSCODE,      miqh.core-theme,                       Core Themes.
+# Gaming Libraries 
+#PACMAN,      wine-staging,                          Runs Windows Software.
+#PACMAN,      giflib,                                Utility Library.
+#PACMAN,      lib32-giflib,                          Utility Library.
+#PACMAN,      libpng,                                Utility Library.
+#PACMAN,      lib32-libpng,                          Utility Library. 
+#PACMAN,      libldap,                               Utility Library. 
+#PACMAN,      lib32-libldap,                         Utility Library. 
+#PACMAN,      gnutls,                                Utility Library. 
+#PACMAN,      lib32-gnutls,                          Utility Library. 
+#PACMAN,      mpg123,                                Utility Library. 
+#PACMAN,      lib32-mpg123,                          Utility Library. 
+#PACMAN,      openal,                                Utility Library. 
+#PACMAN,      lib32-openal,                          Utility Library. 
+#PACMAN,      v4l-utils,                             Utility Library. 
+#PACMAN,      lib32-v4l-utils,                       Utility Library. 
+#PACMAN,      libpulse,                              Utility Library. 
+#PACMAN,      lib32-libpulse,                        Utility Library. 
+#PACMAN,      libgpg-error,                          Utility Library. 
+#PACMAN,      lib32-libgpg-error,                    Utility Library. 
+#PACMAN,      alsa-plugins,                          Utility Library. 
+#PACMAN,      lib32-alsa-plugins,                    Utility Library. 
+#PACMAN,      alsa-lib,                              Utility Library. 
+#PACMAN,      lib32-alsa-lib,                        Utility Library. 
+#PACMAN,      libjpeg-turbo,                         Utility Library. 
+#PACMAN,      lib32-libjpeg-turbo,                   Utility Library. 
+#PACMAN,      sqlite lib32-sqlite,                   Utility Library. 
+#PACMAN,      libxcomposite,                         Utility Library. 
+#PACMAN,      lib32-libxcomposite,                   Utility Library. 
+#PACMAN,      libxinerama,                           Utility Library. 
+#PACMAN,      lib32-libgcrypt,                       Utility Library. 
+#PACMAN,      libgcrypt,                             Utility Library. 
+#PACMAN,      lib32-libxinerama,                     Utility Library. 
+#PACMAN,      ncurses,                               Utility Library. 
+#PACMAN,      lib32-ncurses,                         Utility Library. 
+#PACMAN,      opencl-icd-loader,                     Utility Library. 
+#PACMAN,      lib32-opencl-icd-loader,               Utility Library. 
+#PACMAN,      libxslt lib32-libxslt,                 Utility Library. 
+#PACMAN,      libva,                                 Utility Library. 
+#PACMAN,      lib32-libva,                           Utility Library. 
+#PACMAN,      gtk3,                                  Utility Library. 
+#PACMAN,      lib32-gtk3,                            Utility Library. 
+#PACMAN,      gst-plugins-base-libs,                 Utility Library. 
+#PACMAN,      lib32-gst-plugins-base-libs,           Utility Library. 
+#PACMAN,      vulkan-icd-loader,                     Utility Library. 
+#PACMAN,      lib32-vulkan-icd-loader,               Utility Library.
