@@ -16,7 +16,7 @@ add_encrypted_swap_file(){
         chmod 600 /swapfile
         mkswap -L SWAP /swapfile
         swapon /swapfile
-        cp /etc/fstab /etc/fstab.bakreb
+        cp /etc/fstab /etc/fstab.bak
         echo "/swapfile none swap sw 0 0" >> /etc/fstab
     fi
 }
@@ -53,7 +53,7 @@ setup_grub_bios(){
 setup_grub_uefi(){
     pacman -S --noconfirm --needed grub efibootmgr $microcode os-prober 
     if [ "$encrypted" == "YES" ]; then
-        cp /etc/default/grub /etc/default/grub.bak
+        cp /etc/default/grub /etc/default/grub.bak 
         line='GRUB_CMDLINE_LINUX="cryptdevice=/dev/'"${drive}"'3:cr_root"'
         sed -i 's#GRUB_CMDLINE_LINUX=""#'"${line}"'#g' /etc/default/grub
         sed -i 's/HOOKS=(base udev autodetect modconf block filesystems keyboard fsck)/HOOKS=(base udev autodetect modconf block encrypt filesystems keyboard fsck)/g' /etc/mkinitcpio.conf

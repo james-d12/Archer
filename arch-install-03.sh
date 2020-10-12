@@ -19,7 +19,7 @@ git_packages=()
 vscode_packages=()
 
 add_package_to_list(){
-    case "$1" in
+    case "$1" inww
         "PACMAN") pacman_packages+=("$2");;
         "AUR") aur_packages+=("$2");;
         "PIP") pip_packages+=("$2");;
@@ -29,6 +29,7 @@ add_package_to_list(){
 }
 
 install_aur_helper(){
+    ! command -v git >/dev/null 2>&1 && install_package git
     git clone https://aur.archlinux.org/yay.git
     cd yay && makepkg -si --noconfirm --needed
 }
@@ -46,11 +47,15 @@ install_packages_from_lists(){
         yay -S --batchinstall --cleanafter --noconfirm --needed ${aur_packages[@]}
     fi
 
-    if [ ${#git_packages[@]} -ne 0 ]; then for package in ${git_packages[@]}; do 
-        git clone $package $package; 
-        cd $package; 
-        makepkg -si --noconfirm --needed; 
-    done fi 
+    if [ ${#git_packages[@]} -ne 0 ]; then 
+        ! command -v git >/dev/null 2>&1 && install_package git 
+        for package in ${git_packages[@]}; do 
+            ! command -v git >/dev/null 2>&1 && install_package git 
+            git clone $package $package; 
+            cd $package; 
+            makepkg -si --noconfirm --needed; 
+        done 
+    fi 
 
     if [ ! ${#pip_packages[@]} -eq 0 ]; then 
         ! command -v python-pip >/dev/null 2>&1 && install_package python-pip 

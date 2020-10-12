@@ -58,5 +58,4 @@ harden_security(){
     configure_apparmor_and_firejail
 }
 
-
 harden_security
