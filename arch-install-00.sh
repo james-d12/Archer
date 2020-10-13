@@ -192,9 +192,8 @@ check_details(){
     print_details
     echo -n "Are these details correct? [Y/n]: "; read arecorrect;
     if [[ $arecorrect == "Y" || $arecorrect == "y" ]]; then
-        echo "ok"
-        #output_to_config_file
-        #bash arch-install-01.sh 
+        output_to_config_file
+        bash arch-install-01.sh 
     else
         main 
     fi 
