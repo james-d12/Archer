@@ -113,6 +113,8 @@ PACMAN,      virtualbox-host-dkms,                  Virtual Machine Dependency f
 #VSCODE,      alefragnani.project-manager,           Project Manager.
 #VSCODE,      miqh.core-theme,                       Core Themes.
 #VSCODE,      robbowen.synthwave-vscode,             Synthwave Theme.
+#VSCODE,      ryanolsonx.solarized,                  Better Solarized Theme.
+#VSCODE,      emmanuelbeziat.vscode-great-icons,     Icon set.
 
 # Gaming Libraries 
 #PACMAN,      wine-staging,                          Runs Windows Software.

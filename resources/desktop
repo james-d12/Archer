@@ -55,6 +55,7 @@ case "$desktopenvironment" in
     "kde")
         depackages=(
             'sddm'
+            'sddm-kcm'
             'plasma'
         );;
     "kde-minimal")
