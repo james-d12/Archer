@@ -13,19 +13,20 @@ get_user_input(){
     done
 
     if [ "$encrypted" == "YES" ]; then 
-        echo "Enter encryption password: "; read -s pass1;
-        echo "Re-enter encryption password: "; read -s pass2; 
+        read -s -p "Enter encryption password: " pass1; echo ''
+        read -s -p "Re-enter encryption password: " pass2; echo ''
         while [ $pass1 != $pass2 ]; do
             echo "Passwords do not match, please retry."
-            echo "Enter encryption password: "; read -s pass1;
-            echo "Re-enter encryption password: "; read -s pass2; 
+            read -s -p "Enter encryption password: " pass1; echo ''
+            read -s -p "Re-enter encryption password: " pass2; echo ''
         done
         encryptionpass=$pass1 
     fi
 
-    while [ -z $drive ]; do
-        echo -n "Enter Drive Name: "; 
-        read drive
+    read -r -p "Enter Drive: " drive 
+    while [[ -z $drive || $drive =~ [0-9] ]]; do
+        echo "Drive Name is invalid, please retry..."
+        read -r -p "Enter Drive: " drive 
     done
 
     PS3='Choose System: '
@@ -82,9 +83,9 @@ get_user_input(){
         esac
     done
 
-    while [ -z $username ]; do
-        echo -n "Enter Username: "; 
-        read username
+    read -r -p "Enter Username: " username 
+    while [[ -z $username || $username =~ [0-9] ]]; do
+        read -r -p "Enter Username: " username 
     done
     username=$(echo "$username" | awk '{print tolower($0)}')
 
@@ -134,9 +135,11 @@ get_user_input(){
         esac
     done
 
-    while [ -z $hostname ]; do
-        echo -n "Enter Hostname: "; 
-        read hostname
+
+    read -r -p "Enter Hostname: " hostname 
+    while [[ -z $hostname || $hostname =~ [0-9] ]]; do
+        echo "Hostname is invalid, please retry..."
+        read -r -p "Enter Drive: " hostname 
     done
     hostname=$(echo "$hostname" | awk '{print tolower($0)}')
     clear
@@ -166,7 +169,40 @@ host="
 127.0.1.1	$hostname.localdomain	$hostname"
 EOF
 }
- 
-get_user_input
-output_to_config_file
-bash arch-install-01.sh 
+
+print_details(){
+echo "
+drive="${drive}"
+encrypted="${encrypted}"
+encryptionpass="${encryptionpass}"
+swapsize="${swapsize}"
+system="${system}" 
+kernel="${kernel}"
+microcode="${microcode}"
+desktopenvironment="${desktopenvironment}"
+user="${username}"
+userpass="${userpass}"
+rootpass="${rootpass}"
+locale="${locale}"
+region="${region}"
+city="${city}"
+hostname="${hostname}""
+}
+
+check_details(){
+    print_details
+    echo -n "Are these details correct? [Y/n]: "; read arecorrect;
+    if [[ $arecorrect == "Y" || $arecorrect == "y" ]]; then
+        output_to_config_file
+        bash arch-install-01.sh 
+    else
+        main 
+    fi 
+}
+
+main(){
+    get_user_input
+    check_details
+}
+
+main 
