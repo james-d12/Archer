@@ -39,12 +39,11 @@ get_user_input(){
         esac
     done
 
-    if [ "$encrypted" == "NO" ]; then 
-        while [ -z $swapsize ]; do
-            echo -n "Enter Swap Size(MB): "; 
-            read swapsize
-        done 
-    fi 
+    read -r -p "Enter Swap Size(MB): " swapsize 
+    while [ -z $swapsize ]; do
+        echo "Swapsize is invalid, please retry..."
+        read -r -p "Enter Swap Size(MB): " swapsize 
+    done
 
     PS3='Choose Kernel: '
     options=("linux" "linux-lts" "linux-zen" "linux-hardened")
@@ -193,8 +192,9 @@ check_details(){
     print_details
     echo -n "Are these details correct? [Y/n]: "; read arecorrect;
     if [[ $arecorrect == "Y" || $arecorrect == "y" ]]; then
-        output_to_config_file
-        bash arch-install-01.sh 
+        echo "ok"
+        #output_to_config_file
+        #bash arch-install-01.sh 
     else
         main 
     fi 
