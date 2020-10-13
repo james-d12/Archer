@@ -77,6 +77,7 @@ PACMAN,      ttf-roboto,                            Adds Roboto Fonts.
 PACMAN,      pulseaudio,                            Audio Controller.
 PACMAN,      pavucontrol,                           GUI Frontend for PulseAudio.
 PACMAN,      firefox,                               Firefox Browser.
+#AUR,         brave-bin,                             Privacy based Chromium Browser.
 PACMAN,      audacity,                              Audio Recorder and Manipulator tool.
 PACMAN,      discord,                               Communication.
 PACMAN,      code,                                  VSCode Editor. 
@@ -86,6 +87,7 @@ PACMAN,      obs-studio,                            Recording and Streaming.
 PACMAN,      gimp,                                  Image Editor.
 PACMAN,      feedreader,                            RSS Reader.
 PACMAN,      youtube-dl,                            Youtube Downloader CL Program.
+#AUR,         joplin,                                Note taking app.
 PACMAN,      libreoffice-still,                     Office Suite.
 PACMAN,      virtualbox,                            Virtual Machine.
 #PACMAN,      virtualbox-host-modules-arch,          Virtual Machine Dependency for standard kernel.  
