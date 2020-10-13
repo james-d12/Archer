@@ -18,6 +18,7 @@ add_encrypted_swap_file(){
         swapon /swapfile
         cp /etc/fstab /etc/fstab.bak
         echo "/swapfile none swap sw 0 0" >> /etc/fstab
+        genfstab -U / >> /etc/fstab
     fi
 }
 

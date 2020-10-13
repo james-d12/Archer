@@ -50,7 +50,6 @@ install_packages_from_lists(){
     if [ ${#git_packages[@]} -ne 0 ]; then 
         ! command -v git >/dev/null 2>&1 && install_package git 
         for package in ${git_packages[@]}; do 
-            ! command -v git >/dev/null 2>&1 && install_package git 
             git clone $package $package; 
             cd $package; 
             makepkg -si --noconfirm --needed; 
@@ -66,7 +65,6 @@ install_packages_from_lists(){
         ! command -v code >/dev/null 2>&1 && install_package code 
         code --install-extension ${vscode_packages[@]}
     fi 
-
 }
 
 install_packages(){

@@ -61,7 +61,7 @@ PACMAN,      python-pip,                            Python3 PIP.
 PACMAN,      glfw,                                  OpenGL Library.
 PACMAN,      glew,                                  OpenGL Library.
 
-AUR,         hardened-malloc-git,                   A secure version of C's malloc.
+#AUR,         hardened-malloc-git,                   A secure version of C's malloc.
 PACMAN,      openvpn,                               For VPN Connections.
 PACMAN,      ufw,                                   Firewall.
 PACMAN,      apparmor,                              Security Software.
@@ -73,7 +73,6 @@ PACMAN,      ttf-liberation,                        Free Compatible Versions Lik
 PACMAN,      papirus-icon-theme,                    Papirus Icon Theme Set. 
 PACMAN,      ttf-ubuntu-font-family,                Adds Ubuntu Fonts.
 PACMAN,      ttf-roboto,                            Adds Roboto Fonts.
-PACMAN,      plank,                                 A Docker.
 
 PACMAN,      pulseaudio,                            Audio Controller.
 PACMAN,      pavucontrol,                           GUI Frontend for PulseAudio.
@@ -99,7 +98,7 @@ PACMAN,      virtualbox-host-dkms,                  Virtual Machine Dependency f
 #AUR,         breeze-obsidian-cursor-theme,          Obsidian Cursor Theme.
 #AUR,         gnome-shell-pomodoro,                  Pomodoro Timer for Gnome.
 #AUR,         gnome-shell-extension-pop-shell-git,   Tiling Windows for Gnome.
-#
+
 #PIP,         PyQt5,                                 Python wrapper of QT UI Library.
 #PIP,         selenium,                              Python Library For Web Engine Automation.
 #PIP,         numpy,                                 Pythson Math Library.
@@ -107,7 +106,7 @@ PACMAN,      virtualbox-host-dkms,                  Virtual Machine Dependency f
 #PIP,         gym,                                   Comparing reinforcement learning algorithms.
 #PIP,         opencv-python,                         Library for Real Time Applications.
 #PIP,         pandas,                                Data Anaylsis Tool.
-#
+
 #VSCODE,      ms-python.python,                      Python Language. 
 #VSCODE,      ms-vscode.cpptools,                    C/C++ Language.
 #VSCODE,      ms-dotnettools.csharp,                 C# Language.
