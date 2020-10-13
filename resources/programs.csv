@@ -95,7 +95,6 @@ PACMAN,      virtualbox-host-dkms,                  Virtual Machine Dependency f
 #AUR,         zeal-git,                              Offline Documentation Viewer.
 #AUR,         timeshift,                             Backup Tool.
 #AUR,         bitwarden-bin,                         Password Manager.
-#AUR,         breeze-obsidian-cursor-theme,          Obsidian Cursor Theme.
 #AUR,         gnome-shell-pomodoro,                  Pomodoro Timer for Gnome.
 #AUR,         gnome-shell-extension-pop-shell-git,   Tiling Windows for Gnome.
 
