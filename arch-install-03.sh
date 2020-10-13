@@ -19,7 +19,7 @@ git_packages=()
 vscode_packages=()
 
 add_package_to_list(){
-    case "$1" inww
+    case "$1" in 
         "PACMAN") pacman_packages+=("$2");;
         "AUR") aur_packages+=("$2");;
         "PIP") pip_packages+=("$2");;
