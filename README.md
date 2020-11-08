@@ -1,6 +1,9 @@
 # Overview
+This is a simple collection of scripts that aims to automate the arch installation process to make it quicker and faster, but still allows for full customisation of the install. Packages are installed from the resources/programs.csv file and can be fully edited to fit your needs.
+
+# Programs
 The programs that the third script will install are located in the resources/programs.csv file. To add new programs specify 
-the installer type, then the package name, then a description of the package.
+the installer type, then the package name, then a description of the package, ensure each value is separated by a comma.
     - PACMAN    - Uses pacman to install package.
     - AUR       - Uses an AUR helper (yay) to install package.
     - GIT       - Uses git to clone and uses makepkg to install package.
