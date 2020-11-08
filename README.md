@@ -1,3 +1,6 @@
+# Disclaimer
+This script should not be used by someone not familiar with the arch installation process at the current time, it should not be seen as a replacement to learning the arch installation script. Additionally, if possible the script should be tested in a virtual machine/environment with your config before hand to ensure it will run correctly.
+
 # Overview
 This is a simple collection of scripts that aims to automate the arch installation process to make it quicker and faster, but still allows for full customisation of the install. Packages are installed from the resources/programs.csv file and can be fully edited to fit your needs.
 
