@@ -24,7 +24,7 @@ PACMAN, chromium, Open source google chrome.
 5. Run the first script 'bash arch-install-00.sh'
 6. Answer any prompts for the first script, which asks about the configuration such as 
 the root password, what the system type is and what desktop environment it will, or will not, install.
-7. Tea break, then return to a message saying the script has finished and that you should shutdown, remove the installation media then power on the machine.
+7. Tea break, then return to a message saying the script has finished and that you should shutdown (with the command 'shutdown -now'), remove the installation media then power on the machine.
 8. If you encrypted your installation, you will have to decrypt the drive, then you should be greeted with a terminal login screen. Login to your user 
 and change directory to the 'arch-install'scripts' cd arch-install-scripts
 9. If you haven't edited the resources/programs.csv file, do so at this point.
