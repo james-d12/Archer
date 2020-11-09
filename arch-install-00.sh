@@ -23,10 +23,10 @@ get_user_input(){
         encryptionpass=$pass1 
     fi
 
-    read -r -p "Enter Drive Name: (E.g. /dev/sda) " drive 
+    read -r -p "Enter Drive Name: (E.g. sda or sdb, etc...) " drive 
     while [[ -z $drive || $drive =~ [0-9] ]]; do
         echo "Drive Name is invalid, please retry..."
-        read -r -p "Enter Drive: (E.g. /dev/sda) " drive 
+        read -r -p "Enter Drive Name: (E.g. sda or sdb, etc...) " drive 
     done
 
     PS3='Choose System: '
