@@ -1,5 +1,8 @@
 #!/usr/bin/bash 
 
+# This file is responsible for performing some system tweaks that can enhance the
+# security of the linux machine, this is optional.
+
 restrict_kernel_log_access() { 
     echo "kernel.dmesg_restrict = 1" >> /etc/sysctl.d/51-dmesg-restrict.conf 
 }

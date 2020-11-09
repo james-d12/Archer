@@ -1,5 +1,9 @@
 #!/usr/bin/bash 
 
+# This file is responsible for installing the desktop environment (if selected) and 
+# to install the packages present in the resources/programs.csv file with the appropriate
+# package manager.
+
 . resources/desktop 
 
 check_network_connection(){
@@ -28,6 +32,11 @@ add_package_to_list(){
     esac  
 }
 
+error_message(){
+    echo "$1"
+    exit 1
+}
+
 install_aur_helper(){
     ! command -v git >/dev/null 2>&1 && install_package git
     git clone https://aur.archlinux.org/yay.git
@@ -39,12 +48,12 @@ install_package(){
 }
 
 install_packages_from_lists(){
-    sudo pacman -S --noconfirm --needed ${depackages[@]}
-    sudo pacman -S --noconfirm --needed ${pacman_packages[@]} 
+    sudo pacman -S --noconfirm --needed ${depackages[@]} || error_message "Could not install desktop environment packages, as one of the packages is invalid."
+    sudo pacman -S --noconfirm --needed ${pacman_packages[@]} || error_message "Could not install pacman packages, as one of the packages is invalid."
 
     if [ ${#aur_packages[@]} -ne 0 ]; then
         ! command -v yay >/dev/null 2>&1 && install_aur_helper
-        yay -S --batchinstall --cleanafter --noconfirm --needed ${aur_packages[@]}
+        yay -S --batchinstall --cleanafter --noconfirm --needed ${aur_packages[@]} || error_message "Could not install AUR packages, as one of the packages is invalid."
     fi
 
     if [ ${#git_packages[@]} -ne 0 ]; then 

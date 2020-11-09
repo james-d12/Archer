@@ -1,3 +1,4 @@
+# DRIVERS AND CORE PACKAGES
 PACMAN,      xorg,                                  A Group package that contains extra xorg-apps.
 PACMAN,      xorg-xinit,                            Useful For Starting Window Managers from a TTY. 
 #PACMAN,      linux-headers,                         Headers For Kernel.                
@@ -12,6 +13,8 @@ PACMAN,      xorg-xinit,                            Useful For Starting Window M
 #PACMAN,      xf86-video-ati,                        ATI Driver.
 #PACMAN,      lib32-mesa,                            AMD/ATI OpenGL Library - Needed For Games and Steam.
 
+# UTILTIY PACKAGES
+PACMAN,      cronie,                                Time based scheduling program - needed for timeshift scheduled backups.
 PACMAN,      mtools,                                MS-DOS Disk Tools.
 PACMAN,      cronie,                                Run Services At Specific Times.
 PACMAN,      dosfstools,                            DOS Filesystem Utilities.
@@ -39,67 +42,69 @@ PACMAN,      unzip,                                 Unpack .zip files.
 PACMAN,      p7zip,                                 Unpack .7z Files.
 PACMAN,      unrar,                                 Unpack .rar Files.
     
+# DEVELOPMENT TOOLS AND LANGUAGE SUPPORT PACKAGES
 PACMAN,      make,                                  Linux Build Tool.
-PACMAN,      cmake,                                 Cross Platform Build Tool.
 PACMAN,      git,                                   Project Management.
-PACMAN,      nasm,                                  Assembler.
 PACMAN,      gcc,                                   C/C++ Compiler.
-PACMAN,      gdb,                                   C/C++ Debugger.
-PACMAN,      clang,                                 Clang C/C++ Compiler.
-PACMAN,      cppcheck,                              Compile-time C++ Checker.
-PACMAN,      nodejs,                                Node.js.
-PACMAN,      npm,                                   Node Package Manager.
-PACMAN,      rust,                                  Rust Package.
-PACMAN,      ghc,                                   Haskell Compiler.
-PACMAN,      jdk-openjdk,                           Java SDK.
-PACMAN,      dotnet-sdk,                            .NET SDK.
-PACMAN,      mono,                                  Mono For C#.
-PACMAN,      apache,                                Apache HTTP Web Server.
-PACMAN,      ruby,                                  Ruby Scripting Language.
-PACMAN,      ruby-irb,                              Interactive Ruby Shell.
-PACMAN,      python-pip,                            Python3 PIP.
-PACMAN,      glfw,                                  OpenGL Library.
-PACMAN,      glew,                                  OpenGL Library.
+#PACMAN,      cmake,                                 Cross Platform Build Tool.
+#PACMAN,      nasm,                                  Assembler.
+#PACMAN,      gdb,                                   C/C++ Debugger.
+#PACMAN,      clang,                                 Clang C/C++ Compiler.
+#PACMAN,      cppcheck,                              Compile-time C++ Checker.
+#PACMAN,      nodejs,                                Node.js.
+#PACMAN,      npm,                                   Node Package Manager.
+#PACMAN,      rust,                                  Rust Package.
+#PACMAN,      ghc,                                   Haskell Compiler.
+#PACMAN,      jdk-openjdk,                           Java SDK.
+#PACMAN,      dotnet-sdk,                            .NET SDK.
+#PACMAN,      mono,                                  Mono For C#.
+#PACMAN,      apache,                                Apache HTTP Web Server.
+#PACMAN,      ruby,                                  Ruby Scripting Language.
+#PACMAN,      ruby-irb,                              Interactive Ruby Shell.
+#PACMAN,      python-pip,                            Python3 PIP.
+#PACMAN,      glfw,                                  OpenGL Library.
+#PACMAN,      glew,                                  OpenGL Library.
 
-#AUR,         hardened-malloc-git,                   A secure version of C's malloc.
+# SECURITY AND GUI UTILITY PACKAGES
 PACMAN,      openvpn,                               For VPN Connections.
 PACMAN,      ufw,                                   Firewall.
-PACMAN,      apparmor,                              Security Software.
-PACMAN,      firejail,                              Sandboxing Security Software.
-PACMAN,      grub-customizer,                       Grub Configurator.
 PACMAN,      gparted,                               Disk Management. 
+#PACMAN,      grub-customizer,                       Grub Configurator.
+#PACMAN,      apparmor,                              Security Software.
+#PACMAN,      firejail,                              Sandboxing Security Software.
+#AUR,         hardened-malloc-git,                   A secure version of C's malloc.
 
+# APPEARANCE AND VISUAL PACKAGES
 PACMAN,      ttf-liberation,                        Free Compatible Versions Like Arial Fonts.
-PACMAN,      papirus-icon-theme,                    Papirus Icon Theme Set. 
-PACMAN,      ttf-ubuntu-font-family,                Adds Ubuntu Fonts.
-PACMAN,      ttf-roboto,                            Adds Roboto Fonts.
+#PACMAN,      ttf-ubuntu-font-family,                Adds Ubuntu Fonts.
+#PACMAN,      ttf-roboto,                            Adds Roboto Fonts.
+#PACMAN,      papirus-icon-theme,                    Papirus Icon Theme Set. 
 
+# GENERAL APPLICATION PACKAGES
 PACMAN,      pulseaudio,                            Audio Controller.
-PACMAN,      pavucontrol,                           GUI Frontend for PulseAudio.
+#PACMAN,      pavucontrol,                           GUI Frontend for PulseAudio.
 PACMAN,      firefox,                               Firefox Browser.
 #AUR,         brave-bin,                             Privacy based Chromium Browser.
-PACMAN,      audacity,                              Audio Recorder and Manipulator tool.
-PACMAN,      discord,                               Communication.
-PACMAN,      code,                                  VSCode Editor. 
-PACMAN,      flameshot,                             Screenshot software.
-PACMAN,      neovim,                                Neo Vim - More plugin Support.
-PACMAN,      obs-studio,                            Recording and Streaming.
-PACMAN,      gimp,                                  Image Editor.
-PACMAN,      feedreader,                            RSS Reader.
-PACMAN,      youtube-dl,                            Youtube Downloader CL Program.
+#PACMAN,      discord,                               Communication.
+#PACMAN,      audacity,                              Audio Recorder and Manipulator tool.
+#PACMAN,      code,                                  VSCode Editor. 
+#PACMAN,      neovim,                                Neo Vim - More plugin Support.
+#PACMAN,      flameshot,                             Screenshot software.
+#PACMAN,      obs-studio,                            Recording and Streaming.
+#PACMAN,      gimp,                                  Image Editor.
+#PACMAN,      feedreader,                            RSS Reader.
+#PACMAN,      youtube-dl,                            Youtube Downloader CL Program.
 #AUR,         joplin,                                Note taking app.
-PACMAN,      libreoffice-still,                     Office Suite.
-PACMAN,      virtualbox,                            Virtual Machine.
+#PACMAN,      libreoffice-still,                     Office Suite.
+#PACMAN,      virtualbox,                            Virtual Machine.
 #PACMAN,      virtualbox-host-modules-arch,          Virtual Machine Dependency for standard kernel.  
-PACMAN,      virtualbox-host-dkms,                  Virtual Machine Dependency for Other kernels.    
-
+#PACMAN,      virtualbox-host-dkms,                  Virtual Machine Dependency for Other kernels.    
 #AUR,         protonvpn-cli-ng,                      ProtonVPN CLI Client.
 #AUR,         zeal-git,                              Offline Documentation Viewer.
 #AUR,         timeshift,                             Backup Tool.
 #AUR,         bitwarden-bin,                         Password Manager.
-#AUR,         gnome-shell-pomodoro,                  Pomodoro Timer for Gnome.
-#AUR,         gnome-shell-extension-pop-shell-git,   Tiling Windows for Gnome.
 
+# PYTHON PIP LIBRARIES
 #PIP,         PyQt5,                                 Python wrapper of QT UI Library.
 #PIP,         selenium,                              Python Library For Web Engine Automation.
 #PIP,         numpy,                                 Pythson Math Library.
@@ -108,6 +113,7 @@ PACMAN,      virtualbox-host-dkms,                  Virtual Machine Dependency f
 #PIP,         opencv-python,                         Library for Real Time Applications.
 #PIP,         pandas,                                Data Anaylsis Tool.
 
+# VSCODE EXTENSIONS
 #VSCODE,      ms-python.python,                      Python Language. 
 #VSCODE,      ms-vscode.cpptools,                    C/C++ Language.
 #VSCODE,      ms-dotnettools.csharp,                 C# Language.
@@ -118,7 +124,7 @@ PACMAN,      virtualbox-host-dkms,                  Virtual Machine Dependency f
 #VSCODE,      ryanolsonx.solarized,                  Better Solarized Theme.
 #VSCODE,      emmanuelbeziat.vscode-great-icons,     Icon set.
 
-# Gaming Libraries 
+# GAMING LIBRARY PACKAGES
 #PACMAN,      wine-staging,                          Runs Windows Software.
 #PACMAN,      giflib,                                Utility Library.
 #PACMAN,      lib32-giflib,                          Utility Library.

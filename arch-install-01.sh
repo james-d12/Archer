@@ -2,6 +2,10 @@
 
 . ./arch-config.sh
 
+wipe_drive(){
+  sfdisk --delete /dev/$drive
+}
+
 partition_bios(){
 newsize=$(($swapsize*2))
 sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk /dev/"$drive"
@@ -104,6 +108,9 @@ format_and_mount_uefi_encrypted() {
     mount /dev/"${drive}1" /mnt/boot/efi
 }
 
+
+wipe_drive
+
 case "$system $encrypted" in 
      "BIOS NO") partition_bios; format_and_mount_bios;;
      "BIOS YES") partition_bios_encrypted; format_and_mount_bios_encrypted;;
@@ -119,4 +126,5 @@ cp -r * /mnt/arch-install-scripts/
 arch-chroot /mnt /bin/bash -c "bash arch-install-scripts/arch-install-02.sh"
 
 umount -R /mnt
-reboot
+clear 
+echo "Script has finished, please shutdown, remove the USB/Installation Media and then reboot."
