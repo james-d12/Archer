@@ -108,7 +108,6 @@ format_and_mount_uefi_encrypted() {
     mount /dev/"${drive}1" /mnt/boot/efi
 }
 
-
 wipe_drive
 
 case "$system $encrypted" in 

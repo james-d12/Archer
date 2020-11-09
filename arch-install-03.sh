@@ -13,6 +13,10 @@ check_network_connection(){
         sudo nmtui 
         echo -e "Attempting connection via wifi-menu...."
         sudo wifi-menu
+
+        if ! ping -c 1 -q google.com >&/dev/null; then
+            echo -e "Could not connect to the network, exiting script."
+            exit 1 
     fi
 }
 
@@ -30,6 +34,10 @@ add_package_to_list(){
         "GIT") git_packages+=("$2");;
         *);;
     esac  
+}
+
+warning_message(){
+    echo "$1"
 }
 
 error_message(){
@@ -59,20 +67,20 @@ install_packages_from_lists(){
     if [ ${#git_packages[@]} -ne 0 ]; then 
         ! command -v git >/dev/null 2>&1 && install_package git 
         for package in ${git_packages[@]}; do 
-            git clone $package $package; 
-            cd $package; 
-            makepkg -si --noconfirm --needed; 
+            git clone $package || warning_message "Could not clone the URL: {$package} as it is invalid."
+            cd $package
+            makepkg -si --noconfirm --needed;
         done 
     fi 
 
     if [ ! ${#pip_packages[@]} -eq 0 ]; then 
         ! command -v python-pip >/dev/null 2>&1 && install_package python-pip 
-        pip install ${pip_packages[@]}
+        pip install ${pip_packages[@]} || error_message "Could not install PIP packages, as one of the packages is invalid."
     fi 
     
     if [ ! ${#vscode_packages[@]} -eq 0 ]; then 
         ! command -v code >/dev/null 2>&1 && install_package code 
-        code --install-extension ${vscode_packages[@]}
+        code --install-extension ${vscode_packages[@]} || error_message "Could not install VSCode Extensions, as one of the extensions is invalid."
     fi 
 }
 
