@@ -140,7 +140,7 @@ format_and_mount >> logs.txt 2>&1
 echo "Formating and Mounting Partitions:     ####################  (100%)"
 
 echo "Installing Base Packages:              #                     (0%)"
-install_base_packages >> logs.txt 
+install_base_packages 
 echo "Installing Base Packages:              ####################  (100%)"
 
 echo "Copying Files to /mnt:                 #                     (0%)"
