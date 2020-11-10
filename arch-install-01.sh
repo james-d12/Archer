@@ -7,7 +7,7 @@
 
 wipe_drive(){
   echo "Wiping drive of existing partions                      (0%)"
-  sfdisk --delete /dev/"$drive"
+  sfdisk --delete /dev/"$drive"  >/dev/null 2>&1
   echo "Wiping drive of existing partions #################### (100%)"  
 }
 
@@ -113,30 +113,30 @@ format_and_mount(){
   echo "Formating and Mounting:                      (0%)"; 
   case "$system $encrypted" in 
        "BIOS NO") 
-          partition_bios 
+          partition_bios >/dev/null 2>&1;
           echo "Formating and Mounting: ##########           (50%)"; 
-          format_and_mount_bios;;
+          format_and_mount_bios >/dev/null 2>&1;;
        "BIOS YES") 
-          partition_bios_encrypted; 
+          partition_bios_encrypted >/dev/null 2>&1; 
           echo "Formating and Mounting: ##########           (50%)"; 
-          format_and_mount_bios_encrypted;;
+          format_and_mount_bios_encrypted >/dev/null 2>&1;;
        "UEFI NO") 
-          partition_uefi; 
+          partition_uefi >/dev/null 2>&1; 
           echo "Formating and Mounting: ##########           (50%)"; 
-          format_and_mount_uefi;;
+          format_and_mount_uefi >/dev/null 2>&1;;
        "UEFI YES") 
-          partition_uefi_encrypted; 
+          partition_uefi_encrypted >/dev/null 2>&1; 
           echo "Formating and Mounting: ##########           (50%)"; 
-          format_and_mount_uefi_encrypted;;
+          format_and_mount_uefi_encrypted >/dev/null 2>&1;;
   esac 
   echo "Formating and Mounting:   #################### (100%)"
 }
 
 install_base_packages(){
   echo "Installing Base Packages:                      (0%)" 
-  pacstrap /mnt base base-devel $kernel linux-firmware nano networkmanager wireless_tools wpa_supplicant netctl dialog iwd dhclient
+  pacstrap /mnt base base-devel $kernel linux-firmware nano networkmanager wireless_tools wpa_supplicant netctl dialog iwd dhclient >/dev/null 2>&1
   echo "Installing Base Packages: #################### (100%)"
-  genfstab -U /mnt >> /mnt/etc/fstab
+  genfstab -U /mnt >> /mnt/etc/fstab >/dev/null 2>&1
 }
 
 copy_files_to_mnt(){
@@ -146,10 +146,10 @@ copy_files_to_mnt(){
   echo "Copying Files to /mnt:   ####################  (100%)" 
 }
 
-wipe_drive >/dev/null 2>&1
-format_and_mount >/dev/null 2>&1
-install_base_packages >/dev/null 2>&1
-copy_files_to_mnt >/dev/null 2>&1
+wipe_drive 
+format_and_mount 
+install_base_packages 
+copy_files_to_mnt 
 
 arch-chroot /mnt /bin/bash -c "bash arch-install-scripts/arch-install-02.sh"
 
