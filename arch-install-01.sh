@@ -118,6 +118,7 @@ format_and_mount(){
 
 install_base_packages(){
   packages=("base" "base-devel" "$kernel" "linux-firmware" "nano" "networkmanager" "wireless_tools" "wpa_supplicant" "netctl" "dialog" "iwd" "dhclient")
+  echo ""
   for pkg in ${packages[@]}; do 
     echo -ne "    Installing $pkg: #                     (0%)\r" 
     pacstrap /mnt $pkg >/dev/null 2>&1
