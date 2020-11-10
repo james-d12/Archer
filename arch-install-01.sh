@@ -133,17 +133,17 @@ format_and_mount(){
 }
 
 install_base_packages(){
-  echo "Installing Base Packages:                      (0%)";; 
+  echo "Installing Base Packages:                      (0%)" 
   pacstrap /mnt base base-devel $kernel linux-firmware nano networkmanager wireless_tools wpa_supplicant netctl dialog iwd dhclient
-  echo "Installing Base Packages: #################### (100%)";; 
+  echo "Installing Base Packages: #################### (100%)"
   genfstab -U /mnt >> /mnt/etc/fstab
 }
 
 copy_files_to_mnt(){
-  echo "Copying Files to /mnt:                         (0%)";; 
+  echo "Copying Files to /mnt:                         (0%)" 
   mkdir -p /mnt/arch-install-scripts/
   cp -r * /mnt/arch-install-scripts/
-  echo "Copying Files to /mnt:   ####################  (100%)";; 
+  echo "Copying Files to /mnt:   ####################  (100%)" 
 }
 
 wipe_drive >/dev/null 2>&1
