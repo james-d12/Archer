@@ -141,7 +141,7 @@ get_user_input(){
     read -r -p "Enter Hostname: " hostname 
     while [[ -z $hostname || $hostname =~ [0-9] ]]; do
         echo "Hostname is invalid, please retry..."
-        read -r -p "Enter Drive: " hostname 
+        read -r -p "Enter Hostname: " hostname 
     done
     hostname=$(echo "$hostname" | awk '{print tolower($0)}')
     clear
