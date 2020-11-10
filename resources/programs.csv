@@ -11,7 +11,7 @@ PACMAN,      xorg-xinit,                            Useful For Starting Window M
 #PACMAN,      xf86-video-amdgpu,                     AMD Driver.
 #PACMAN,      xf86-video-ati,                        ATI Driver.
 #PACMAN,      lib32-mesa,                            AMD/ATI OpenGL Library - Needed For Games and Steam.
-
+,,
 PACMAN,      cronie,                                Time based scheduling program - needed for timeshift scheduled backups.
 PACMAN,      mtools,                                MS-DOS Disk Tools.
 PACMAN,      cronie,                                Run Services At Specific Times.
@@ -28,14 +28,3 @@ PACMAN,      traceroute,                            Packet Route Tracking.
 PACMAN,      iproute2,                              Contains Network Tools.
 PACMAN,      fail2ban,                              IP Banner.
 PACMAN,      parted,                                Terminal Partitioning Tool.
-PACMAN,      hdparm,                                Used For Getting Disk Speeds.
-PACMAN,      lm_sensors,                            Used For Getting Temperature Readings.
-PACMAN,      ffmpeg,                                CLI Audio Tool.
-PACMAN,      mlocate,                               File/Folder location CLI Tool.
-PACMAN,      udisks2,                               Storage Device Daemon.
-PACMAN,      udiskie,                               Auto Mounter With Support For LUKS.
-PACMAN,      bzip2,                                 Unpack .bz2,bz,tbz2,tbz Files.
-PACMAN,      gzip,                                  Unpack .gz,.z,.tgz,.taz Files.
-PACMAN,      unzip,                                 Unpack .zip files.
-PACMAN,      p7zip,                                 Unpack .7z Files.
-PACMAN,      unrar,                                 Unpack .rar Files.
