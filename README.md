@@ -6,19 +6,20 @@ This is a simple collection of scripts that aims to automate the arch installati
 
 # Steps
 1. Boot into a live USB for arch linux.
-2. Run 'pacman -Syy && pacman -S git' on the arch linux live iso.
-3. Run 'git clone https://github.com/james-d12/arch-installer.git'
-4. Change to the 'arch-installer' directory 'cd arch-installer'.
-5. Run the first script 'bash arch-install-00.sh'
-6. Answer any prompts for the first script, which asks about the configuration such as 
+2. Connect to the internet.
+3. Run 'pacman -Syy && pacman -S git' on the arch linux live iso.
+4. Run 'git clone https://github.com/james-d12/arch-installer.git'
+5. Change to the 'arch-installer' directory 'cd arch-installer'.
+6. Run the first script 'bash arch-install-00.sh'
+7. Answer any prompts for the first script, which asks about the configuration such as 
 the root password, what the system type is and what desktop environment it will, or will not, install.
-7. Tea break, then return to a message saying the script has finished and that you should shutdown (with the command 'shutdown -now'), remove the installation media then power on the machine.
-8. If you encrypted your installation, you will have to decrypt the drive, then you should be greeted with a terminal login screen. Login to your user 
+8. Tea break, then return to a message saying the script has finished and that you should shutdown (with the command 'shutdown -now'), remove the installation media then power on the machine.
+9. If you encrypted your installation, you will have to decrypt the drive, then you should be greeted with a terminal login screen. Login to your user 
 and change directory to the 'arch-install'scripts' cd arch-install-scripts
-9. If you haven't edited the resources/programs.csv file, do so at this point.
-10. Run the 3rd script located in the 'arch-install-scripts' as the newly created user located in the folder in the users's home directory.
-11. Another tea break. You should be greeted with the display manager for your chosen desktop environment asking for a login.
-12. Login and you are done. 
+10. If you haven't edited the resources/programs.csv file, do so at this point.
+11. Run the 3rd script located in the 'arch-install-scripts' as the newly created user located in the folder in the users's home directory.
+12. Another tea break. You should be greeted with the display manager for your chosen desktop environment asking for a login.
+13. Login and you are done. 
 
 Note: The 4th script configures network and security settings it is optional but recommended.
 

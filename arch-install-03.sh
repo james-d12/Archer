@@ -1,8 +1,7 @@
 #!/usr/bin/bash 
 
-# This file is responsible for installing the desktop environment (if selected) and 
-# to install the packages present in the resources/programs.csv file with the appropriate
-# package manager.
+# Arch Installer By james-d12
+# GitHub Repository: https://github.com/james-d12/arch-installer
 
 . resources/desktop 
 
@@ -36,14 +35,8 @@ add_package_to_list(){
     esac  
 }
 
-warning_message(){
-    echo "$1"
-}
-
-error_message(){
-    echo "$1"
-    exit 1
-}
+warning() { echo "WARN: $1" }
+error() { echo "ERROR: $1"; exit 1 }
 
 install_aur_helper(){
     ! command -v git >/dev/null 2>&1 && install_package git
@@ -56,18 +49,18 @@ install_package(){
 }
 
 install_packages_from_lists(){
-    sudo pacman -S --noconfirm --needed ${depackages[@]} || error_message "Could not install desktop environment packages, as one of the packages is invalid."
-    sudo pacman -S --noconfirm --needed ${pacman_packages[@]} || error_message "Could not install pacman packages, as one of the packages is invalid."
+    sudo pacman -S --noconfirm --needed ${depackages[@]} || error "Could not install desktop environment packages, as one of the packages is invalid."
+    sudo pacman -S --noconfirm --needed ${pacman_packages[@]} || error "Could not install pacman packages, as one of the packages is invalid."
 
     if [ ${#aur_packages[@]} -ne 0 ]; then
         ! command -v yay >/dev/null 2>&1 && install_aur_helper
-        yay -S --batchinstall --cleanafter --noconfirm --needed ${aur_packages[@]} || error_message "Could not install AUR packages, as one of the packages is invalid."
+        yay -S --batchinstall --cleanafter --noconfirm --needed ${aur_packages[@]} || error "Could not install AUR packages, as one of the packages is invalid."
     fi
 
     if [ ${#git_packages[@]} -ne 0 ]; then 
         ! command -v git >/dev/null 2>&1 && install_package git 
         for package in ${git_packages[@]}; do 
-            git clone $package || warning_message "Could not clone the URL: {$package} as it is invalid."
+            git clone $package || warning "Could not clone the URL: {$package} as it is invalid."
             cd $package
             makepkg -si --noconfirm --needed;
         done 
@@ -75,12 +68,12 @@ install_packages_from_lists(){
 
     if [ ! ${#pip_packages[@]} -eq 0 ]; then 
         ! command -v python-pip >/dev/null 2>&1 && install_package python-pip 
-        pip install ${pip_packages[@]} || error_message "Could not install PIP packages, as one of the packages is invalid."
+        pip install ${pip_packages[@]} || error "Could not install PIP packages, as one of the packages is invalid."
     fi 
     
     if [ ! ${#vscode_packages[@]} -eq 0 ]; then 
         ! command -v code >/dev/null 2>&1 && install_package code 
-        code --install-extension ${vscode_packages[@]} || error_message "Could not install VSCode Extensions, as one of the extensions is invalid."
+        code --install-extension ${vscode_packages[@]} || error "Could not install VSCode Extensions, as one of the extensions is invalid."
     fi 
 }
 

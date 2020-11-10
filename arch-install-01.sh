@@ -1,9 +1,12 @@
 #!/usr/bin/bash 
 
+# Arch Installer By james-d12
+# GitHub Repository: https://github.com/james-d12/arch-installer
+
 . ./arch-config.sh
 
 wipe_drive(){
-  sfdisk --delete /dev/$drive
+  sfdisk --delete /dev/"$drive"
 }
 
 partition_bios(){

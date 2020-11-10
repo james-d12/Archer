@@ -1,5 +1,8 @@
 #!/usr/bin/bash 
 
+# Arch Installer By james-d12
+# GitHub Repository: https://github.com/james-d12/arch-installer
+
 get_user_input(){
     clear
     PS3='Encrypt Drive?'

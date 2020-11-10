@@ -1,5 +1,8 @@
 #!/usr/bin/bash 
 
+# Arch Installer By james-d12
+# GitHub Repository: https://github.com/james-d12/arch-installer
+
 . /arch-install-scripts/arch-config.sh
 
 setup_users(){
