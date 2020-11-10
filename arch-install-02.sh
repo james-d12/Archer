@@ -84,9 +84,9 @@ setup_users >/dev/null 2>&1
 echo "Setting up Users:                      ####################  (100%)"
 
 if [ "$encrypted" == "YES" ]; then
-    echo "Adding Encrypted Swap File:        #                     (0%)"
+    echo "Adding Encrypted Swap File:            #                     (0%)"
     add_encrypted_swap_file >/dev/null 2>&1
-    echo "Adding Encrypted Swap File:        ####################  (100%)"
+    echo "Adding Encrypted Swap File:            ####################  (100%)"
 fi 
 
 

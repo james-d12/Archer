@@ -126,9 +126,9 @@ copy_files_to_mnt(){
   cp -r * /mnt/arch-install-scripts/
 }
 
-echo "Wiping Drive /dev/$drive:              #                     (0%)"
+echo "Wiping Drive /dev/$drive:                 #                     (0%)"
 wipe_drive >/dev/null 2>&1
-echo "Wiping Drive /dev/$drive:              ####################  (100%)"
+echo "Wiping Drive /dev/$drive:                 ####################  (100%)"
 
 echo "Formating and Mounting Partitions:     #                     (0%)"
 format_and_mount >/dev/null 2>&1
@@ -145,5 +145,4 @@ echo "Copying Files to /mnt:                 ####################  (100%)"
 arch-chroot /mnt /bin/bash -c "bash arch-install-scripts/arch-install-02.sh"
 
 umount -R /mnt
-clear 
 echo "Script has finished, please shutdown, remove the USB/Installation Media and then reboot."
