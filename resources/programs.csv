@@ -11,7 +11,7 @@ PACMAN,      xorg-xinit,                            Useful For Starting Window M
 #PACMAN,      xf86-video-amdgpu,                     AMD Driver.
 #PACMAN,      xf86-video-ati,                        ATI Driver.
 #PACMAN,      lib32-mesa,                            AMD/ATI OpenGL Library - Needed For Games and Steam.
-,,
+
 PACMAN,      cronie,                                Time based scheduling program - needed for timeshift scheduled backups.
 PACMAN,      mtools,                                MS-DOS Disk Tools.
 PACMAN,      cronie,                                Run Services At Specific Times.
