@@ -68,14 +68,12 @@ partition_uefi_encrypted(){
 }
 
 format_and_mount_bios() {
-    echo "Formatting and mounting for BIOS......"
     mkswap -L SWAP /dev/"${drive}1"
     mkfs.ext4 -L ROOT /dev/"${drive}2"
     swapon /dev/"${drive}1"
     mount /dev/"${drive}2" /mnt
 }
 format_and_mount_bios_encrypted() {
-    echo "Formatting and mounting for encrypted BIOS......"
     modprobe dm-crypt && modprobe dm-mod 
     ( echo "$encryptionpass"; ) | cryptsetup luksFormat -v -s 512 -h sha512 /dev/"${drive}2"
     ( echo "$encryptionpass"; ) | cryptsetup open /dev/"${drive}2" cr_root
@@ -86,7 +84,6 @@ format_and_mount_bios_encrypted() {
     mount /dev/"${drive}1" /mnt/boot
 }
 format_and_mount_uefi() {
-    echo "Formatting and mounting for UEFI......"
     mkfs.fat -F32 /dev/"${drive}1"
     mkswap -L SWAP /dev/"${drive}2"
     mkfs.ext4 -L ROOT /dev/"${drive}3"
@@ -97,7 +94,6 @@ format_and_mount_uefi() {
     mount /dev/"${drive}1" /mnt/boot/efi  
 }
 format_and_mount_uefi_encrypted() {
-    echo "Formatting and mounting for encrypted UEFI......"
     modprobe dm-crypt && modprobe dm-mod 
     ( echo "$encryptionpass"; ) | cryptsetup luksFormat -v -s 512 -h sha512 /dev/"${drive}3"
     ( echo "$encryptionpass"; ) | cryptsetup open /dev/"${drive}3" cr_root
@@ -111,13 +107,13 @@ format_and_mount_uefi_encrypted() {
     mount /dev/"${drive}1" /mnt/boot/efi
 }
 
-wipe_drive
+wipe_drive >/dev/null 2>&1
 
 case "$system $encrypted" in 
-     "BIOS NO") partition_bios; format_and_mount_bios;;
-     "BIOS YES") partition_bios_encrypted; format_and_mount_bios_encrypted;;
-     "UEFI NO") partition_uefi; format_and_mount_uefi;;
-     "UEFI YES") partition_uefi_encrypted; format_and_mount_uefi_encrypted;;
+     "BIOS NO") partition_bios >/dev/null 2>&1; format_and_mount_bios >/dev/null 2>&1;;
+     "BIOS YES") partition_bios_encrypted >/dev/null 2>&1; format_and_mount_bios_encrypted >/dev/null 2>&1;;
+     "UEFI NO") partition_uefi >/dev/null 2>&1; format_and_mount_uefi >/dev/null 2>&1;;
+     "UEFI YES") partition_uefi_encrypted >/dev/null 2>&1; format_and_mount_uefi_encrypted >/dev/null 2>&1;;
 esac 
 
 pacstrap /mnt base base-devel $kernel linux-firmware nano networkmanager wireless_tools wpa_supplicant netctl dialog iwd dhclient
