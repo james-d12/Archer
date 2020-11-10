@@ -92,11 +92,11 @@ fi
 
 echo -ne "Setting up Localisation:               #                     (0%)\r"
 setup_localisation >> logs.txt 2>&1
-echo -e  "Setting up Localisation:               #################### (100%)\r"
+echo -e  "Setting up Localisation:               ####################  (100%)\r"
 
 echo -ne "Setting up Network:                    #                     (0%)\r"
 setup_network >> logs.txt 2>&1
-echo -e  "Setting up Network:                    #################### (100%)\r"
+echo -e  "Setting up Network:                    ####################  (100%)\r"
 
 echo -ne "Setting up Grub Bootloader:            #                     (0%)\r"
 setup_grub >> logs.txt 2>&1
