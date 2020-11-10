@@ -103,4 +103,3 @@ setup_grub >> logs.txt 2>&1
 echo "Setting up Grub Bootloader:            #################### (100%)"
 
 cleanup_script >> logs.txt 2>&1
-
