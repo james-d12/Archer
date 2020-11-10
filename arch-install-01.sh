@@ -6,7 +6,9 @@
 . ./arch-config.sh
 
 wipe_drive(){
+  echo "Wiping drive of existing partions                      (0%)"
   sfdisk --delete /dev/"$drive"
+  echo "Wiping drive of existing partions #################### (100%)"  
 }
 
 partition_bios(){
@@ -108,44 +110,43 @@ format_and_mount_uefi_encrypted() {
 }
 
 format_and_mount(){
+  echo "Formating and Mounting:                      (0%)"; 
   case "$system $encrypted" in 
        "BIOS NO") 
           partition_bios 
           echo "Formating and Mounting: ##########           (50%)"; 
-          format_and_mount_bios;
-          echo "Formating and Mounting: #################### (100%)";; 
+          format_and_mount_bios;;
        "BIOS YES") 
           partition_bios_encrypted; 
           echo "Formating and Mounting: ##########           (50%)"; 
-          format_and_mount_bios_encrypted;
-          echo "Formating and Mounting: #################### (100%)";;
+          format_and_mount_bios_encrypted;;
        "UEFI NO") 
           partition_uefi; 
           echo "Formating and Mounting: ##########           (50%)"; 
-          format_and_mount_uefi;
-          echo "Formating and Mounting: #################### (100%)";; 
+          format_and_mount_uefi;;
        "UEFI YES") 
           partition_uefi_encrypted; 
           echo "Formating and Mounting: ##########           (50%)"; 
-          format_and_mount_uefi_encrypted;
-          echo "Formating and Mounting: #################### (100%)";;
+          format_and_mount_uefi_encrypted;;
   esac 
+  echo "Formating and Mounting:   #################### (100%)";; 
 }
 
 install_base_packages(){
+  echo "Installing Base Packages:                      (0%)";; 
   pacstrap /mnt base base-devel $kernel linux-firmware nano networkmanager wireless_tools wpa_supplicant netctl dialog iwd dhclient
+  echo "Installing Base Packages: #################### (100%)";; 
   genfstab -U /mnt >> /mnt/etc/fstab
 }
 
 copy_files_to_mnt(){
+  echo "Copying Files to /mnt:                         (0%)";; 
   mkdir -p /mnt/arch-install-scripts/
   cp -r * /mnt/arch-install-scripts/
+  echo "Copying Files to /mnt:   ####################  (100%)";; 
 }
 
-echo "Wiping drive of existing partions                      (0%)"
 wipe_drive >/dev/null 2>&1
-echo "Wiping drive of existing partions #################### (100%)"
-
 format_and_mount >/dev/null 2>&1
 install_base_packages >/dev/null 2>&1
 copy_files_to_mnt >/dev/null 2>&1
