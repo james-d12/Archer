@@ -18,7 +18,7 @@ get_user_input(){
     if [ "$encrypted" == "YES" ]; then 
         read -s -p "Enter encryption password: " pass1; echo ''
         read -s -p "Re-enter encryption password: " pass2; echo ''
-        while [ $pass1 != $pass2 ]; do
+        while [[ $pass1 != $pass2 && -z $pass1 && -z $pass2]]; do
             echo "Passwords do not match, please retry."
             read -s -p "Enter encryption password: " pass1; echo ''
             read -s -p "Re-enter encryption password: " pass2; echo ''
