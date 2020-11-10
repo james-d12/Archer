@@ -127,19 +127,19 @@ copy_files_to_mnt(){
 }
 
 echo "Wiping Drive /dev/$drive:                 #                     (0%)"
-wipe_drive >/dev/null 2>&1
+wipe_drive > logs.txt 2>&1
 echo "Wiping Drive /dev/$drive:                 ####################  (100%)"
 
 echo "Formating and Mounting Partitions:     #                     (0%)"
-format_and_mount >/dev/null 2>&1
+format_and_mount >> logs.txt 2>&1
 echo "Formating and Mounting Partitions:     ####################  (100%)"
 
 echo "Installing Base Packages:              #                     (0%)"
-install_base_packages >/dev/null 2>&1
+install_base_packages >> logs.txt 2>&1
 echo "Installing Base Packages:              ####################  (100%)"
 
 echo "Copying Files to /mnt:                 #                     (0%)"
-copy_files_to_mnt >/dev/null 2>&1
+copy_files_to_mnt >> logs.txt 2>&1
 echo "Copying Files to /mnt:                 ####################  (100%)"
 
 arch-chroot /mnt /bin/bash -c "bash arch-install-scripts/arch-install-02.sh"

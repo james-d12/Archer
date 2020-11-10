@@ -80,27 +80,27 @@ cleanup_script(){
 }
 
 echo "Setting up Users:                      #                     (0%)"
-setup_users >/dev/null 2>&1
+setup_users >> logs.txt 2>&1
 echo "Setting up Users:                      ####################  (100%)"
 
 if [ "$encrypted" == "YES" ]; then
     echo "Adding Encrypted Swap File:            #                     (0%)"
-    add_encrypted_swap_file >/dev/null 2>&1
+    add_encrypted_swap_file >> logs.txt 2>&1
     echo "Adding Encrypted Swap File:            ####################  (100%)"
 fi 
 
 
 echo "Setting up Localisation:               #                     (0%)"
-setup_localisation >/dev/null 2>&1
+setup_localisation >> logs.txt 2>&1
 echo "Setting up Localisation:               #################### (100%)"
 
 echo "Setting up Network:                    #                     (0%)"
-setup_network >/dev/null 2>&1
+setup_network >> logs.txt 2>&1
 echo "Setting up Network:                    #################### (100%)"
 
 echo "Setting up Grub Bootloader:            #                     (0%)"
-setup_grub >/dev/null 2>&1
+setup_grub >> logs.txt 2>&1
 echo "Setting up Grub Bootloader:            #################### (100%)"
 
-cleanup_script >/dev/null 2>&1
+cleanup_script >> logs.txt 2>&1
 
