@@ -119,9 +119,9 @@ format_and_mount(){
 install_base_packages(){
   packages=("base" "base-devel" "$kernel" "linux-firmware" "nano" "networkmanager" "wireless_tools" "wpa_supplicant" "netctl" "dialog" "iwd" "dhclient")
   for pkg in ${packages[@]}; do 
-    echo "    Installing $pkg:   #                     (0%)" 
+    echo "    Installing $pkg:                  #                     (0%)" 
     pacstrap /mnt $pkg >/dev/null 2>&1
-    echo "    Installing $pkg:   ##################### (100%)" 
+    echo "    Installing $pkg:                  ##################### (100%)" 
   done 
   genfstab -U /mnt >> /mnt/etc/fstab
 }
