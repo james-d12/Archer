@@ -109,10 +109,26 @@ format_and_mount_uefi_encrypted() {
 
 format_and_mount(){
   case "$system $encrypted" in 
-       "BIOS NO") partition_bios; format_and_mount_bios;;
-       "BIOS YES") partition_bios_encrypted; format_and_mount_bios_encrypted;;
-       "UEFI NO") partition_uefi; format_and_mount_uefi;;
-       "UEFI YES") partition_uefi_encrypted; format_and_mount_uefi_encrypted;;
+       "BIOS NO") 
+          partition_bios 
+          echo "Formating and Mounting: ##########           (50%)"; 
+          format_and_mount_bios;
+          echo "Formating and Mounting: #################### (100%)";; 
+       "BIOS YES") 
+          partition_bios_encrypted; 
+          echo "Formating and Mounting: ##########           (50%)"; 
+          format_and_mount_bios_encrypted;
+          echo "Formating and Mounting: #################### (100%)";;
+       "UEFI NO") 
+          partition_uefi; 
+          echo "Formating and Mounting: ##########           (50%)"; 
+          format_and_mount_uefi;
+          echo "Formating and Mounting: #################### (100%)";; 
+       "UEFI YES") 
+          partition_uefi_encrypted; 
+          echo "Formating and Mounting: ##########           (50%)"; 
+          format_and_mount_uefi_encrypted;
+          echo "Formating and Mounting: #################### (100%)";;
   esac 
 }
 
@@ -126,7 +142,10 @@ copy_files_to_mnt(){
   cp -r * /mnt/arch-install-scripts/
 }
 
+echo "Wiping drive of existing partions                      (0%)"
 wipe_drive >/dev/null 2>&1
+echo "Wiping drive of existing partions #################### (100%)"
+
 format_and_mount >/dev/null 2>&1
 install_base_packages >/dev/null 2>&1
 copy_files_to_mnt >/dev/null 2>&1
