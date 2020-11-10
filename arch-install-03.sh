@@ -79,21 +79,21 @@ install_vscode_packages(){
 }
 
 install_packages(){
-    echo "      Installing Pacman packages:               #                   (0%)"
+    echo -ne "      Installing Pacman packages:               #                   (0%)\r"
     install_pacman_packages
-    echo "      Installing Pacman packages:               ################### (100%)"
+    echo -e  "      Installing Pacman packages:               ################### (100%)\r"
 
-    echo "      Installing AUR packages:                  #                   (0%)"
+    echo -ne "      Installing AUR packages:                  #                   (0%)\r"
     install_aur_packages
-    echo "      Installing AUR packages:                  ################### (100%)"
+    echo -e  "      Installing AUR packages:                  ################### (100%)\r"
 
-    echo "      Installing PIP packages:                  #                   (0%)"
+    echo -ne "      Installing PIP packages:                  #                   (0%)\r"
     install_pip_packages
-    echo "      Installing PIP packages:                  ################### (100%)"
+    echo -e  "      Installing PIP packages:                  ################### (100%)\r"
     
-    echo "      Installing VSCODE packages:               #                   (0%)"
+    echo -ne "      Installing VSCODE packages:               #                   (0%)\r"
     install_vscode_packages
-    echo "      Installing VSCODE packages:               ################### (100%)"
+    echo -e  "      Installing VSCODE packages:               ################### (100%)\r"
 }
 
 install_all_packages(){
@@ -112,7 +112,11 @@ enable_systemd_services(){
 }
 
 check_network_connection
-echo "      Installing packages:                          #                   (0%)"
+
+echo -ne "Installing packages:                          #                   (0%)\r"
 install_all_packages
-echo "      Installing packages:                          #################### (100%)"
+echo -e "Installing packages:                          #################### (100%)\r"
+
+echo -ne "Enabling Systemd Services:                    #                   (0%)\r"
 enable_systemd_services
+echo -e "Enabling Systemd Services:                   #################### (100%)\r"
