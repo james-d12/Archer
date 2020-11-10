@@ -1,4 +1,3 @@
-# DRIVERS AND CORE PACKAGES
 PACMAN,      xorg,                                  A Group package that contains extra xorg-apps.
 PACMAN,      xorg-xinit,                            Useful For Starting Window Managers from a TTY. 
 #PACMAN,      linux-headers,                         Headers For Kernel.                
@@ -13,7 +12,6 @@ PACMAN,      xorg-xinit,                            Useful For Starting Window M
 #PACMAN,      xf86-video-ati,                        ATI Driver.
 #PACMAN,      lib32-mesa,                            AMD/ATI OpenGL Library - Needed For Games and Steam.
 
-# UTILTIY PACKAGES
 PACMAN,      cronie,                                Time based scheduling program - needed for timeshift scheduled backups.
 PACMAN,      mtools,                                MS-DOS Disk Tools.
 PACMAN,      cronie,                                Run Services At Specific Times.
@@ -42,7 +40,6 @@ PACMAN,      unzip,                                 Unpack .zip files.
 PACMAN,      p7zip,                                 Unpack .7z Files.
 PACMAN,      unrar,                                 Unpack .rar Files.
     
-# DEVELOPMENT TOOLS AND LANGUAGE SUPPORT PACKAGES
 PACMAN,      make,                                  Linux Build Tool.
 PACMAN,      git,                                   Project Management.
 PACMAN,      gcc,                                   C/C++ Compiler.
@@ -65,7 +62,6 @@ PACMAN,      gcc,                                   C/C++ Compiler.
 #PACMAN,      glfw,                                  OpenGL Library.
 #PACMAN,      glew,                                  OpenGL Library.
 
-# SECURITY AND GUI UTILITY PACKAGES
 PACMAN,      openvpn,                               For VPN Connections.
 PACMAN,      ufw,                                   Firewall.
 PACMAN,      gparted,                               Disk Management. 
@@ -74,13 +70,11 @@ PACMAN,      gparted,                               Disk Management.
 #PACMAN,      firejail,                              Sandboxing Security Software.
 #AUR,         hardened-malloc-git,                   A secure version of C's malloc.
 
-# APPEARANCE AND VISUAL PACKAGES
 PACMAN,      ttf-liberation,                        Free Compatible Versions Like Arial Fonts.
 #PACMAN,      ttf-ubuntu-font-family,                Adds Ubuntu Fonts.
 #PACMAN,      ttf-roboto,                            Adds Roboto Fonts.
 #PACMAN,      papirus-icon-theme,                    Papirus Icon Theme Set. 
 
-# GENERAL APPLICATION PACKAGES
 PACMAN,      pulseaudio,                            Audio Controller.
 #PACMAN,      pavucontrol,                           GUI Frontend for PulseAudio.
 PACMAN,      firefox,                               Firefox Browser.
@@ -104,7 +98,6 @@ PACMAN,      firefox,                               Firefox Browser.
 #AUR,         timeshift,                             Backup Tool.
 #AUR,         bitwarden-bin,                         Password Manager.
 
-# PYTHON PIP LIBRARIES
 #PIP,         PyQt5,                                 Python wrapper of QT UI Library.
 #PIP,         selenium,                              Python Library For Web Engine Automation.
 #PIP,         numpy,                                 Pythson Math Library.
@@ -113,7 +106,6 @@ PACMAN,      firefox,                               Firefox Browser.
 #PIP,         opencv-python,                         Library for Real Time Applications.
 #PIP,         pandas,                                Data Anaylsis Tool.
 
-# VSCODE EXTENSIONS
 #VSCODE,      ms-python.python,                      Python Language. 
 #VSCODE,      ms-vscode.cpptools,                    C/C++ Language.
 #VSCODE,      ms-dotnettools.csharp,                 C# Language.
@@ -124,7 +116,6 @@ PACMAN,      firefox,                               Firefox Browser.
 #VSCODE,      ryanolsonx.solarized,                  Better Solarized Theme.
 #VSCODE,      emmanuelbeziat.vscode-great-icons,     Icon set.
 
-# GAMING LIBRARY PACKAGES
 #PACMAN,      wine-staging,                          Runs Windows Software.
 #PACMAN,      giflib,                                Utility Library.
 #PACMAN,      lib32-giflib,                          Utility Library.
