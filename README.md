@@ -33,18 +33,18 @@ Packages are read from the 'resources/programs.csv' file, and each package conta
  - **Installer:** What installer is used to install the package (E.g. pacman, git, etc...)
  - **Package Name:** The package's name to install (E.g. firefox)
  - **Description:** A short description of the package.
- 
+
 They are all separated by a comma, and example for adding firefox to the file would be as follows:
 **PACMAN, firefox, A web browser**
 It is important that you do not forget commas otherwise it will cause the script to break when reading the file.
 
 ## List of Available Installers
 The installation script (arch-install-03.sh) supports the following installers:
-    - PACMAN    - Uses pacman to install package.
-    - AUR       - Uses an AUR helper (yay) to install package.
-    - GIT       - Uses git to clone and uses makepkg to install package.
-    - VSCODE    - Uses vscode cli to install extensions.
-    - PIP       - Uses python-pip to install python libraries.
+ - **PACMAN:**    - Uses pacman to install package.
+ - **AUR:**    - Uses an AUR helper (yay) to install package.
+ - **GIT:**    - Uses git to clone and uses makepkg to install package.
+ - **VSCODE:**    - Uses vscode cli to install extensions.
+ - **PIP:**    - Uses python-pip to install python libraries.
 
 ## Systemd Services
 By default the scripts support a handful of services out of the box including automatically enabling services for the window managers for each desktop environment and enabling the firewall. However if you add a program that needs its service to be enabled, you may have to do so manually. 
