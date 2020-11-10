@@ -107,20 +107,30 @@ format_and_mount_uefi_encrypted() {
     mount /dev/"${drive}1" /mnt/boot/efi
 }
 
+format_and_mount(){
+  case "$system $encrypted" in 
+       "BIOS NO") partition_bios; format_and_mount_bios;;
+       "BIOS YES") partition_bios_encrypted; format_and_mount_bios_encrypted;;
+       "UEFI NO") partition_uefi; format_and_mount_uefi;;
+       "UEFI YES") partition_uefi_encrypted; format_and_mount_uefi_encrypted;;
+  esac 
+}
+
+install_base_packages(){
+  pacstrap /mnt base base-devel $kernel linux-firmware nano networkmanager wireless_tools wpa_supplicant netctl dialog iwd dhclient
+  genfstab -U /mnt >> /mnt/etc/fstab
+}
+
+copy_files_to_mnt(){
+  mkdir -p /mnt/arch-install-scripts/
+  cp -r * /mnt/arch-install-scripts/
+}
+
 wipe_drive >/dev/null 2>&1
+format_and_mount >/dev/null 2>&1
+install_base_packages >/dev/null 2>&1
+copy_files_to_mnt >/dev/null 2>&1
 
-case "$system $encrypted" in 
-     "BIOS NO") partition_bios >/dev/null 2>&1; format_and_mount_bios >/dev/null 2>&1;;
-     "BIOS YES") partition_bios_encrypted >/dev/null 2>&1; format_and_mount_bios_encrypted >/dev/null 2>&1;;
-     "UEFI NO") partition_uefi >/dev/null 2>&1; format_and_mount_uefi >/dev/null 2>&1;;
-     "UEFI YES") partition_uefi_encrypted >/dev/null 2>&1; format_and_mount_uefi_encrypted >/dev/null 2>&1;;
-esac 
-
-pacstrap /mnt base base-devel $kernel linux-firmware nano networkmanager wireless_tools wpa_supplicant netctl dialog iwd dhclient
-genfstab -U /mnt >> /mnt/etc/fstab
-
-mkdir -p /mnt/arch-install-scripts/
-cp -r * /mnt/arch-install-scripts/
 arch-chroot /mnt /bin/bash -c "bash arch-install-scripts/arch-install-02.sh"
 
 umount -R /mnt
