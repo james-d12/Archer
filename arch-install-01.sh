@@ -135,13 +135,19 @@ echo -ne "Wiping Drive /dev/$drive:                 #                     (0%)\r
 wipe_drive > logs.txt 2>&1
 echo -ne "Wiping Drive /dev/$drive:                 ####################  (100%)\r"
 
+echo ""
+
 echo -ne "Formating and Mounting Partitions:     #                     (0%)\r"
 format_and_mount >> logs.txt 2>&1
 echo -ne "Formating and Mounting Partitions:     ####################  (100%)\r"
 
+echo ""
+
 echo -ne "Installing Base Packages:              #                     (0%)\r"
 install_base_packages 
 echo -ne "Installing Base Packages:              ####################  (100%)\r"
+
+echo ""
 
 echo -ne "Copying Files to /mnt:                 #                     (0%)\r"
 copy_files_to_mnt >> logs.txt 2>&1
