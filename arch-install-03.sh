@@ -96,7 +96,7 @@ install_packages(){
     echo "      Installing VSCODE packages:               ################### (100%)"
 }
 
-install_packages(){
+install_all_packages(){
     touch temp.csv; cat resources/programs.csv | tr -d " \t\r" > temp.csv
     while IFS=, read -r installer package description; do
         add_package_to_list $installer $package 
@@ -113,6 +113,6 @@ enable_systemd_services(){
 
 check_network_connection
 echo "      Installing packages:                          #                   (0%)"
-install_packages
+install_all_packages
 echo "      Installing packages:                          #################### (100%)"
 enable_systemd_services
