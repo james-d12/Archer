@@ -14,15 +14,13 @@ setup_users(){
 }
 
 add_encrypted_swap_file(){
-    if [ "$encrypted" == "YES" ]; then
-        dd if=/dev/zero of=/swapfile bs=1M count=$swapsize status=progress
-        chmod 600 /swapfile
-        mkswap -L SWAP /swapfile
-        swapon /swapfile
-        cp /etc/fstab /etc/fstab.bak
-        echo "/swapfile none swap sw 0 0" >> /etc/fstab
-        genfstab -U / >> /etc/fstab
-    fi
+    dd if=/dev/zero of=/swapfile bs=1M count=$swapsize status=progress
+    chmod 600 /swapfile
+    mkswap -L SWAP /swapfile
+    swapon /swapfile
+    cp /etc/fstab /etc/fstab.bak
+    echo "/swapfile none swap sw 0 0" >> /etc/fstab
+    genfstab -U / >> /etc/fstab
 }
 
 setup_localisation(){
@@ -81,9 +79,28 @@ cleanup_script(){
     sudo chown -R $user:wheel /home/$user/arch-install-scripts/
 }
 
-setup_users
-add_encrypted_swap_file
-setup_localisation
-setup_network
-setup_grub
-cleanup_script
+echo "Setting up Users:                      #                     (0%)"
+setup_users >/dev/null 2>&1
+echo "Setting up Users:                      ####################  (100%)"
+
+if [ "$encrypted" == "YES" ]; then
+    echo "Adding Encrypted Swap File:        #                     (0%)"
+    add_encrypted_swap_file >/dev/null 2>&1
+    echo "Adding Encrypted Swap File:        ####################  (100%)"
+fi 
+
+
+echo "Setting up Localisation:               #                     (0%)"
+setup_localisation >/dev/null 2>&1
+echo "Setting up Localisation:               #################### (100%)"
+
+echo "Setting up Network:                    #                     (0%)"
+setup_network >/dev/null 2>&1
+echo "Setting up Network:                    #################### (100%)"
+
+echo "Setting up Grub Bootloader:            #                     (0%)"
+setup_grub >/dev/null 2>&1
+echo "Setting up Grub Bootloader:            #################### (100%)"
+
+cleanup_script >/dev/null 2>&1
+
