@@ -118,7 +118,7 @@ format_and_mount(){
 
 install_base_packages(){
   packages=("base" "base-devel" "$kernel" "linux-firmware" "nano" "networkmanager" "wireless_tools" "wpa_supplicant" "netctl" "dialog" "iwd" "dhclient")
-  echo ""
+  echo "Installing Packages:"
   for pkg in ${packages[@]}; do 
     echo -ne "    Installing $pkg: #                     (0%)\r" 
     pacstrap /mnt $pkg >/dev/null 2>&1
@@ -140,9 +140,7 @@ echo -ne "Formating and Mounting Partitions:     #                     (0%)\r"
 format_and_mount >> logs.txt 2>&1
 echo -e  "Formating and Mounting Partitions:     ####################  (100%)\r"
 
-echo -ne "Installing Base Packages:              #                     (0%)\r"
 install_base_packages 
-echo -e "Installing Base Packages:              ####################  (100%)\r"
 
 echo -ne "Copying Files to /mnt:                 #                     (0%)\r"
 copy_files_to_mnt >> logs.txt 2>&1
