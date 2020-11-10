@@ -117,12 +117,6 @@ format_and_mount(){
 }
 
 install_base_packages(){
-  services=("base")
-  echo "                                       "
-  for service in ${services[@]}; done
-    echo -n "#"
-  done 
-
   pacstrap /mnt base base-devel $kernel linux-firmware nano networkmanager wireless_tools wpa_supplicant netctl dialog iwd dhclient
   genfstab -U /mnt >> /mnt/etc/fstab
 }
