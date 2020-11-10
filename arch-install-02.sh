@@ -79,27 +79,27 @@ cleanup_script(){
     sudo chown -R $user:wheel /home/$user/arch-install-scripts/
 }
 
-echo "Setting up Users:                      #                     (0%)"
+echo -ne "Setting up Users:                      #                     (0%)\r"
 setup_users >> logs.txt 2>&1
-echo "Setting up Users:                      ####################  (100%)"
+echo -e  "Setting up Users:                      ####################  (100%)\r"
 
 if [ "$encrypted" == "YES" ]; then
-    echo "Adding Encrypted Swap File:            #                     (0%)"
+    echo -ne "Adding Encrypted Swap File:            #                     (0%)\r"
     add_encrypted_swap_file >> logs.txt 2>&1
-    echo "Adding Encrypted Swap File:            ####################  (100%)"
+    echo -e  "Adding Encrypted Swap File:            ####################  (100%)\r"
 fi 
 
 
-echo "Setting up Localisation:               #                     (0%)"
+echo -ne "Setting up Localisation:               #                     (0%)\r"
 setup_localisation >> logs.txt 2>&1
-echo "Setting up Localisation:               #################### (100%)"
+echo -e  "Setting up Localisation:               #################### (100%)\r"
 
-echo "Setting up Network:                    #                     (0%)"
+echo -ne "Setting up Network:                    #                     (0%)\r"
 setup_network >> logs.txt 2>&1
-echo "Setting up Network:                    #################### (100%)"
+echo -e  "Setting up Network:                    #################### (100%)\r"
 
-echo "Setting up Grub Bootloader:            #                     (0%)"
+echo -ne "Setting up Grub Bootloader:            #                     (0%)\r"
 setup_grub >> logs.txt 2>&1
-echo "Setting up Grub Bootloader:            #################### (100%)"
+echo -e  "Setting up Grub Bootloader:            #################### (100%)\r"
 
 cleanup_script >> logs.txt 2>&1
