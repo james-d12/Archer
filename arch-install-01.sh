@@ -117,7 +117,12 @@ format_and_mount(){
 }
 
 install_base_packages(){
-  pacstrap /mnt base base-devel $kernel linux-firmware nano networkmanager wireless_tools wpa_supplicant netctl dialog iwd dhclient
+  packages=("base" "base-devel" "$kernel" "linux-firmware" "nano" "networkmanager" "wireless_tools" "wpa_supplicant" "netctl" "dialog" "iwd" "dhclient")
+  for pkg in ${packages[@]}; do 
+    echo "    Installing $pkg:   #                     (0%)" 
+    pacstrap /mnt $pkg 
+    echo "    Installing $pkg:   ##################### (100%)" 
+  done 
   genfstab -U /mnt >> /mnt/etc/fstab
 }
 
