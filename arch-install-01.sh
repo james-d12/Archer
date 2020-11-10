@@ -120,7 +120,7 @@ install_base_packages(){
   packages=("base" "base-devel" "$kernel" "linux-firmware" "nano" "networkmanager" "wireless_tools" "wpa_supplicant" "netctl" "dialog" "iwd" "dhclient")
   for pkg in ${packages[@]}; do 
     echo "    Installing $pkg:   #                     (0%)" 
-    pacstrap /mnt $pkg 
+    pacstrap /mnt $pkg >/dev/null 2>&1
     echo "    Installing $pkg:   ##################### (100%)" 
   done 
   genfstab -U /mnt >> /mnt/etc/fstab
@@ -140,7 +140,7 @@ format_and_mount >> logs.txt 2>&1
 echo "Formating and Mounting Partitions:     ####################  (100%)"
 
 echo "Installing Base Packages:              #                     (0%)"
-install_base_packages >> logs.txt 2>&1
+install_base_packages >> logs.txt 
 echo "Installing Base Packages:              ####################  (100%)"
 
 echo "Copying Files to /mnt:                 #                     (0%)"
