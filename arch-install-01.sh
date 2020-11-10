@@ -129,7 +129,7 @@ format_and_mount(){
           echo "Formating and Mounting: ##########           (50%)"; 
           format_and_mount_uefi_encrypted;;
   esac 
-  echo "Formating and Mounting:   #################### (100%)";; 
+  echo "Formating and Mounting:   #################### (100%)"
 }
 
 install_base_packages(){
