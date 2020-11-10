@@ -119,9 +119,9 @@ format_and_mount(){
 install_base_packages(){
   packages=("base" "base-devel" "$kernel" "linux-firmware" "nano" "networkmanager" "wireless_tools" "wpa_supplicant" "netctl" "dialog" "iwd" "dhclient")
   for pkg in ${packages[@]}; do 
-    echo "    Installing $pkg:                  #                     (0%)" 
+    echo "    Installing $pkg: #                     (0%)" 
     pacstrap /mnt $pkg >/dev/null 2>&1
-    echo "    Installing $pkg:                  ##################### (100%)" 
+    echo "    Installing $pkg: ##################### (100%)" 
   done 
   genfstab -U /mnt >> /mnt/etc/fstab
 }
@@ -133,19 +133,19 @@ copy_files_to_mnt(){
 
 echo "Wiping Drive /dev/$drive:                 #                     (0%)"
 wipe_drive > logs.txt 2>&1
-echo "Wiping Drive /dev/$drive:                 ####################  (100%)"
+echo "Wiping Drive /dev/$drive:                 ####################  (100%)\r"
 
 echo "Formating and Mounting Partitions:     #                     (0%)"
 format_and_mount >> logs.txt 2>&1
-echo "Formating and Mounting Partitions:     ####################  (100%)"
+echo "Formating and Mounting Partitions:     ####################  (100%)\r"
 
 echo "Installing Base Packages:              #                     (0%)"
 install_base_packages 
-echo "Installing Base Packages:              ####################  (100%)"
+echo "Installing Base Packages:              ####################  (100%)\r"
 
 echo "Copying Files to /mnt:                 #                     (0%)"
 copy_files_to_mnt >> logs.txt 2>&1
-echo "Copying Files to /mnt:                 ####################  (100%)"
+echo "Copying Files to /mnt:                 ####################  (100%)\r"
 
 arch-chroot /mnt /bin/bash -c "bash arch-install-scripts/arch-install-02.sh"
 
