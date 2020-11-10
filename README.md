@@ -30,9 +30,10 @@ This script aims to be very customisable and with that comes with 3 desktop envi
 
 ## Packages
 Packages are read from the 'resources/programs.csv' file, and each package contains 3 pieces of data:
- - Installer: What installer is used to install the package (E.g. pacman, git, etc...)
- - Package Name: The package's name to install (E.g. firefox)
- - Description: A short description of the package.
+ - **Installer:** What installer is used to install the package (E.g. pacman, git, etc...)
+ - **Package Name:** The package's name to install (E.g. firefox)
+ - **Description:** A short description of the package.
+ 
 They are all separated by a comma, and example for adding firefox to the file would be as follows:
 **PACMAN, firefox, A web browser**
 It is important that you do not forget commas otherwise it will cause the script to break when reading the file.
