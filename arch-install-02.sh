@@ -89,7 +89,6 @@ if [ "$encrypted" == "YES" ]; then
     echo -e  "Adding Encrypted Swap File:            ####################  (100%)\r"
 fi 
 
-
 echo -ne "Setting up Localisation:               #                     (0%)\r"
 setup_localisation >> logs.txt 2>&1
 echo -e  "Setting up Localisation:               ####################  (100%)\r"

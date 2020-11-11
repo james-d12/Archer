@@ -16,6 +16,7 @@ check_network_connection(){
         if ! ping -c 1 -q google.com >&/dev/null; then
             echo -e "Could not connect to the network, exiting script."
             exit 1 
+        fi
     fi
 }
 

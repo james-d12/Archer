@@ -118,7 +118,7 @@ format_and_mount(){
 
 install_base_packages(){
   packages=("base" "base-devel" "$kernel" "linux-firmware" "nano" "networkmanager" "wireless_tools" "wpa_supplicant" "netctl" "dialog" "iwd" "dhclient")
-  echo "Installing Packages:"
+  echo "Installing Base Packages:"
   for pkg in ${packages[@]}; do 
     echo -ne "    Installing $pkg: #                     (0%)\r" 
     pacstrap /mnt $pkg >/dev/null 2>&1
@@ -146,7 +146,7 @@ echo -ne "Copying Files to /mnt:                 #                     (0%)\r"
 copy_files_to_mnt >> logs.txt 2>&1
 echo -e  "Copying Files to /mnt:                 ####################  (100%)\r"
 
-arch-chroot /mnt /bin/bash -c "bash arch-install-scripts/arch-install-02.sh"
+arch-chroot /mnt /bin/bash -c "bash arch-install-scripts/arch-install-02.sh" 
 
 umount -R /mnt
 echo -ne "Script has finished, please shutdown, remove the USB/Installation Media and then reboot."
