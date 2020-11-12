@@ -103,4 +103,5 @@ echo -e  "Setting up Grub Bootloader:            ####################  (100%)\r"
 
 cleanup_script >> logs.txt 2>&1
 
+cd /home/"$user" 
 su -c "bash /home/"$user"/arch-install-scripts/arch-install-03.sh" - "$user" 
