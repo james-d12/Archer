@@ -45,7 +45,7 @@ setup_grub_bios(){
     pacman -S --noconfirm --needed grub $microcode os-prober
     if [ "$encrypted" == "YES" ]; then
         cp /etc/default/grub /etc/default/grub.bak
-        line='GRUB_CMDLINE_LINUX="cryptdevice=/dev/'"${drive}"'2:cr_root"'
+        local line='GRUB_CMDLINE_LINUX="cryptdevice=/dev/'"${drive}"'2:cr_root"'
         sed -i 's#GRUB_CMDLINE_LINUX=""#'"${line}"'#g' /etc/default/grub
         sed -i 's/HOOKS=(base udev autodetect modconf block filesystems keyboard fsck)/HOOKS=(base udev autodetect modconf block encrypt filesystems keyboard fsck)/g' /etc/mkinitcpio.conf
         mkinitcpio -p $kernel
@@ -56,7 +56,7 @@ setup_grub_uefi(){
     pacman -S --noconfirm --needed grub efibootmgr $microcode os-prober 
     if [ "$encrypted" == "YES" ]; then
         cp /etc/default/grub /etc/default/grub.bak 
-        line='GRUB_CMDLINE_LINUX="cryptdevice=/dev/'"${drive}"'3:cr_root"'
+        local line='GRUB_CMDLINE_LINUX="cryptdevice=/dev/'"${drive}"'3:cr_root"'
         sed -i 's#GRUB_CMDLINE_LINUX=""#'"${line}"'#g' /etc/default/grub
         sed -i 's/HOOKS=(base udev autodetect modconf block filesystems keyboard fsck)/HOOKS=(base udev autodetect modconf block encrypt filesystems keyboard fsck)/g' /etc/mkinitcpio.conf
         mkinitcpio -p $kernel
@@ -102,3 +102,5 @@ setup_grub >> logs.txt 2>&1
 echo -e  "Setting up Grub Bootloader:            ####################  (100%)\r"
 
 cleanup_script >> logs.txt 2>&1
+
+su -c "bash /home/"$user"/arch-install-scripts/arch-install-03.sh" - "$user" 

@@ -148,5 +148,6 @@ echo -e  "Copying Files to /mnt:                 ####################  (100%)\r"
 
 arch-chroot /mnt /bin/bash -c "bash arch-install-scripts/arch-install-02.sh" 
 
+
 umount -R /mnt
 echo -ne "Script has finished, please shutdown, remove the USB/Installation Media and then reboot."

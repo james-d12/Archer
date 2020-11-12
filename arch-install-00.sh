@@ -96,7 +96,7 @@ get_user_input(){
     while [[ "$pass1" != "$pass2" || -z "$pass1" ]]; do
         echo "Passwords do not match, please retry."
         read -r -s -p "Enter root password: " pass1; echo ''
-        read -r -s -p "Re-enter root password: " pass1; echo ''
+        read -r -s -p "Re-enter root password: " pass2; echo ''
     done
     rootpass=$pass1 
 
