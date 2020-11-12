@@ -4,7 +4,7 @@
 # GitHub Repository: https://github.com/james-d12/arch-installer
 
 
-. "$(pwd)scripts/arch-config.sh"
+. "/arch-install-scripts/scripts/arch-config.sh"
 
 setup_users(){
     useradd -m -G wheel "$user" 
