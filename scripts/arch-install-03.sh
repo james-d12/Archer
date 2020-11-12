@@ -5,6 +5,8 @@
 
 . "$(pwd)/scripts/resources/desktop"
 
+su "$user"
+
 check_network_connection(){
     if ! ping -c 1 -q google.com >&/dev/null; then
         echo -e "You are not connected to the internet, attempting connection solutions....."

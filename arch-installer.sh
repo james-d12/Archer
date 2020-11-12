@@ -23,9 +23,7 @@ fi
 arch-chroot /mnt /bin/bash -c "bash arch-install-scripts/scripts/arch-install-02.sh"
 
 # Run the 4th script as the newly created user, which installs the packages and desktop environment (if selected).
-su -c "bash /home/""$user""/arch-install-scripts/scripts/arch-install-03.sh" - "$user" 
-
-arch-chroot /mnt /bin/bash -c "su -c 'bash /home/""$user""/arch-install-scripts/scripts/arch-install-03.sh" - "$user"'
+arch-chroot /mnt /bin/bash -c "bash /home/""$user""/arch-install-scripts/scripts/arch-install-03.sh"
 
 # Cleanup by unmounting all drives.
 umount -R /mnt 
