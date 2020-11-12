@@ -16,12 +16,12 @@ get_user_input(){
     done
 
     if [ "$encrypted" == "YES" ]; then 
-        read -s -p "Enter encryption password: " pass1; echo ''
-        read -s -p "Re-enter encryption password: " pass2; echo ''
-        while [[ $pass1 != $pass2 || -z $pass1 ]]; do
+        read -r -s -p "Enter encryption password: " pass1; echo ''
+        read -r -s -p "Re-enter encryption password: " pass2; echo ''
+        while [[ "$pass1" != "$pass2" || -z "$pass1" ]]; do
             echo "Passwords do not match, please retry."
-            read -s -p "Enter encryption password: " pass1; echo ''
-            read -s -p "Re-enter encryption password: " pass2; echo ''
+            read -r -s -p "Enter encryption password: " pass1; echo ''
+            read -r -s -p "Re-enter encryption password: " pass2; echo ''
         done
         encryptionpass=$pass1 
     fi
@@ -43,7 +43,7 @@ get_user_input(){
     done
 
     read -r -p "Enter Swap Size(MB): " swapsize 
-    while [ -z $swapsize ]; do
+    while [ -z "$swapsize" ]; do
         echo "Swapsize is invalid, please retry..."
         read -r -p "Enter Swap Size(MB): " swapsize 
     done
@@ -91,21 +91,21 @@ get_user_input(){
     done
     username=$(echo "$username" | awk '{print tolower($0)}')
 
-    echo "Enter root password: "; read -s pass1;
-    echo "Re-enter root password: "; read -s pass2; 
-    while [ $pass1 != $pass2 ]; do
+    read -r -s -p "Enter root password: " pass1; echo ''
+    read -r -s -p "Re-enter root password: " pass1; echo ''
+    while [ "$pass1" != "$pass2" ]; do
         echo "Passwords do not match, please retry."
-        echo "Enter root password: "; read -s pass1 
-        echo "Re-enter root password: "; read -s pass2
+        read -r -s -p "Enter root password: " pass1; echo ''
+        read -r -s -p "Re-enter root password: " pass1; echo ''
     done
     rootpass=$pass1 
 
-    echo "Enter user password: "; read -s pass1 
-    echo "Re-enter user password: "; read -s pass2 
-    while [ $pass1 != $pass2 ]; do
+    read -r -s -p "Enter user password: " pass1; echo ''
+    read -r -s -p "Re-enter user password: " pass1; echo ''
+    while [ "$pass1" != "$pass2" ]; do
         echo "Passwords do not match, please retry."
-        echo "Enter user password: "; read -s pass1 
-        echo "Re-enter user password: "; read -s pass2
+        read -r -s -p "Enter user password: " pass1; echo ''
+        read -r -s -p "Re-enter user password: " pass1; echo ''
     done
     userpass=$pass1 
 
@@ -174,27 +174,27 @@ EOF
 
 print_details(){
 echo "
-drive="${drive}"
-encrypted="${encrypted}"
-encryptionpass="${encryptionpass}"
-swapsize="${swapsize}"
-system="${system}" 
-kernel="${kernel}"
-microcode="${microcode}"
-desktopenvironment="${desktopenvironment}"
-user="${username}"
-userpass="${userpass}"
-rootpass="${rootpass}"
-locale="${locale}"
-region="${region}"
-city="${city}"
-hostname="${hostname}""
+drive=""${drive}""
+encrypted=""${encrypted}""
+encryptionpass=""${encryptionpass}""
+swapsize=""${swapsize}""
+system=""${system}"" 
+kernel=""${kernel}""
+microcode=""${microcode}""
+desktopenvironment=""${desktopenvironment}""
+user=""${username}""
+userpass=""${userpass}""
+rootpass=""${rootpass}""
+locale=""${locale}""
+region=""${region}""
+city=""${city}""
+hostname=""${hostname}"""
 }
 
 check_details(){
     print_details
-    echo -n "Are these details correct? [Y/n]: "; read arecorrect;
-    if [[ $arecorrect == "Y" || $arecorrect == "y" ]]; then
+    echo -n "Are these details correct? [Y/n]: "; read -r arecorrect;
+    if [[ "$arecorrect" == "Y" || "$arecorrect" == "y" ]]; then
         clear
         output_to_config_file
         bash arch-install-01.sh 
