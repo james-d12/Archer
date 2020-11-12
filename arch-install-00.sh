@@ -92,7 +92,7 @@ get_user_input(){
     username=$(echo "$username" | awk '{print tolower($0)}')
 
     read -r -s -p "Enter root password: " pass1; echo ''
-    read -r -s -p "Re-enter root password: " pass1; echo ''
+    read -r -s -p "Re-enter root password: " pass2; echo ''
     while [ "$pass1" != "$pass2" ]; do
         echo "Passwords do not match, please retry."
         read -r -s -p "Enter root password: " pass1; echo ''
@@ -101,11 +101,11 @@ get_user_input(){
     rootpass=$pass1 
 
     read -r -s -p "Enter user password: " pass1; echo ''
-    read -r -s -p "Re-enter user password: " pass1; echo ''
+    read -r -s -p "Re-enter user password: " pass2; echo ''
     while [ "$pass1" != "$pass2" ]; do
         echo "Passwords do not match, please retry."
         read -r -s -p "Enter user password: " pass1; echo ''
-        read -r -s -p "Re-enter user password: " pass1; echo ''
+        read -r -s -p "Re-enter user password: " pass2; echo ''
     done
     userpass=$pass1 
 
