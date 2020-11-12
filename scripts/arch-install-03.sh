@@ -3,7 +3,7 @@
 # Arch Installer By james-d12
 # GitHub Repository: https://github.com/james-d12/arch-installer
 
-. "$(pwd)/scripts/resources/desktop"
+. "/arch-install-scripts/scripts/resources/desktop"
 
 su "$user"
 
