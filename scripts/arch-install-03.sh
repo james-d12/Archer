@@ -3,7 +3,7 @@
 # Arch Installer By james-d12
 # GitHub Repository: https://github.com/james-d12/arch-installer
 
-. "$(pwd)/resources/desktop 
+. "$(pwd)/scripts/resources/desktop"
 
 check_network_connection(){
     if ! ping -c 1 -q google.com >&/dev/null; then
@@ -100,7 +100,8 @@ install_packages(){
 }
 
 install_all_packages(){
-    touch temp.csv; cat resources/programs.csv | tr -d " \t\r" > temp.csv
+    touch temp.csv; 
+    "$(pwd)/scripts/resources/programs.csv" | tr -d " \t\r" > temp.csv
     while IFS=, read -r installer package description; do
         add_package_to_list "$installer" "$package" 
     done < temp.csv; 

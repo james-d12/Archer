@@ -148,7 +148,7 @@ get_user_input(){
 }
 
 output_to_config_file(){
-cat <<EOF > $(pwd)/scripts/arch-config.sh
+cat <<EOF > "$(pwd)/scripts/arch-config.sh"
 #!/usr/bin/env bash
 drive="${drive}"
 encrypted="${encrypted}"
