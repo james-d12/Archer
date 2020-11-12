@@ -10,7 +10,7 @@ increase_user_login_timeout() {
     echo "auth optional pam_faildelay.so delay=4000000" >> /etc/pam.d/system-login 
 }
 deny_ip_spoofs(){ 
-    echo "order bind, hosts\n multi on" >> /etc/host.conf 
+    printf "order bind, hosts\n multi on" >> /etc/host.conf 
 }
 
 configure_apparmor_and_firejail(){

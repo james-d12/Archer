@@ -10,7 +10,7 @@ wipe_drive(){
 }
 
 partition_bios(){
-newsize=$(($swapsize*2))
+newsize=$((swapsize*2))
 sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk /dev/"$drive"
     o # clear the in memory partition table
     n # new partition
@@ -53,18 +53,18 @@ EOF
 }
 
 partition_uefi(){
-    sgdisk -Z /dev/$drive 
-    sgdisk -a 2048 -o /dev/$drive 
-    sgdisk -n 1:0:+512M -t 1:ef00 /dev/$drive 
-    sgdisk -n 2:0:+$swapsize"M" -t 2:8200 /dev/$drive 
-    sgdisk -n 3:0:0 -t 3:8300 /dev/$drive
+    sgdisk -Z /dev/"$drive" 
+    sgdisk -a 2048 -o /dev/"$drive" 
+    sgdisk -n 1:0:+512M -t 1:ef00 /dev/"$drive" 
+    sgdisk -n 2:0:+"${swapsize}M" -t 2:8200 /dev/"$drive" 
+    sgdisk -n 3:0:0 -t 3:8300 /dev/"$drive"
 }
 partition_uefi_encrypted(){
-    sgdisk -Z /dev/$drive 
-    sgdisk -a 2048 -o /dev/$drive 
-    sgdisk -n 1:0:+100M -t 1:ef00 /dev/$drive 
-    sgdisk -n 2:0:+512M -t 2:8300 /dev/$drive 
-    sgdisk -n 3:0:0 -t 3:8300 /dev/$drive 
+    sgdisk -Z /dev/"$drive" 
+    sgdisk -a 2048 -o /dev/"$drive" 
+    sgdisk -n 1:0:+100M -t 1:ef00 /dev/"$drive" 
+    sgdisk -n 2:0:+512M -t 2:8300 /dev/"$drive" 
+    sgdisk -n 3:0:0 -t 3:8300 /dev/"$drive" 
 }
 
 format_and_mount_bios() {
@@ -119,17 +119,17 @@ format_and_mount(){
 install_base_packages(){
   packages=("base" "base-devel" "$kernel" "linux-firmware" "nano" "networkmanager" "wireless_tools" "wpa_supplicant" "netctl" "dialog" "iwd" "dhclient")
   echo "Installing Base Packages:"
-  for pkg in ${packages[@]}; do 
-    echo -ne "    Installing $pkg: #                     (0%)\r" 
-    pacstrap /mnt $pkg >/dev/null 2>&1
-    echo -e  "    Installing $pkg: ##################### (100%)\r" 
+  for pkg in "${packages[@]}"; do 
+    echo -ne "    Installing ""$pkg"": #                     (0%)\r" 
+    pacstrap /mnt "$pkg" >/dev/null 2>&1
+    echo -e  "    Installing ""$pkg"": ##################### (100%)\r" 
   done 
   genfstab -U /mnt >> /mnt/etc/fstab
 }
 
 copy_files_to_mnt(){
   mkdir -p /mnt/arch-install-scripts/
-  cp -r * /mnt/arch-install-scripts/
+  cp -r ./* /mnt/arch-install-scripts/
 }
 
 echo -ne "Wiping Drive /dev/$drive:                 #                     (0%)\r"
