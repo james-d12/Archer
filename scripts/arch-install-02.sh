@@ -3,7 +3,7 @@
 # Arch Installer By james-d12
 # GitHub Repository: https://github.com/james-d12/arch-installer
 
-. /arch-install-scripts/arch-config.sh
+. "$(pwd)/arch-config.sh"
 
 setup_users(){
     useradd -m -G wheel $user 
@@ -102,6 +102,3 @@ setup_grub >> logs.txt 2>&1
 echo -e  "Setting up Grub Bootloader:            ####################  (100%)\r"
 
 cleanup_script >> logs.txt 2>&1
-
-cd /home/"$user" 
-su -c "bash /home/"$user"/arch-install-scripts/arch-install-03.sh" - "$user" 

@@ -3,7 +3,7 @@
 # Arch Installer By james-d12
 # GitHub Repository: https://github.com/james-d12/arch-installer
 
-. ./arch-config.sh
+. "$(pwd)/arch-config.sh"
 
 wipe_drive(){
   sfdisk --delete /dev/"$drive"
@@ -145,9 +145,3 @@ install_base_packages
 echo -ne "Copying Files to /mnt:                 #                     (0%)\r"
 copy_files_to_mnt >> logs.txt 2>&1
 echo -e  "Copying Files to /mnt:                 ####################  (100%)\r"
-
-arch-chroot /mnt /bin/bash -c "bash arch-install-scripts/arch-install-02.sh" 
-
-
-umount -R /mnt
-echo -ne "Script has finished, please shutdown, remove the USB/Installation Media and then reboot."

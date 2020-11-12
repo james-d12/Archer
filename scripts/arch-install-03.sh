@@ -3,7 +3,7 @@
 # Arch Installer By james-d12
 # GitHub Repository: https://github.com/james-d12/arch-installer
 
-. resources/desktop 
+. "$(pwd)/resources/desktop 
 
 check_network_connection(){
     if ! ping -c 1 -q google.com >&/dev/null; then

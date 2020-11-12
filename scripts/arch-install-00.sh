@@ -173,8 +173,7 @@ EOF
 }
 
 print_details(){
-echo "
-drive=""${drive}""
+echo "drive=""${drive}""
 encrypted=""${encrypted}""
 encryptionpass=""${encryptionpass}""
 swapsize=""${swapsize}""
@@ -197,7 +196,6 @@ check_details(){
     if [[ "$arecorrect" == "Y" || "$arecorrect" == "y" ]]; then
         clear
         output_to_config_file
-        bash arch-install-01.sh 
     else
         main 
     fi 
