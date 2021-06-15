@@ -11,4 +11,4 @@ jobs:
     - name: Get Arch-Linux Image
       run: docker pull archlinux
     - name: Run Arch-Linux Image
-      run: docker run archlinux
+      run: docker run archlinux; docker exec -it archlinux echo "Hello from container!"
