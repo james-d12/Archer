@@ -1,17 +1,32 @@
-#!/usr/bin/bash 
+#!/usr/bin/env bash
 
 # Arch Installer By james-d12
 # GitHub Repository: https://github.com/james-d12/arch-installer
 
+
+print_home(){
+    echo "------------------------------------------------"
+    echo " █████╗ ██████╗  ██████╗██╗  ██╗███████╗██████╗ 
+██╔══██╗██╔══██╗██╔════╝██║  ██║██╔════╝██╔══██╗
+███████║██████╔╝██║     ███████║█████╗  ██████╔╝
+██╔══██║██╔══██╗██║     ██╔══██║██╔══╝  ██╔══██╗
+██║  ██║██║  ██║╚██████╗██║  ██║███████╗██║  ██║
+╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝"
+    echo "          Made by James Durban"
+    echo "GitHub Repository: https://github.com/james-d12/archer"
+    echo "------------------------------------------------" 
+}
+
 get_user_input(){
     clear
-    PS3='Encrypt Drive?'
+
+    print_home
+    PS3='Encrypt Drive? '
     options=("YES" "NO")
     select o  in "${options[@]}"; do
         case $o in
-            "YES") encrypted=$o; break;;
-            "NO") encrypted=$o; break;;
-            *) echo "Invalid option $REPLY";;
+            "YES" | "NO") encrypted=$o; break;;
+            *);;
         esac
     done
 
@@ -32,15 +47,12 @@ get_user_input(){
         read -r -p "Enter Drive Name: (E.g. sda or sdb, etc...) " drive 
     done
 
-    PS3='Choose System: '
-    options=("BIOS" "UEFI")
-    select o  in "${options[@]}"; do
-        case $o in
-            "BIOS") system=$o; break;;
-            "UEFI") system=$o; break;;
-            *) echo "Invalid option $REPLY";;
-        esac
-    done
+    architecture=$(getconf LONG_BIT)
+    if [ "$architecture" == "64" ]; then
+        system="UEFI"
+    else 
+        system="BIOS"
+    fi 
 
     read -r -p "Enter Swap Size(MB): " swapsize 
     while [ -z $swapsize ]; do
@@ -91,15 +103,6 @@ get_user_input(){
     done
     username=$(echo "$username" | awk '{print tolower($0)}')
 
-    echo "Enter root password: "; read -s pass1;
-    echo "Re-enter root password: "; read -s pass2; 
-    while [ $pass1 != $pass2 ]; do
-        echo "Passwords do not match, please retry."
-        echo "Enter root password: "; read -s pass1 
-        echo "Re-enter root password: "; read -s pass2
-    done
-    rootpass=$pass1 
-
     echo "Enter user password: "; read -s pass1 
     echo "Re-enter user password: "; read -s pass2 
     while [ $pass1 != $pass2 ]; do
@@ -108,6 +111,15 @@ get_user_input(){
         echo "Re-enter user password: "; read -s pass2
     done
     userpass=$pass1 
+
+    echo "Enter root password: "; read -s pass1;
+    echo "Re-enter root password: "; read -s pass2; 
+    while [ $pass1 != $pass2 ]; do
+        echo "Passwords do not match, please retry."
+        echo "Enter root password: "; read -s pass1 
+        echo "Re-enter root password: "; read -s pass2
+    done
+    rootpass=$pass1 
 
     PS3='Choose Locale: '
     options=("en_GB" "en_US")
@@ -147,29 +159,26 @@ get_user_input(){
     clear
 }
 
-output_to_config_file(){
-cat <<EOF > arch-config.sh
-#!/usr/bin/env bash
-drive="${drive}"
-encrypted="${encrypted}"
-encryptionpass="${encryptionpass}"
-swapsize="${swapsize}"
-system="${system}" 
-kernel="${kernel}"
-microcode="${microcode}"
-desktopenvironment="${desktopenvironment}"
-user="${username}"
-userpass="${userpass}"
-rootpass="${rootpass}"
-locale="${locale}"
-region="${region}"
-city="${city}"
-hostname="${hostname}"
-host="
-127.0.0.1	localhost
-::1		    localhost
-127.0.1.1	$hostname.localdomain	$hostname"
-EOF
+export_variables() {
+    export drive="${drive}"
+    export encrypted="${encrypted}"
+    export encryptionpass="${encryptionpass}"
+    export swapsize="${swapsize}"
+    export system="${system}" 
+    export kernel="${kernel}"
+    export microcode="${microcode}"
+    export desktopenvironment="${desktopenvironment}"
+    export user="${username}"
+    export userpass="${userpass}"
+    export rootpass="${rootpass}"
+    export locale="${locale}"
+    export region="${region}"
+    export city="${city}"
+    export hostname="${hostname}"
+    export host="
+    127.0.0.1	localhost
+    ::1		    localhost
+    127.0.1.1	$hostname.localdomain	$hostname"
 }
 
 print_details(){
@@ -195,7 +204,7 @@ check_details(){
     print_details
     echo -n "Are these details correct? [Y/n]: "; read arecorrect;
     if [[ $arecorrect == "Y" || $arecorrect == "y" ]]; then
-        output_to_config_file
+        export_variables
         bash arch-install-01.sh 
     else
         main 
