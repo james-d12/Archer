@@ -159,26 +159,29 @@ get_user_input(){
     clear
 }
 
-export_variables() {
-    export drive="${drive}"
-    export encrypted="${encrypted}"
-    export encryptionpass="${encryptionpass}"
-    export swapsize="${swapsize}"
-    export system="${system}" 
-    export kernel="${kernel}"
-    export microcode="${microcode}"
-    export desktopenvironment="${desktopenvironment}"
-    export user="${username}"
-    export userpass="${userpass}"
-    export rootpass="${rootpass}"
-    export locale="${locale}"
-    export region="${region}"
-    export city="${city}"
-    export hostname="${hostname}"
-    export host="
-    127.0.0.1	localhost
-    ::1		    localhost
-    127.0.1.1	$hostname.localdomain	$hostname"
+output_to_config_file(){
+cat <<EOF > $(pwd)/arch-config.sh
+#!/usr/bin/env bash
+drive="${drive}"
+encrypted="${encrypted}"
+encryptionpass="${encryptionpass}"
+swapsize="${swapsize}"
+system="${system}" 
+kernel="${kernel}"
+microcode="${microcode}"
+desktopenvironment="${desktopenvironment}"
+user="${username}"
+userpass="${userpass}"
+rootpass="${rootpass}"
+locale="${locale}"
+region="${region}"
+city="${city}"
+hostname="${hostname}"
+host="
+127.0.0.1	localhost
+::1		    localhost
+127.0.1.1	$hostname.localdomain	$hostname"
+EOF
 }
 
 print_details(){

@@ -3,6 +3,8 @@
 # Arch Installer By james-d12
 # GitHub Repository: https://github.com/james-d12/arch-installer
 
+. $(pwd)/arch-config.sh
+
 wipe_drive(){
   sfdisk --delete /dev/"$drive"
 }

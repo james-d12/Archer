@@ -3,6 +3,8 @@
 # Arch Installer By james-d12
 # GitHub Repository: https://github.com/james-d12/arch-installer
 
+. $(pwd)/arch-config.sh
+
 setup_users(){
     useradd -m -G wheel $user 
     ( echo "$rootpass"; echo "$rootpass" ) | passwd
