@@ -3,8 +3,6 @@
 # Arch Installer By james-d12
 # GitHub Repository: https://github.com/james-d12/arch-installer
 
-. ./arch-config.sh
-
 wipe_drive(){
   sfdisk --delete /dev/"$drive"
 }
@@ -122,11 +120,3 @@ esac
 
 pacstrap /mnt base base-devel $kernel linux-firmware nano networkmanager wireless_tools wpa_supplicant netctl dialog iwd dhclient
 genfstab -U /mnt >> /mnt/etc/fstab
-
-mkdir -p /mnt/arch-install-scripts/
-cp -r * /mnt/arch-install-scripts/
-arch-chroot /mnt /bin/bash -c "bash arch-install-scripts/arch-install-02.sh"
-
-umount -R /mnt
-clear 
-echo "Script has finished, please shutdown, remove the USB/Installation Media and then reboot."

@@ -205,7 +205,7 @@ check_details(){
     echo -n "Are these details correct? [Y/n]: "; read arecorrect;
     if [[ $arecorrect == "Y" || $arecorrect == "y" ]]; then
         export_variables
-        bash arch-install-01.sh 
+        return 
     else
         main 
     fi 

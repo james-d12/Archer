@@ -97,3 +97,5 @@ enable_systemd_services(){
 check_network_connection
 install_packages
 enable_systemd_services
+
+bash arch-install-scripts/arch-install-04.sh
