@@ -6,7 +6,7 @@ copy_files(){
 }
 
 bash $(pwd)/scripts/arch-install-00.sh 
-bash arch-install-01.sh 
+bash $(pwd)/scripts/arch-install-01.sh 
 copy_files
 arch-chroot /mnt /bin/bash -c "bash arch-install-scripts/arch-install-02.sh"
 umount -R /mnt && echo "Script has finished, please shutdown, remove the USB/Installation Media and then reboot."
