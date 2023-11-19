@@ -120,5 +120,5 @@ case "$system $encrypted" in
      "UEFI YES") partition_uefi_encrypted; format_and_mount_uefi_encrypted;;
 esac 
 
-pacstrap /mnt base base-devel $kernel linux-firmware nano networkmanager wireless_tools wpa_supplicant netctl dialog iwd dhclient
+pacstrap -K /mnt base base-devel $kernel linux-firmware nano networkmanager wireless_tools wpa_supplicant netctl dialog iwd dhclient
 genfstab -U /mnt >> /mnt/etc/fstab
