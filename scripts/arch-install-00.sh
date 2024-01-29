@@ -3,8 +3,23 @@
 # Arch Installer By james-d12
 # GitHub Repository: https://github.com/james-d12/arch-installer
 
+function print_home(){
+    echo "------------------------------------------------"
+    echo " █████╗ ██████╗  ██████╗██╗  ██╗███████╗██████╗"
+    echo "██╔══██╗██╔══██╗██╔════╝██║  ██║██╔════╝██╔══██╗ "
+    echo "███████║██████╔╝██║     ███████║█████╗  ██████╔╝"
+    echo "██╔══██║██╔══██╗██║     ██╔══██║██╔══╝  ██╔══██╗"
+    echo "██║  ██║██║  ██║╚██████╗██║  ██║███████╗██║  ██║"
+    echo "╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝"
+    echo "          Made by James Durban"
+    echo "GitHub Repository: https://github.com/james-d12/archer"
+    echo "------------------------------------------------" 
+}
+
 function get_user_input(){
     clear
+    
+    print_home
     PS3='Encrypt Drive?'
     options=("YES" "NO")
     select o  in "${options[@]}"; do
