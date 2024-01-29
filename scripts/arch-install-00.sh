@@ -182,11 +182,16 @@ city=""${ARCHER_CITY}""
 hostname=""${ARCHER_HOSTNAME}"""
 }
 
-print_details
-echo -n "Are these details correct? [Y/n]: "; read -r arecorrect;
-if [[ "$arecorrect" == "Y" || "$arecorrect" == "y" ]]; then
-    clear
-    output_to_config_file
-else
-    main 
-fi 
+function check_details(){
+    print_details
+    echo -n "Are these details correct? [Y/n]: "; read arecorrect;
+    if [[ $arecorrect == "Y" || $arecorrect == "y" ]]; then
+        output_to_config_file
+        return 
+    else
+        main 
+    fi 
+}
+
+get_user_input
+check_details
