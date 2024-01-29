@@ -47,15 +47,12 @@ function get_user_input(){
         read -r -p "Enter Drive Name: (E.g. sda or sdb, etc...) " drive 
     done
 
-    PS3='Choose System: '
-    options=("BIOS" "UEFI")
-    select o  in "${options[@]}"; do
-        case $o in
-            "BIOS") system=$o; break;;
-            "UEFI") system=$o; break;;
-            *) echo "Invalid option $REPLY";;
-        esac
-    done
+    architecture=$(getconf LONG_BIT)
+    if [ "$architecture" == "64" ]; then
+        system="UEFI"
+    else 
+        system="BIOS"
+    fi 
 
     read -r -p "Enter Swap Size(MB): " swapsize 
     while [ -z "$swapsize" ]; do
