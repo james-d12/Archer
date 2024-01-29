@@ -134,26 +134,6 @@ function copy_files_to_mnt(){
   cp -r ./* /mnt/arch-install-scripts/
 }
 
-
-echo "Environment Variables"
-echo "drive=""${ARCHER_DRIVE}""
-encrypted=""${ARCHER_ENCRYPTED}""
-encryptionpass=""${ARCHER_ENCRYPTED_PASSWORD}""
-swapsize=""${ARCHER_SWAPSIZE}""
-system=""${ARCHER_SYSTEM}"" 
-kernel=""${ARCHER_KERNEL}""
-microcode=""${ARCHER_MICROCODE}""
-desktopenvironment=""${ARCHER_DESKTOPENVIRONMENT}""
-user=""${ARCHER_USER}""
-userpass=""${ARCHER_USER_PASSWORD}""
-rootpass=""${ARCHER_ROOT_PASSWORD}""
-locale=""${ARCHER_LOCALE}""
-region=""${ARCHER_REGION}""
-city=""${ARCHER_CITY}""
-hostname=""${ARCHER_HOSTNAME}"""
-echo "***********************************"
-
-
 echo -ne "Wiping Drive /dev/$ARCHER_DRIVE:                 #                     (0%)\r"
 wipe_drive > logs.txt 2>&1
 echo -e  "Wiping Drive /dev/$ARCHER_DRIVE:                 ####################  (100%)\r"
