@@ -137,6 +137,7 @@ function copy_files_to_mnt(){
 
 echo "Environment Variables"
 echo "drive=""${ARCHER_DRIVE}""
+TEST=""${ARCHER_TEST}""
 encrypted=""${ARCHER_ENCRYPTED}""
 encryptionpass=""${ARCHER_ENCRYPTED_PASSWORD}""
 swapsize=""${ARCHER_SWAPSIZE}""

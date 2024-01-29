@@ -10,6 +10,8 @@ if [ ! -d "$(pwd)/scripts" ]; then
     exit 1
 fi
 
+export ARCHER_TEST="TEST"
+
 # Run the first script - prompting user for configuration settings.
 /bin/bash "$(pwd)/scripts/arch-install-00.sh"
 
