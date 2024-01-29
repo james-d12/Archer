@@ -3,22 +3,24 @@
 # Arch Installer By james-d12
 # GitHub Repository: https://github.com/james-d12/arch-installer
 
-restrict_kernel_log_access() { 
+function restrict_kernel_log_access() { 
     echo "kernel.dmesg_restrict = 1" >> /etc/sysctl.d/51-dmesg-restrict.conf 
 }
-increase_user_login_timeout() { 
+
+function increase_user_login_timeout() { 
     echo "auth optional pam_faildelay.so delay=4000000" >> /etc/pam.d/system-login 
 }
-deny_ip_spoofs(){ 
+
+function deny_ip_spoofs(){ 
     printf "order bind, hosts\n multi on" >> /etc/host.conf 
 }
 
-configure_apparmor_and_firejail(){
+function configure_apparmor_and_firejail(){
     command -v firejail > /dev/null && command -v apparmor > /dev/null &&
     firecfg && sudo apparmor_parser -r /etc/apparmor.d/firejail-default
 }
 
-configure_firewall(){
+function configure_firewall(){
     if command -v ufw > /dev/null; then
         sudo ufw limit 22/tcp  
         sudo ufw limit ssh
@@ -33,7 +35,7 @@ configure_firewall(){
     fi
 }
 
-configure_sysctl(){
+function configure_sysctl(){
     if command -v sysctl > /dev/null; then
         sudo sysctl -a
         sudo sysctl -A
@@ -43,7 +45,7 @@ configure_sysctl(){
     fi
 }
 
-configure_fail2ban(){
+function configure_fail2ban(){
     if command -v fail2ban > /dev/null; then
         sudo cp fail2ban.local /etc/fail2ban/
         sudo systemctl enable fail2ban
@@ -51,14 +53,10 @@ configure_fail2ban(){
     fi
 }
 
-harden_security(){
-    restrict_kernel_log_access
-    increase_user_login_timeout
-    deny_ip_spoofs
-    configure_firewall
-    configure_sysctl
-    configure_fail2ban
-    configure_apparmor_and_firejail
-}
-
-harden_security
+restrict_kernel_log_access
+increase_user_login_timeout
+deny_ip_spoofs
+configure_firewall
+configure_sysctl
+configure_fail2ban
+configure_apparmor_and_firejail

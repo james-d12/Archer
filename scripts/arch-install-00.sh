@@ -3,7 +3,7 @@
 # Arch Installer By james-d12
 # GitHub Repository: https://github.com/james-d12/arch-installer
 
-get_user_input(){
+function get_user_input(){
     clear
     PS3='Encrypt Drive?'
     options=("YES" "NO")
@@ -145,65 +145,48 @@ get_user_input(){
     done
     hostname=$(echo "$hostname" | awk '{print tolower($0)}')
     clear
+
+    export ARCHER_DRIVE=${drive}
+    export ARCHER_ENCRYPTED=${encrypted}
+    export ARCHER_ENCRYPTED_PASSWORD=${encryptionpass}
+    export ARCHER_SWAPSIZE=${swapsize}
+    export ARCHER_SYSTEM=${system}
+    export ARCHER_KERNEL=${kernel}
+    export ARCHER_MICROCODE=${microcode}
+    export ARCHER_DESKTOPENVIRONMENT=${desktopenvironment}
+    export ARCHER_USER=${user}
+    export ARCHER_USER_PASSWORD=${userpass}
+    export ARCHER_ROOT_PASSWORD=${rootpass}
+    export ARCHER_LOCALE=${locale}
+    export ARCHER_REGION=${region}
+    export ARCHER_CITY=${city}
+    export ARCHER_HOSTNAME=${hostname}
+    export ARCHER_HOST="127.0.0.1	localhost\n::1		    localhost\n127.0.1.1\n	$hostname.localdomain	$hostname\n"
 }
 
-output_to_config_file(){
-cat <<EOF > "$(pwd)/scripts/arch-config.sh"
-#!/usr/bin/env bash
-drive="${drive}"
-encrypted="${encrypted}"
-encryptionpass="${encryptionpass}"
-swapsize="${swapsize}"
-system="${system}" 
-kernel="${kernel}"
-microcode="${microcode}"
-desktopenvironment="${desktopenvironment}"
-user="${username}"
-userpass="${userpass}"
-rootpass="${rootpass}"
-locale="${locale}"
-region="${region}"
-city="${city}"
-hostname="${hostname}"
-host="
-127.0.0.1	localhost
-::1		    localhost
-127.0.1.1	$hostname.localdomain	$hostname"
-EOF
+function print_details(){
+echo "drive=""${ARCHER_DRIVE}""
+encrypted=""${ARCHER_ENCRYPTED}""
+encryptionpass=""${ARCHER_ENCRYPTED_PASSWORD}""
+swapsize=""${ARCHER_SWAPSIZE}""
+system=""${ARCHER_SYSTEM}"" 
+kernel=""${ARCHER_KERNEL}""
+microcode=""${ARCHER_MICROCODE}""
+desktopenvironment=""${ARCHER_DESKTOPENVIRONMENT}""
+user=""${ARCHER_USER}""
+userpass=""${ARCHER_USER_PASSWORD}""
+rootpass=""${ARCHER_ROOT_PASSWORD}""
+locale=""${ARCHER_LOCALE}""
+region=""${ARCHER_REGION}""
+city=""${ARCHER_CITY}""
+hostname=""${ARCHER_HOSTNAME}"""
 }
 
-print_details(){
-echo "drive=""${drive}""
-encrypted=""${encrypted}""
-encryptionpass=""${encryptionpass}""
-swapsize=""${swapsize}""
-system=""${system}"" 
-kernel=""${kernel}""
-microcode=""${microcode}""
-desktopenvironment=""${desktopenvironment}""
-user=""${username}""
-userpass=""${userpass}""
-rootpass=""${rootpass}""
-locale=""${locale}""
-region=""${region}""
-city=""${city}""
-hostname=""${hostname}"""
-}
-
-check_details(){
-    print_details
-    echo -n "Are these details correct? [Y/n]: "; read -r arecorrect;
-    if [[ "$arecorrect" == "Y" || "$arecorrect" == "y" ]]; then
-        clear
-        output_to_config_file
-    else
-        main 
-    fi 
-}
-
-main(){
-    get_user_input
-    check_details
-}
-
-main 
+print_details
+echo -n "Are these details correct? [Y/n]: "; read -r arecorrect;
+if [[ "$arecorrect" == "Y" || "$arecorrect" == "y" ]]; then
+    clear
+    output_to_config_file
+else
+    main 
+fi 

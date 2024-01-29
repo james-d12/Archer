@@ -3,11 +3,7 @@
 # Arch Installer By james-d12
 # GitHub Repository: https://github.com/james-d12/arch-installer
 
-. "/arch-install-scripts/scripts/resources/desktop"
-
-su "$user"
-
-check_network_connection(){
+function check_network_connection(){
     if ! ping -c 1 -q google.com >&/dev/null; then
         echo -e "You are not connected to the internet, attempting connection solutions....."
         echo -e "Attempting connection via nmtui...."
@@ -28,7 +24,7 @@ pip_packages=()
 git_packages=()
 vscode_packages=()
 
-add_package_to_list(){
+function add_package_to_list(){
     case "$1" in 
         "PACMAN") pacman_packages+=("$2");;
         "AUR") aur_packages+=("$2");;
@@ -38,30 +34,32 @@ add_package_to_list(){
     esac  
 }
 
-warning() { printf "WARN: %s\n" "$1"; }
-error() { printf "ERROR: %s\n" "$1"; exit 1; }
+function warning() { printf "WARN: %s\n" "$1"; }
+function error() { printf "ERROR: %s\n" "$1"; exit 1; }
 
-install_aur_helper(){
+function install_aur_helper(){
     ! command -v git >/dev/null 2>&1 && install_package git
     git clone https://aur.archlinux.org/yay.git
     cd yay && makepkg -si --noconfirm --needed
 }
 
-install_package(){ 
+function install_package(){ 
     sudo pacman -S "$1" --needed --noconfirm 
 }
 
-install_pacman_packages(){
+function install_pacman_packages(){
     sudo pacman -S --noconfirm --needed "${depackages[@]}" || error "Could not install desktop environment packages, as one of the packages is invalid."
     sudo pacman -S --noconfirm --needed "${pacman_packages[@]}" || error "Could not install pacman packages, as one of the packages is invalid."
 }
-install_aur_packages() {
+
+function install_aur_packages() {
     if [ ${#aur_packages[@]} -ne 0 ]; then 
         ! command -v yay >/dev/null 2>&1 && install_aur_helper
         yay -S --batchinstall --cleanafter --noconfirm --needed "${aur_packages[@]}" || error "Could not install AUR packages, as one of the packages is invalid."
     fi 
 }
-install_git_packages(){
+
+function install_git_packages(){
     if [ ${#git_packages[@]} -ne 0 ]; then 
         ! command -v git >/dev/null 2>&1 && install_package git 
         for package in "${git_packages[@]}"; do 
@@ -70,20 +68,22 @@ install_git_packages(){
         done 
     fi 
 }
-install_pip_packages(){
+
+function install_pip_packages(){
     if [ ! ${#pip_packages[@]} -eq 0 ]; then 
         ! command -v python-pip >/dev/null 2>&1 && install_package python-pip 
         pip install "${pip_packages[@]}" || error "Could not install PIP packages, as one of the packages is invalid."
     fi 
 }
-install_vscode_packages(){
+
+function install_vscode_packages(){
     if [ ! ${#vscode_packages[@]} -eq 0 ]; then 
         ! command -v code >/dev/null 2>&1 && install_package code 
         code --install-extension "${vscode_packages[@]}" || error "Could not install VSCode Extensions, as one of the extensions is invalid."
     fi 
 }
 
-install_packages(){
+function install_packages(){
     echo -ne "      Installing Pacman packages:               #                   (0%)\r"
     install_pacman_packages
     echo -e  "      Installing Pacman packages:               ################### (100%)\r"
@@ -101,7 +101,7 @@ install_packages(){
     echo -e  "      Installing VSCODE packages:               ################### (100%)\r"
 }
 
-install_all_packages(){
+function install_all_packages(){
     touch temp.csv; 
     "$(pwd)/scripts/resources/programs.csv" | tr -d " \t\r" > temp.csv
     while IFS=, read -r installer package description; do
@@ -111,14 +111,17 @@ install_all_packages(){
     rm -rf temp.csv
 }
 
-enable_systemd_service() {  
+function enable_systemd_service() {  
     sudo systemctl enable "$1".service >/dev/null 2>&1 
     echo -e "Enabling $1.service.."  
 }
-enable_systemd_services(){
+
+function enable_systemd_services(){
     services=("gdm" "sddm" "lightdm" "NetworkManager" "ufw" "apparmor" "cronie")
     for service in "${services[@]}"; do enable_systemd_service "$service"; done 
 }
+
+su "$user"
 
 check_network_connection
 

@@ -3,15 +3,13 @@
 # Arch Installer By james-d12
 # GitHub Repository: https://github.com/james-d12/arch-installer
 
-. "$(pwd)/scripts/arch-config.sh"
-
-wipe_drive(){
+function wipe_drive(){
   sfdisk --delete /dev/"$drive"
 }
 
-partition_bios(){
-newsize=$((swapsize*2))
-sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk /dev/"$drive"
+function partition_bios(){
+newsize=$((ARCHER_SWAPSIZE*2))
+sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk /dev/"$ARCHER_DRIVE"
     o # clear the in memory partition table
     n # new partition
     p # primary partition
@@ -31,8 +29,8 @@ sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk /dev/"$drive"
 EOF
 }
 
-partition_bios_encrypted(){
-sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk /dev/"$drive"
+function partition_bios_encrypted(){
+sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk /dev/"$ARCHER_DRIVE"
     o # clear the in memory partition table
     n # new partition
     p # primary partition
@@ -52,63 +50,67 @@ sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk /dev/"$drive"
 EOF
 }
 
-partition_uefi(){
-    sgdisk -Z /dev/"$drive" 
-    sgdisk -a 2048 -o /dev/"$drive" 
-    sgdisk -n 1:0:+512M -t 1:ef00 /dev/"$drive" 
-    sgdisk -n 2:0:+"${swapsize}M" -t 2:8200 /dev/"$drive" 
-    sgdisk -n 3:0:0 -t 3:8300 /dev/"$drive"
-}
-partition_uefi_encrypted(){
-    sgdisk -Z /dev/"$drive" 
-    sgdisk -a 2048 -o /dev/"$drive" 
-    sgdisk -n 1:0:+100M -t 1:ef00 /dev/"$drive" 
-    sgdisk -n 2:0:+512M -t 2:8300 /dev/"$drive" 
-    sgdisk -n 3:0:0 -t 3:8300 /dev/"$drive" 
+function partition_uefi(){
+    sgdisk -Z /dev/"$ARCHER_DRIVE" 
+    sgdisk -a 2048 -o /dev/"$ARCHER_DRIVE" 
+    sgdisk -n 1:0:+512M -t 1:ef00 /dev/"$ARCHER_DRIVE" 
+    sgdisk -n 2:0:+"${ARCHER_SWAPSIZE}M" -t 2:8200 /dev/"$ARCHER_DRIVE" 
+    sgdisk -n 3:0:0 -t 3:8300 /dev/"$ARCHER_DRIVE"
 }
 
-format_and_mount_bios() {
-    mkswap -L SWAP /dev/"${drive}1"
-    mkfs.ext4 -L ROOT /dev/"${drive}2"
-    swapon /dev/"${drive}1"
-    mount /dev/"${drive}2" /mnt
+function partition_uefi_encrypted(){
+    sgdisk -Z /dev/"$ARCHER_DRIVE" 
+    sgdisk -a 2048 -o /dev/"$ARCHER_DRIVE" 
+    sgdisk -n 1:0:+100M -t 1:ef00 /dev/"$ARCHER_DRIVE" 
+    sgdisk -n 2:0:+512M -t 2:8300 /dev/"$ARCHER_DRIVE" 
+    sgdisk -n 3:0:0 -t 3:8300 /dev/"$ARCHER_DRIVE" 
 }
-format_and_mount_bios_encrypted() {
+
+function format_and_mount_bios() {
+    mkswap -L SWAP /dev/"${ARCHER_DRIVE}1"
+    mkfs.ext4 -L ROOT /dev/"${ARCHER_DRIVE}2"
+    swapon /dev/"${ARCHER_DRIVE}1"
+    mount /dev/"${ARCHER_DRIVE}2" /mnt
+}
+
+function format_and_mount_bios_encrypted() {
     modprobe dm-crypt && modprobe dm-mod 
-    ( echo "$encryptionpass"; ) | cryptsetup luksFormat -v -s 512 -h sha512 /dev/"${drive}2"
-    ( echo "$encryptionpass"; ) | cryptsetup open /dev/"${drive}2" cr_root
+    ( echo "$ARCHER_ENCRYPTED_PASSWORD"; ) | cryptsetup luksFormat -v -s 512 -h sha512 /dev/"${ARCHER_DRIVE}2"
+    ( echo "$ARCHER_ENCRYPTED_PASSWORD"; ) | cryptsetup open /dev/"${ARCHER_DRIVE}2" cr_root
     mkfs.ext4 -L BOOT /dev/"${drive}1"
     mkfs.ext4 /dev/mapper/cr_root
     mount /dev/mapper/cr_root /mnt
     mkdir -p /mnt/boot
-    mount /dev/"${drive}1" /mnt/boot
+    mount /dev/"${ARCHER_DRIVE}1" /mnt/boot
 }
-format_and_mount_uefi() {
-    mkfs.fat -F32 /dev/"${drive}1"
-    mkswap -L SWAP /dev/"${drive}2"
-    mkfs.ext4 -L ROOT /dev/"${drive}3"
-    swapon /dev/"${drive}2"
-    mount /dev/"${drive}3" /mnt
+
+function format_and_mount_uefi() {
+    mkfs.fat -F32 /dev/"${ARCHER_DRIVE}1"
+    mkswap -L SWAP /dev/"${ARCHER_DRIVE}2"
+    mkfs.ext4 -L ROOT /dev/"${ARCHER_DRIVE}3"
+    swapon /dev/"${ARCHER_DRIVE}2"
+    mount /dev/"${ARCHER_DRIVE}3" /mnt
     mkdir -p /mnt/boot 
     mkdir -p /mnt/boot/efi 
-    mount /dev/"${drive}1" /mnt/boot/efi  
+    mount /dev/"${ARCHER_DRIVE}1" /mnt/boot/efi  
 }
-format_and_mount_uefi_encrypted() {
+
+function format_and_mount_uefi_encrypted() {
     modprobe dm-crypt && modprobe dm-mod 
-    ( echo "$encryptionpass"; ) | cryptsetup luksFormat -v -s 512 -h sha512 /dev/"${drive}3"
-    ( echo "$encryptionpass"; ) | cryptsetup open /dev/"${drive}3" cr_root
-    mkfs.fat -F32 /dev/"${drive}1"
-    mkfs.ext4 -L BOOT /dev/"${drive}2"
+    ( echo "$ARCHER_ENCRYPTED_PASSWORD"; ) | cryptsetup luksFormat -v -s 512 -h sha512 /dev/"${ARCHER_DRIVE}3"
+    ( echo "$ARCHER_ENCRYPTED_PASSWORD"; ) | cryptsetup open /dev/"${ARCHER_DRIVE}3" cr_root
+    mkfs.fat -F32 /dev/"${ARCHER_DRIVE}1"
+    mkfs.ext4 -L BOOT /dev/"${ARCHER_DRIVE}2"
     mkfs.ext4 -L ROOT /dev/mapper/cr_root
     mount /dev/mapper/cr_root /mnt
     mkdir -p /mnt/boot 
-    mount /dev/"${drive}2" /mnt/boot
+    mount /dev/"${ARCHER_DRIVE}2" /mnt/boot
     mkdir -p /mnt/boot/efi 
-    mount /dev/"${drive}1" /mnt/boot/efi
+    mount /dev/"${ARCHER_DRIVE}1" /mnt/boot/efi
 }
 
-format_and_mount(){
-  case "$system $encrypted" in 
+function format_and_mount(){
+  case "$ARCHER_SYSTEM $ARCHER_ENCRYPTED" in 
        "BIOS NO") partition_bios; format_and_mount_bios;;
        "BIOS YES") partition_bios_encrypted; format_and_mount_bios_encrypted;;
        "UEFI NO") partition_uefi; format_and_mount_uefi;;
@@ -116,12 +118,12 @@ format_and_mount(){
   esac 
 }
 
-install_base_packages(){
-  packages=("base" "base-devel" "$kernel" "linux-firmware" "nano" "networkmanager" "wireless_tools" "wpa_supplicant" "netctl" "dialog" "iwd" "dhclient")
+function install_base_packages(){
+  packages=("base" "base-devel" "$ARCHER_KERNEL" "linux-firmware" "nano" "networkmanager" "wireless_tools" "wpa_supplicant" "netctl" "dialog" "iwd" "dhclient")
   echo "Installing Base Packages:"
   for pkg in "${packages[@]}"; do 
     echo -ne "    Installing ""$pkg"": #                     (0%)\r" 
-    pacstrap /mnt "$pkg" >/dev/null 2>&1
+    pacstrap -K /mnt "$pkg" >/dev/null 2>&1
     echo -e  "    Installing ""$pkg"": ##################### (100%)\r" 
   done 
   genfstab -U /mnt >> /mnt/etc/fstab
@@ -132,9 +134,9 @@ copy_files_to_mnt(){
   cp -r ./* /mnt/arch-install-scripts/
 }
 
-echo -ne "Wiping Drive /dev/$drive:                 #                     (0%)\r"
+echo -ne "Wiping Drive /dev/$ARCHER_DRIVE:                 #                     (0%)\r"
 wipe_drive > logs.txt 2>&1
-echo -e  "Wiping Drive /dev/$drive:                 ####################  (100%)\r"
+echo -e  "Wiping Drive /dev/$ARCHER_DRIVE:                 ####################  (100%)\r"
 
 echo -ne "Formating and Mounting Partitions:     #                     (0%)\r"
 format_and_mount >> logs.txt 2>&1

@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-. ./arch-config.sh
-
 case "$desktopenvironment" in
     "gnome") 
         depackages=(
