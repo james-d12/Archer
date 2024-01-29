@@ -166,7 +166,7 @@ function get_user_input(){
     export ARCHER_KERNEL=${kernel}
     export ARCHER_MICROCODE=${microcode}
     export ARCHER_DESKTOPENVIRONMENT=${desktopenvironment}
-    export ARCHER_USER=${user}
+    export ARCHER_USER=${username}
     export ARCHER_USER_PASSWORD=${userpass}
     export ARCHER_ROOT_PASSWORD=${rootpass}
     export ARCHER_LOCALE=${locale}
