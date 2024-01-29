@@ -103,7 +103,7 @@ function install_packages(){
 
 function install_all_packages(){
     touch temp.csv; 
-    "$(pwd)/scripts/resources/programs.csv" | tr -d " \t\r" > temp.csv
+    "$($Home)/arch-install-scripts/scripts/resources/programs.csv" | tr -d " \t\r" > temp.csv
     while IFS=, read -r installer package description; do
         add_package_to_list "$installer" "$package" 
     done < temp.csv; 
@@ -121,7 +121,7 @@ function enable_systemd_services(){
     for service in "${services[@]}"; do enable_systemd_service "$service"; done 
 }
 
-su "$user"
+su "$ARCHER_USER"
 
 check_network_connection
 
