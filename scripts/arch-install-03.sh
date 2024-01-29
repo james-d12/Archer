@@ -123,7 +123,9 @@ function enable_systemd_services(){
 
 su "$ARCHER_USER"
 
+echo -ne "Checking Network:                          #                   (0%)\r"
 check_network_connection
+echo -e "Checking Network:                          #################### (100%)\r"
 
 echo -ne "Installing packages:                          #                   (0%)\r"
 install_all_packages

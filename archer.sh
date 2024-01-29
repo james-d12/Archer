@@ -223,16 +223,17 @@ clear
 
 print_home
 
-# Run the 2nd script which performs pre arch-chrooting tasks like formatting and mounting.
+# Run the 1st script which performs pre arch-chrooting tasks like formatting and mounting.
 /bin/bash "$(pwd)/scripts/arch-install-01.sh"
 
-# Run the 3rd script by chrooting into the mount point /mnt.
+# Run the 2nd script by chrooting into the mount point /mnt.
 arch-chroot /mnt /bin/bash -c "bash arch-install-scripts/scripts/arch-install-02.sh"
 
-home="/home/""$ARCHER_USER"""
+# Run the 3rd script as the newly created user, which installs the packages and desktop environment (if selected).
+arch-chroot /mnt /bin/bash -c "bash /home/$ARCHER_USER/arch-install-scripts/scripts/arch-install-03.sh"
 
 # Run the 4th script as the newly created user, which installs the packages and desktop environment (if selected).
-arch-chroot /mnt /bin/bash -c "bash $home/arch-install-scripts/scripts/arch-install-03.sh"
+arch-chroot /mnt /bin/bash -c "bash /home/$ARCHER_USER/arch-install-scripts/scripts/arch-install-04.sh"
 
 # Cleanup by unmounting all drives.
 umount -R /mnt 

@@ -53,6 +53,8 @@ function configure_fail2ban(){
     fi
 }
 
+su "$ARCHER_USER"
+
 restrict_kernel_log_access
 increase_user_login_timeout
 deny_ip_spoofs
