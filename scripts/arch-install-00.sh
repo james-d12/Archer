@@ -198,7 +198,6 @@ function check_details(){
     print_details
     echo -n "Are these details correct? [Y/n]: "; read arecorrect;
     if [[ $arecorrect == "Y" || $arecorrect == "y" ]]; then
-        output_to_config_file
         return 
     else
         main 
