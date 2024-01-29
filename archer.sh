@@ -218,7 +218,10 @@ fi
 
 main
 
+
 clear
+
+print_home
 
 # Run the 2nd script which performs pre arch-chrooting tasks like formatting and mounting.
 /bin/bash "$(pwd)/scripts/arch-install-01.sh"
