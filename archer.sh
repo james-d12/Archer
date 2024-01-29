@@ -204,6 +204,11 @@ function check_details(){
     fi 
 }
 
+function main(){
+    get_user_input
+    check_details
+}
+
 # If no scripts directory exists then we terminate.
 if [ ! -d "$(pwd)/scripts" ]; then 
     printf "No scripts folder present where the 'arch-installer.sh' script is located. Please reclone the repository using \n
@@ -211,8 +216,7 @@ if [ ! -d "$(pwd)/scripts" ]; then
     exit 1
 fi
 
-get_user_input
-check_details
+main
 
 # Run the first script - prompting user for configuration settings.
 /bin/bash "$(pwd)/scripts/arch-install-00.sh"
