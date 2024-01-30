@@ -176,6 +176,25 @@ function get_user_input(){
     export ARCHER_HOST="127.0.0.1	localhost\n::1		    localhost\n127.0.1.1\n	$hostname.localdomain	$hostname\n"
 }
 
+function default_options() {
+    export ARCHER_DRIVE=sda
+    export ARCHER_ENCRYPTED=YES
+    export ARCHER_ENCRYPTED_PASSWORD=1234
+    export ARCHER_SWAPSIZE=256
+    export ARCHER_SYSTEM=UEFI
+    export ARCHER_KERNEL=linux
+    export ARCHER_MICROCODE=intel-ucode
+    export ARCHER_DESKTOPENVIRONMENT=gnome-minimal
+    export ARCHER_USER=user
+    export ARCHER_USER_PASSWORD=1234
+    export ARCHER_ROOT_PASSWORD=1234
+    export ARCHER_LOCALE=en_GB
+    export ARCHER_REGION=Europe
+    export ARCHER_CITY=London
+    export ARCHER_HOSTNAME=arch-pc
+    export ARCHER_HOST="127.0.0.1	localhost\n::1		    localhost\n127.0.1.1\n	arch-pc.localdomain	arch-pc\n"
+}
+
 function print_details(){
 echo "drive=""${ARCHER_DRIVE}""
 encrypted=""${ARCHER_ENCRYPTED}""
@@ -205,8 +224,10 @@ function check_details(){
 }
 
 function main(){
-    get_user_input
-    check_details
+    #get_user_input
+    #check_details
+
+    default_options
 }
 
 # If no scripts directory exists then we terminate.
