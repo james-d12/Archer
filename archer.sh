@@ -184,7 +184,7 @@ function default_options() {
     export ARCHER_SYSTEM=UEFI
     export ARCHER_KERNEL=linux
     export ARCHER_MICROCODE=intel-ucode
-    export ARCHER_DESKTOPENVIRONMENT=gnome-minimal
+    export ARCHER_DESKTOPENVIRONMENT=gnome
     export ARCHER_USER=user
     export ARCHER_USER_PASSWORD=1234
     export ARCHER_ROOT_PASSWORD=1234
