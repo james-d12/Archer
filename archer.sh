@@ -226,13 +226,13 @@ print_home
 /bin/bash "$(pwd)/scripts/arch-install-01.sh"
 
 # Run the 2nd script by chrooting into the mount point /mnt.
-arch-chroot /mnt /bin/bash -c "bash arch-install-scripts/scripts/arch-install-02.sh"
+arch-chroot /mnt /bin/bash -c "bash /home/$ARCHER_USER/arch-install-scripts/scripts/arch-install-02.sh"
 
 # Run the 3rd script as the newly created user, which installs the packages and desktop environment (if selected).
-arch-chroot /mnt /bin/bash -c "bash /home/$ARCHER_USER/arch-install-scripts/scripts/arch-install-03.sh"
+# arch-chroot /mnt /bin/bash -c "bash /home/$ARCHER_USER/arch-install-scripts/scripts/arch-install-03.sh"
 
 # Run the 4th script as the newly created user, which installs the packages and desktop environment (if selected).
-arch-chroot /mnt /bin/bash -c "bash /home/$ARCHER_USER/arch-install-scripts/scripts/arch-install-04.sh"
+# arch-chroot /mnt /bin/bash -c "bash /home/$ARCHER_USER/arch-install-scripts/scripts/arch-install-04.sh"
 
 # Cleanup by unmounting all drives.
 umount -R /mnt 
