@@ -75,7 +75,7 @@ PACMAN,      ttf-liberation,                        Free Compatible Versions Lik
 #PACMAN,      ttf-roboto,                            Adds Roboto Fonts.
 #PACMAN,      papirus-icon-theme,                    Papirus Icon Theme Set. 
 ,,
-PACMAN,      pulseaudio,                            Audio Controller.
+#PACMAN,      pulseaudio,                            Audio Controller.
 #PACMAN,      pavucontrol,                           GUI Frontend for PulseAudio.
 PACMAN,      firefox,                               Firefox Browser.
 #AUR,         brave-bin,                             Privacy based Chromium Browser.
