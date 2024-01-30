@@ -119,9 +119,8 @@ function install_package(){
 }
 
 function install_pacman_packages(){
-    echo -ne "DE PACKAGES: ${depackages[@]}"
-    sudo pacman -S --noconfirm --needed "${depackages[@]}" || error "Could not install desktop environment packages, as one of the packages is invalid."
     sudo pacman -S --noconfirm --needed "${pacman_packages[@]}" || error "Could not install pacman packages, as one of the packages is invalid."
+    sudo pacman -S --noconfirm --needed "${depackages[@]}" || error "Could not install desktop environment packages, as one of the packages is invalid."
 }
 
 function install_aur_packages() {
