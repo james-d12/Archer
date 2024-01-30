@@ -3,6 +3,8 @@
 # Arch Installer By james-d12
 # GitHub Repository: https://github.com/james-d12/arch-installer
 
+. resources/desktop 
+
 function setup_users(){
     useradd -m -G wheel "$ARCHER_USER" 
     ( echo "$ARCHER_ROOT_PASSWORD"; echo "$ARCHER_ROOT_PASSWORD" ) | passwd
