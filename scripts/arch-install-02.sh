@@ -3,7 +3,7 @@
 # Arch Installer By james-d12
 # GitHub Repository: https://github.com/james-d12/arch-installer
 
-. resources/desktop 
+. /home/$ARCHER_USER/arch-install-scripts/scripts/resources/desktop 
 
 function setup_users(){
     useradd -m -G wheel "$ARCHER_USER" 
