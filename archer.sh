@@ -256,7 +256,7 @@ arch-chroot /mnt /bin/bash -c "bash /home/$ARCHER_USER/arch-install-scripts/scri
 # arch-chroot /mnt /bin/bash -c "bash /home/$ARCHER_USER/arch-install-scripts/scripts/arch-install-04.sh"
 
 # Cleanup by unmounting all drives.
-umount -R /mnt 
+# umount -R /mnt 
 
 # Inform that the script has been completed.
-echo "Script has finished. Please shutdown, remove installation media and reboot."
+# echo "Script has finished. Please shutdown, remove installation media and reboot."
