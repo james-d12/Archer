@@ -130,10 +130,10 @@ function install_base_packages(){
 }
 
 function copy_files_to_mnt(){
-  mkdir -p /home/$ARCHER_USER/arch-install-scripts
-  cp -r ./* /home/$ARCHER_USER/arch-install-scripts/
-  chmod -R 700 /home/$ARCHER_USER/arch-install-scripts
-  chown -R $ARCHER_USER:wheel /home/$ARCHER_USER/arch-install-scripts/
+  mkdir -p /mnt/home/$ARCHER_USER/arch-install-scripts
+  cp -r ./* /mnt/home/$ARCHER_USER/arch-install-scripts
+  chmod -R 700 /mnt/home/$ARCHER_USER/arch-install-scripts
+  chown -R $ARCHER_USER:wheel /mnt/home/$ARCHER_USER/arch-install-scripts/
 }
 
 echo -ne "Wiping Drive /dev/$ARCHER_DRIVE:                 #                     (0%)\r"
