@@ -172,7 +172,7 @@ function install_packages(){
 
 function install_all_packages(){
     touch temp.csv; 
-    "/arch-install-scripts/scripts/resources/programs.csv" | tr -d " \t\r" > temp.csv
+    "/home/$ARCHER_USER/arch-install-scripts/resources/programs.csv" | tr -d " \t\r" > temp.csv
     while IFS=, read -r installer package description; do
         add_package_to_list "$installer" "$package" 
     done < temp.csv; 
