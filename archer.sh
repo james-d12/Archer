@@ -249,14 +249,8 @@ print_home
 # Run the 2nd script by chrooting into the mount point /mnt.
 arch-chroot /mnt /bin/bash -c "bash /home/$ARCHER_USER/arch-install-scripts/scripts/arch-install-02.sh"
 
-# Run the 3rd script as the newly created user, which installs the packages and desktop environment (if selected).
-# arch-chroot /mnt /bin/bash -c "bash /home/$ARCHER_USER/arch-install-scripts/scripts/arch-install-03.sh"
-
-# Run the 4th script as the newly created user, which installs the packages and desktop environment (if selected).
-# arch-chroot /mnt /bin/bash -c "bash /home/$ARCHER_USER/arch-install-scripts/scripts/arch-install-04.sh"
-
 # Cleanup by unmounting all drives.
-# umount -R /mnt 
+umount -R /mnt 
 
 # Inform that the script has been completed.
-# echo "Script has finished. Please shutdown, remove installation media and reboot."
+echo "Script has finished. Please shutdown, remove installation media and reboot."

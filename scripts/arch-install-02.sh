@@ -175,7 +175,8 @@ function install_packages(){
 
 function install_all_packages(){
     while IFS=, read -r installer package description; do
-        add_package_to_list "$installer" "$package" 
+        $package_name = $package | xargs
+        add_package_to_list "$installer" "$package_name" 
     done < "/home/$ARCHER_USER/arch-install-scripts/scripts/resources/programs.csv"; 
     install_packages
 }
