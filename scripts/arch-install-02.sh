@@ -245,9 +245,9 @@ setup_users >> logs.txt 2>&1
 echo -e  "Setting up Users:                      ####################  (100%)\r"
 
 if [ "$ARCHER_ENCRYPTED" == "YES" ]; then
-    echo -ne "Setting up Encrypted Swap File:            #                     (0%)\r"
+    echo -ne "Setting up Encrypted Swap File:        #                     (0%)\r"
     add_encrypted_swap_file >> logs.txt 2>&1
-    echo -e  "Setting up Encrypted Swap File:            ####################  (100%)\r"
+    echo -e  "Setting up Encrypted Swap File:        ####################  (100%)\r"
 fi 
 
 echo -ne "Setting up Localisation:               #                     (0%)\r"
