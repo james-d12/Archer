@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-case "$desktopenvironment" in
+case "$ARCHER_DESKTOPENVIRONMENT" in
     "gnome") 
         depackages=(
             'gnome'
