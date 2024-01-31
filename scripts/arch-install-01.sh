@@ -136,8 +136,7 @@ function format_and_mount(){
 }
 
 function install_base_packages(){
-  packages=("base" "base-devel" "$ARCHER_KERNEL" "linux-firmware" "nano" "networkmanager" "wireless_tools" "wpa_supplicant" "netctl" "dialog" "iwd" "dhclient")
-  pacstrap -K /mnt ${packages[@]} 
+  pacstrap -K /mnt base base-devel $ARCHER_KERNEL linux-firmware nano networkmanager wireless_tools wpa_supplicant netctl dialog iwd dhclient
   genfstab -U /mnt >> /mnt/etc/fstab
 }
 
