@@ -5,7 +5,7 @@
 
 function wipe_drive(){
   # Make sure to unmount existing drives, recursively for all partitions. 
-  umount -A --recursive /mnt
+  umount -A --recursive /dev/$ARCHER_DRIVE
   # Remove all partitions from drive
   sfdisk --delete /dev/"$ARCHER_DRIVE"
   # Sync to ensure changes to disk are synced up properly.
