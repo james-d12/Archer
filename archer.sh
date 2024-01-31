@@ -178,8 +178,8 @@ function get_user_input(){
 
 function default_options() {
     export ARCHER_DRIVE=sda
-    export ARCHER_ENCRYPTED=YES
-    export ARCHER_ENCRYPTED_PASSWORD=1234
+    export ARCHER_ENCRYPTED=NO
+    export ARCHER_ENCRYPTED_PASSWORD=
     export ARCHER_SWAPSIZE=256
     export ARCHER_SYSTEM=UEFI
     export ARCHER_KERNEL=linux

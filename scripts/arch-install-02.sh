@@ -240,25 +240,25 @@ function configure_fail2ban(){
 }
 
 echo -ne "Setting up Users:                      #                     (0%)\r"
-setup_users >> logs.txt 2>&1
+setup_users 
 echo -e  "Setting up Users:                      ####################  (100%)\r"
 
 if [ "$ARCHER_ENCRYPTED" == "YES" ]; then
     echo -ne "Setting up Encrypted Swap File:        #                     (0%)\r"
-    add_encrypted_swap_file >> logs.txt 2>&1
+    add_encrypted_swap_file 
     echo -e  "Setting up Encrypted Swap File:        ####################  (100%)\r"
 fi 
 
 echo -ne "Setting up Localisation:               #                     (0%)\r"
-setup_localisation >> logs.txt 2>&1
+setup_localisation 
 echo -e  "Setting up Localisation:               ####################  (100%)\r"
 
 echo -ne "Setting up Network:                    #                     (0%)\r"
-setup_network >> logs.txt 2>&1
+setup_network 
 echo -e  "Setting up Network:                    ####################  (100%)\r"
 
 echo -ne "Setting up Grub Bootloader:            #                     (0%)\r"
-setup_grub >> logs.txt 2>&1
+setup_grub 
 echo -e  "Setting up Grub Bootloader:            ####################  (100%)\r"
 
 echo -ne "Checking Network:                          #                   (0%)\r"

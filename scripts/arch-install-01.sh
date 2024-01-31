@@ -135,15 +135,15 @@ function copy_files_to_mnt(){
 }
 
 echo -ne "Wiping Drive /dev/$ARCHER_DRIVE:                 #                     (0%)\r"
-wipe_drive > logs.txt 2>&1
+wipe_drive > 1
 echo -e  "Wiping Drive /dev/$ARCHER_DRIVE:                 ####################  (100%)\r"
 
 echo -ne "Formating and Mounting Partitions:     #                     (0%)\r"
-format_and_mount >> logs.txt 2>&1
+format_and_mount 
 echo -e  "Formating and Mounting Partitions:     ####################  (100%)\r"
 
 install_base_packages 
 
 echo -ne "Copying Files to /mnt:                 #                     (0%)\r"
-copy_files_to_mnt >> logs.txt 2>&1
+copy_files_to_mnt 
 echo -e  "Copying Files to /mnt:                 ####################  (100%)\r"
