@@ -237,6 +237,8 @@ if [ ! -d "$(pwd)/scripts" ]; then
     exit 1
 fi
 
+set -e
+
 main
 
 clear
