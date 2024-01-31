@@ -3,6 +3,16 @@
 # Arch Installer By james-d12
 # GitHub Repository: https://github.com/james-d12/arch-installer
 
+function setup() {
+  # Ensure keyring is installed
+  pacman-key --init
+
+  # Mirror Optimisation
+  pacman -S --noconfirm --needed pacman-contrib
+  cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
+  rankmirrors -n 6 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist
+}
+
 function wipe_drive(){
   # Make sure to unmount existing drives, recursively for all partitions. 
   umount -A --recursive /dev/$ARCHER_DRIVE
@@ -144,6 +154,10 @@ function copy_files_to_mnt(){
   mkdir -p /mnt/home/$ARCHER_USER/arch-install-scripts
   cp -r ./* /mnt/home/$ARCHER_USER/arch-install-scripts
 }
+
+echo -ne "Setting up requirements:                #                     (0%)\r"
+setup
+echo -e  "Setting up requirements:                 ####################  (100%)\r"
 
 echo -ne "Wiping Drive /dev/$ARCHER_DRIVE:                 #                     (0%)\r"
 wipe_drive > 1
