@@ -4,6 +4,8 @@
 # GitHub Repository: https://github.com/james-d12/arch-installer
 
 function wipe_drive(){
+  # Make sure to unmount existing drives, recursively for all partitions. 
+  ls /dev/"$ARCHER_DRIVE"?* | xargs -n1 umount -l
   # Remove all partitions from drive
   sfdisk --delete /dev/"$ARCHER_DRIVE"
   # Sync to ensure changes to disk are synced up properly.
