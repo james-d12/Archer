@@ -61,6 +61,7 @@ function partition_uefi(){
     sgdisk -n 1:0:+512M -t 1:ef00 /dev/"$ARCHER_DRIVE" 
     sgdisk -n 2:0:+"${ARCHER_SWAPSIZE}M" -t 2:8200 /dev/"$ARCHER_DRIVE" 
     sgdisk -n 3:0:0 -t 3:8300 /dev/"$ARCHER_DRIVE"
+    sync
 }
 
 function partition_uefi_encrypted(){
@@ -69,6 +70,7 @@ function partition_uefi_encrypted(){
     sgdisk -n 1:0:+100M -t 1:ef00 /dev/"$ARCHER_DRIVE" 
     sgdisk -n 2:0:+512M -t 2:8300 /dev/"$ARCHER_DRIVE" 
     sgdisk -n 3:0:0 -t 3:8300 /dev/"$ARCHER_DRIVE" 
+    sync
 }
 
 function format_and_mount_bios() {
@@ -76,6 +78,7 @@ function format_and_mount_bios() {
     mkfs.ext4 -L ROOT /dev/"${ARCHER_DRIVE}2"
     swapon /dev/"${ARCHER_DRIVE}1"
     mount /dev/"${ARCHER_DRIVE}2" /mnt
+    sync
 }
 
 function format_and_mount_bios_encrypted() {
@@ -87,6 +90,7 @@ function format_and_mount_bios_encrypted() {
     mount /dev/mapper/cr_root /mnt
     mkdir -p /mnt/boot
     mount /dev/"${ARCHER_DRIVE}1" /mnt/boot
+    sync
 }
 
 function format_and_mount_uefi() {
@@ -98,6 +102,7 @@ function format_and_mount_uefi() {
     mkdir -p /mnt/boot 
     mkdir -p /mnt/boot/efi 
     mount /dev/"${ARCHER_DRIVE}1" /mnt/boot/efi  
+    sync
 }
 
 function format_and_mount_uefi_encrypted() {
@@ -112,6 +117,7 @@ function format_and_mount_uefi_encrypted() {
     mount /dev/"${ARCHER_DRIVE}2" /mnt/boot
     mkdir -p /mnt/boot/efi 
     mount /dev/"${ARCHER_DRIVE}1" /mnt/boot/efi
+    sync
 }
 
 function format_and_mount(){
@@ -125,12 +131,7 @@ function format_and_mount(){
 
 function install_base_packages(){
   packages=("base" "base-devel" "$ARCHER_KERNEL" "linux-firmware" "nano" "networkmanager" "wireless_tools" "wpa_supplicant" "netctl" "dialog" "iwd" "dhclient")
-  echo "Installing Base Packages:"
-  for pkg in "${packages[@]}"; do 
-    echo -ne "    Installing ""$pkg"": #                     (0%)\r" 
-    pacstrap -K /mnt "$pkg" >/dev/null 2>&1
-    echo -e  "    Installing ""$pkg"": ##################### (100%)\r" 
-  done 
+  pacstrap -K /mnt ${packages[@]} 
   genfstab -U /mnt >> /mnt/etc/fstab
 }
 
