@@ -249,9 +249,6 @@ if [ "$ARCHER_ENCRYPTED" == "YES" ]; then
     echo -e  "Setting up Encrypted Swap File:        ####################  (100%)\r"
 fi 
 
-# If any command fails stop everything
-set -e
-
 echo -ne "Setting up Localisation:               #                     (0%)\r"
 setup_localisation 
 echo -e  "Setting up Localisation:               ####################  (100%)\r"

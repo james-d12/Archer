@@ -155,9 +155,6 @@ function copy_files_to_mnt(){
   cp -r ./* /mnt/home/$ARCHER_USER/arch-install-scripts
 }
 
-# If any command fails, stop everything
-set -e
-
 echo -ne "Setting up requirements:                #                     (0%)\r"
 setup
 echo -e  "Setting up requirements:                 ####################  (100%)\r"
