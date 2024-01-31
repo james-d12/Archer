@@ -6,6 +6,8 @@
 function wipe_drive(){
   # Make sure to unmount existing drives, recursively for all partitions. 
   umount -A --recursive /dev/$ARCHER_DRIVE
+  # Remove any existing MBR / GPT partition drives
+  sgdisk --zap-all /dev/"$ARCHER_DRIVE"  
   # Remove all partitions from drive
   sfdisk --delete /dev/"$ARCHER_DRIVE"
   # Shred remaining data
