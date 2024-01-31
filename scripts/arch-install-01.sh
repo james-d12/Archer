@@ -8,6 +8,8 @@ function wipe_drive(){
   umount -A --recursive /dev/$ARCHER_DRIVE
   # Remove all partitions from drive
   sfdisk --delete /dev/"$ARCHER_DRIVE"
+  # Shred remaining data
+  shred --verbose --random-source=/dev/urandom --iterations=1 --size=1G /dev/"$ARCHER_DRIVE"
   # Sync to ensure changes to disk are synced up properly.
   sync 
 }
