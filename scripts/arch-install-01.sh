@@ -4,51 +4,58 @@
 # GitHub Repository: https://github.com/james-d12/arch-installer
 
 function wipe_drive(){
+  # Remove all partitions from drive
   sfdisk --delete /dev/"$ARCHER_DRIVE"
+  # Perform quick shred to remove all data
+  shred --verbose --random-source=/dev/urandom --iterations=1 --size=1G /dev/"$ARCHER_DRIVE"
+  # Sync to ensure changes to disk are synced up properly.
+  sync 
 }
 
-function partition_bios(){
-newsize=$((ARCHER_SWAPSIZE*2))
-sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk /dev/"$ARCHER_DRIVE"
-    o # clear the in memory partition table
-    n # new partition
-    p # primary partition
-    1 # partition number 1
-      # default - start at beginning of disk 
-    +$newsize"M" # swap parttion
+function partition_bios() {
+  local newsize=$((ARCHER_SWAPSIZE * 2))
+
+  fdisk /dev/"$ARCHER_DRIVE" <<EOF
+    o # Clear the in-memory partition table
+    n # New partition
+    p # Primary partition
+    1 # Partition number 1
+      # Default - start at the beginning of the disk 
+    +$newsize"M" # Swap partition
     t
-    82
-    n # new partition
-    p # primary partition
-    2 # partion number 2
-      # default, start immediately after preceding partition
-      # default, extend partition to end of disk
-    p # print the in-memory partition table
-    w # write the partition table
-    q # and we're done
+    82 # Set partition type to Linux swap
+    n # New partition
+    p # Primary partition
+    2 # Partition number 2
+      # Default, start immediately after the preceding partition
+      # Default, extend partition to the end of the disk
+    p # Print the in-memory partition table
+    w # Write the partition table
+    q # Quit
 EOF
 }
 
-function partition_bios_encrypted(){
-sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk /dev/"$ARCHER_DRIVE"
-    o # clear the in memory partition table
-    n # new partition
-    p # primary partition
-    1 # partition number 1
-      # default - start at beginning of disk 
-    +512M # 512 MB boot parttion
-    n # new partition
-    p # primary partition
-    2 # partion number 2
-      # default, start immediately after preceding partition
-      # default, extend partition to end of disk
-    a # make a partition bootable
-    1 # bootable partition is partition 1 -- /dev/sda1
-    p # print the in-memory partition table
-    w # write the partition table
-    q # and we're done
+function partition_bios_encrypted() {
+    fdisk /dev/"$ARCHER_DRIVE" <<EOF
+    o # Clear the in-memory partition table
+    n # New partition
+    p # Primary partition
+    1 # Partition number 1
+      # Default - start at the beginning of the disk 
+    +512M # 512 MB boot partition
+    n # New partition
+    p # Primary partition
+    2 # Partition number 2
+      # Default, start immediately after preceding partition
+      # Default, extend partition to the end of the disk
+    a # Make a partition bootable
+    1 # Bootable partition is partition 1 -- /dev/sda1
+    p # Print the in-memory partition table
+    w # Write the partition table
+    q # Quit
 EOF
 }
+
 
 function partition_uefi(){
     sgdisk -Z /dev/"$ARCHER_DRIVE" 
