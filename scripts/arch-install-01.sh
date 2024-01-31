@@ -4,7 +4,7 @@
 # GitHub Repository: https://github.com/james-d12/arch-installer
 
 function wipe_drive(){
-  sfdisk --delete /dev/"$drive"
+  sfdisk --delete /dev/"$ARCHER_DRIVE"
 }
 
 function partition_bios(){
