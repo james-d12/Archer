@@ -43,32 +43,22 @@ PACMAN,      unrar,                                 Unpack rar Files.
 PACMAN,      make,                                  Linux Build Tool.
 PACMAN,      git,                                   Project Management.
 PACMAN,      gcc,                                   C/C++ Compiler.
-#PACMAN,      cmake,                                 Cross Platform Build Tool.
-#PACMAN,      nasm,                                  Assembler.
-#PACMAN,      gdb,                                   C/C++ Debugger.
-#PACMAN,      clang,                                 Clang C/C++ Compiler.
-#PACMAN,      cppcheck,                              Compile-time C++ Checker.
-#PACMAN,      nodejs,                                Node.js.
-#PACMAN,      npm,                                   Node Package Manager.
-#PACMAN,      rust,                                  Rust Package.
-#PACMAN,      ghc,                                   Haskell Compiler.
-#PACMAN,      jdk-openjdk,                           Java SDK.
-#PACMAN,      dotnet-sdk,                            .NET SDK.
-#PACMAN,      mono,                                  Mono For C#.
-#PACMAN,      apache,                                Apache HTTP Web Server.
-#PACMAN,      ruby,                                  Ruby Scripting Language.
-#PACMAN,      ruby-irb,                              Interactive Ruby Shell.
-#PACMAN,      python-pip,                            Python3 PIP.
-#PACMAN,      glfw,                                  OpenGL Library.
-#PACMAN,      glew,                                  OpenGL Library.
+PACMAN,      cmake,                                 Cross Platform Build Tool.
+PACMAN,      nasm,                                  Assembler.
+PACMAN,      gdb,                                   C/C++ Debugger.
+PACMAN,      clang,                                 Clang C/C++ Compiler.
+PACMAN,      cppcheck,                              Compile-time C++ Checker.
+PACMAN,      nodejs,                                Node.js.
+PACMAN,      npm,                                   Node Package Manager.
+PACMAN,      rust,                                  Rust Package.
+PACMAN,      dotnet-sdk,                            .NET SDK.
 ,,
 PACMAN,      openvpn,                               For VPN Connections.
 PACMAN,      ufw,                                   Firewall.
 PACMAN,      gparted,                               Disk Management. 
+PACMAN,      apparmor,                              Security Software.
+PACMAN,      firejail,                              Sandboxing Security Software.
 #PACMAN,      grub-customizer,                       Grub Configurator.
-#PACMAN,      apparmor,                              Security Software.
-#PACMAN,      firejail,                              Sandboxing Security Software.
-#AUR,         hardened-malloc-git,                   A secure version of C's malloc.
 ,,
 PACMAN,      ttf-liberation,                        Free Compatible Versions Like Arial Fonts.
 #PACMAN,      ttf-ubuntu-font-family,                Adds Ubuntu Fonts.
@@ -78,7 +68,6 @@ PACMAN,      ttf-liberation,                        Free Compatible Versions Lik
 #PACMAN,      pulseaudio,                            Audio Controller.
 #PACMAN,      pavucontrol,                           GUI Frontend for PulseAudio.
 PACMAN,      firefox,                               Firefox Browser.
-#AUR,         brave-bin,                             Privacy based Chromium Browser.
 #PACMAN,      discord,                               Communication.
 #PACMAN,      audacity,                              Audio Recorder and Manipulator tool.
 #PACMAN,      code,                                  VSCode Editor. 
@@ -116,48 +105,48 @@ PACMAN,      firefox,                               Firefox Browser.
 #VSCODE,      ryanolsonx.solarized,                  Better Solarized Theme.
 #VSCODE,      emmanuelbeziat.vscode-great-icons,     Icon set.
 ,,
-#PACMAN,      wine-staging,                          Runs Windows Software.
-#PACMAN,      giflib,                                Gaming Utility Library.
-#PACMAN,      lib32-giflib,                          Gaming Utility Library.
-#PACMAN,      libpng,                                Gaming Utility Library.
-#PACMAN,      lib32-libpng,                          Gaming Utility Library. 
-#PACMAN,      libldap,                               Gaming Utility Library. 
-#PACMAN,      lib32-libldap,                         Gaming Utility Library. 
-#PACMAN,      gnutls,                                Gaming Utility Library. 
-#PACMAN,      lib32-gnutls,                          Gaming Utility Library. 
-#PACMAN,      mpg123,                                Gaming Utility Library. 
-#PACMAN,      lib32-mpg123,                          Gaming Utility Library. 
-#PACMAN,      openal,                                Gaming Utility Library. 
-#PACMAN,      lib32-openal,                          Gaming Utility Library. 
-#PACMAN,      v4l-utils,                             Gaming Utility Library. 
-#PACMAN,      lib32-v4l-utils,                       Gaming Utility Library. 
-#PACMAN,      libpulse,                              Gaming Utility Library. 
-#PACMAN,      lib32-libpulse,                        Gaming Utility Library. 
-#PACMAN,      libgpg-error,                          Gaming Utility Library. 
-#PACMAN,      lib32-libgpg-error,                    Gaming Utility Library. 
-#PACMAN,      alsa-plugins,                          Gaming Utility Library. 
-#PACMAN,      lib32-alsa-plugins,                    Gaming Utility Library. 
-#PACMAN,      alsa-lib,                              Gaming Utility Library. 
-#PACMAN,      lib32-alsa-lib,                        Gaming Utility Library. 
-#PACMAN,      libjpeg-turbo,                         Gaming Utility Library. 
-#PACMAN,      lib32-libjpeg-turbo,                   Gaming Utility Library. 
-#PACMAN,      sqlite lib32-sqlite,                   Gaming Utility Library. 
-#PACMAN,      libxcomposite,                         Gaming Utility Library. 
-#PACMAN,      lib32-libxcomposite,                   Gaming Utility Library. 
-#PACMAN,      libxinerama,                           Gaming Utility Library. 
-#PACMAN,      lib32-libgcrypt,                       Gaming Utility Library. 
-#PACMAN,      libgcrypt,                             Gaming Utility Library. 
-#PACMAN,      lib32-libxinerama,                     Gaming Utility Library. 
-#PACMAN,      ncurses,                               Gaming Utility Library. 
-#PACMAN,      lib32-ncurses,                         Gaming Utility Library. 
-#PACMAN,      opencl-icd-loader,                     Gaming Utility Library. 
-#PACMAN,      lib32-opencl-icd-loader,               Gaming Utility Library. 
-#PACMAN,      libxslt lib32-libxslt,                 Gaming Utility Library. 
-#PACMAN,      libva,                                 Gaming Utility Library. 
-#PACMAN,      lib32-libva,                           Gaming Utility Library. 
-#PACMAN,      gtk3,                                  Gaming Utility Library. 
-#PACMAN,      lib32-gtk3,                            Gaming Utility Library. 
-#PACMAN,      gst-plugins-base-libs,                 Gaming Utility Library. 
-#PACMAN,      lib32-gst-plugins-base-libs,           Gaming Utility Library. 
-#PACMAN,      vulkan-icd-loader,                     Gaming Utility Library. 
-#PACMAN,      lib32-vulkan-icd-loader,               Gaming Utility Library.
+PACMAN,      wine-staging,                          Runs Windows Software.
+PACMAN,      giflib,                                Gaming Utility Library.
+PACMAN,      lib32-giflib,                          Gaming Utility Library.
+PACMAN,      libpng,                                Gaming Utility Library.
+PACMAN,      lib32-libpng,                          Gaming Utility Library. 
+PACMAN,      libldap,                               Gaming Utility Library. 
+PACMAN,      lib32-libldap,                         Gaming Utility Library. 
+PACMAN,      gnutls,                                Gaming Utility Library. 
+PACMAN,      lib32-gnutls,                          Gaming Utility Library. 
+PACMAN,      mpg123,                                Gaming Utility Library. 
+PACMAN,      lib32-mpg123,                          Gaming Utility Library. 
+PACMAN,      openal,                                Gaming Utility Library. 
+PACMAN,      lib32-openal,                          Gaming Utility Library. 
+PACMAN,      v4l-utils,                             Gaming Utility Library. 
+PACMAN,      lib32-v4l-utils,                       Gaming Utility Library. 
+PACMAN,      libpulse,                              Gaming Utility Library. 
+PACMAN,      lib32-libpulse,                        Gaming Utility Library. 
+PACMAN,      libgpg-error,                          Gaming Utility Library. 
+PACMAN,      lib32-libgpg-error,                    Gaming Utility Library. 
+PACMAN,      alsa-plugins,                          Gaming Utility Library. 
+PACMAN,      lib32-alsa-plugins,                    Gaming Utility Library. 
+PACMAN,      alsa-lib,                              Gaming Utility Library. 
+PACMAN,      lib32-alsa-lib,                        Gaming Utility Library. 
+PACMAN,      libjpeg-turbo,                         Gaming Utility Library. 
+PACMAN,      lib32-libjpeg-turbo,                   Gaming Utility Library. 
+PACMAN,      sqlite lib32-sqlite,                   Gaming Utility Library. 
+PACMAN,      libxcomposite,                         Gaming Utility Library. 
+PACMAN,      lib32-libxcomposite,                   Gaming Utility Library. 
+PACMAN,      libxinerama,                           Gaming Utility Library. 
+PACMAN,      lib32-libgcrypt,                       Gaming Utility Library. 
+PACMAN,      libgcrypt,                             Gaming Utility Library. 
+PACMAN,      lib32-libxinerama,                     Gaming Utility Library. 
+PACMAN,      ncurses,                               Gaming Utility Library. 
+PACMAN,      lib32-ncurses,                         Gaming Utility Library. 
+PACMAN,      opencl-icd-loader,                     Gaming Utility Library. 
+PACMAN,      lib32-opencl-icd-loader,               Gaming Utility Library. 
+PACMAN,      libxslt lib32-libxslt,                 Gaming Utility Library. 
+PACMAN,      libva,                                 Gaming Utility Library. 
+PACMAN,      lib32-libva,                           Gaming Utility Library. 
+PACMAN,      gtk3,                                  Gaming Utility Library. 
+PACMAN,      lib32-gtk3,                            Gaming Utility Library. 
+PACMAN,      gst-plugins-base-libs,                 Gaming Utility Library. 
+PACMAN,      lib32-gst-plugins-base-libs,           Gaming Utility Library. 
+PACMAN,      vulkan-icd-loader,                     Gaming Utility Library. 
+PACMAN,      lib32-vulkan-icd-loader,               Gaming Utility Library.

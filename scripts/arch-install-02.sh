@@ -179,14 +179,12 @@ function install_all_packages(){
     install_packages
 }
 
-function enable_systemd_service() {  
-    sudo systemctl enable "$1".service >/dev/null 2>&1 
-    echo -e "Enabling $1.service.."  
-}
-
 function enable_systemd_services(){
     services=("gdm" "sddm" "lightdm" "NetworkManager" "ufw" "apparmor" "cronie")
-    for service in "${services[@]}"; do enable_systemd_service "$service"; done 
+    for service in "${services[@]}"; do 
+        echo -e "Enabling $service.service.."  
+        sudo systemctl enable "$service".service
+    done 
 }
 
 function restrict_kernel_log_access() { 
