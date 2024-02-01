@@ -247,10 +247,10 @@ print_home
 /bin/bash "$(pwd)/scripts/arch-install-01.sh"
 
 # Run the 2nd script by chrooting into the mount point /mnt.
-arch-chroot /mnt /bin/bash -c "bash /home/$ARCHER_USER/arch-install-scripts/scripts/arch-install-02.sh"
+# arch-chroot /mnt /bin/bash -c "bash /home/$ARCHER_USER/arch-install-scripts/scripts/arch-install-02.sh"
 
 # Cleanup by unmounting all drives.
-umount -R /mnt 
+# umount -R /mnt 
 
 # Inform that the script has been completed.
 echo "Script has finished. Please shutdown, remove installation media and reboot."

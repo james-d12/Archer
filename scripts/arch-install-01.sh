@@ -4,72 +4,37 @@
 # GitHub Repository: https://github.com/james-d12/arch-installer
 
 function setup() {
-  # Ensure keyring is installed
   pacman-key --init
-
-  # Mirror Optimisation
   pacman -S --noconfirm --needed pacman-contrib
   cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
   rankmirrors -n 6 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist
 }
 
 function wipe_drive(){
-  # Make sure to unmount existing drives, recursively for all partitions. 
   umount -A --recursive /dev/$ARCHER_DRIVE
-  # Remove any existing MBR / GPT partition drives
   sgdisk --zap-all /dev/"$ARCHER_DRIVE"  
-  # Remove all partitions from drive
   sfdisk --delete /dev/"$ARCHER_DRIVE"
-  # Shred remaining data
   shred --verbose --random-source=/dev/urandom --iterations=1 --size=1G /dev/"$ARCHER_DRIVE"
-  # Sync to ensure changes to disk are synced up properly.
   sync 
 }
 
 function partition_bios() {
   local newsize=$((ARCHER_SWAPSIZE * 2))
 
-  fdisk /dev/"$ARCHER_DRIVE" <<EOF
-    o # Clear the in-memory partition table
-    n # New partition
-    p # Primary partition
-    1 # Partition number 1
-      # Default - start at the beginning of the disk 
-    +$newsize"M" # Swap partition
-    t
-    82 # Set partition type to Linux swap
-    n # New partition
-    p # Primary partition
-    2 # Partition number 2
-      # Default, start immediately after the preceding partition
-      # Default, extend partition to the end of the disk
-    p # Print the in-memory partition table
-    w # Write the partition table
-    q # Quit
-EOF
+  parted -s /dev/"$ARCHER_DRIVE" mklabel msdos
+  parted -s /dev/"$ARCHER_DRIVE" mkpart primary linux-swap 0% +"$newsize"M
+  parted -s /dev/"$ARCHER_DRIVE" mkpart primary ext4 "$newsize"M 100%
+  parted -s /dev/"$ARCHER_DRIVE" set 1 boot on
 }
 
 function partition_bios_encrypted() {
-    fdisk /dev/"$ARCHER_DRIVE" <<EOF
-    o # Clear the in-memory partition table
-    n # New partition
-    p # Primary partition
-    1 # Partition number 1
-      # Default - start at the beginning of the disk 
-    +512M # 512 MB boot partition
-    n # New partition
-    p # Primary partition
-    2 # Partition number 2
-      # Default, start immediately after preceding partition
-      # Default, extend partition to the end of the disk
-    a # Make a partition bootable
-    1 # Bootable partition is partition 1 -- /dev/sda1
-    p # Print the in-memory partition table
-    w # Write the partition table
-    q # Quit
-EOF
-}
+  local archer_drive="/dev/$ARCHER_DRIVE"
 
+  parted -s "$archer_drive" mklabel msdos
+  parted -s "$archer_drive" mkpart primary ext2 0% 512M
+  parted -s "$archer_drive" mkpart primary ext2 512M 100%
+  parted -s "$archer_drive" set 1 boot on
+}
 
 function partition_uefi(){
     sgdisk -Z /dev/"$ARCHER_DRIVE" 
