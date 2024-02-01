@@ -20,7 +20,6 @@ function wipe_drive(){
 
 function partition_bios() {
   local newsize=$((ARCHER_SWAPSIZE * 2))
-
   parted -s /dev/"$ARCHER_DRIVE" mklabel msdos
   parted -s /dev/"$ARCHER_DRIVE" mkpart primary linux-swap 0% +"$newsize"M
   parted -s /dev/"$ARCHER_DRIVE" mkpart primary ext4 "$newsize"M 100%
@@ -29,7 +28,6 @@ function partition_bios() {
 
 function partition_bios_encrypted() {
   local archer_drive="/dev/$ARCHER_DRIVE"
-
   parted -s "$archer_drive" mklabel msdos
   parted -s "$archer_drive" mkpart primary ext2 0% 512M
   parted -s "$archer_drive" mkpart primary ext2 512M 100%
@@ -37,76 +35,70 @@ function partition_bios_encrypted() {
 }
 
 function partition_uefi(){
-    sgdisk -Z /dev/"$ARCHER_DRIVE" 
-    sgdisk -a 2048 -o /dev/"$ARCHER_DRIVE" 
-    sgdisk -n 1:0:+512M -t 1:ef00 /dev/"$ARCHER_DRIVE" 
-    sgdisk -n 2:0:+"${ARCHER_SWAPSIZE}M" -t 2:8200 /dev/"$ARCHER_DRIVE" 
-    sgdisk -n 3:0:0 -t 3:8300 /dev/"$ARCHER_DRIVE"
-    sync
+  sgdisk -Z /dev/"$ARCHER_DRIVE" 
+  sgdisk -a 2048 -o /dev/"$ARCHER_DRIVE" 
+  sgdisk -n 1:0:+512M -t 1:ef00 /dev/"$ARCHER_DRIVE" 
+  sgdisk -n 2:0:+"${ARCHER_SWAPSIZE}M" -t 2:8200 /dev/"$ARCHER_DRIVE" 
+  sgdisk -n 3:0:0 -t 3:8300 /dev/"$ARCHER_DRIVE"
 }
 
 function partition_uefi_encrypted(){
-    sgdisk -Z /dev/"$ARCHER_DRIVE" 
-    sgdisk -a 2048 -o /dev/"$ARCHER_DRIVE" 
-    sgdisk -n 1:0:+100M -t 1:ef00 /dev/"$ARCHER_DRIVE" 
-    sgdisk -n 2:0:+512M -t 2:8300 /dev/"$ARCHER_DRIVE" 
-    sgdisk -n 3:0:0 -t 3:8300 /dev/"$ARCHER_DRIVE" 
-    sync
+  sgdisk -Z /dev/"$ARCHER_DRIVE" 
+  sgdisk -a 2048 -o /dev/"$ARCHER_DRIVE" 
+  sgdisk -n 1:0:+100M -t 1:ef00 /dev/"$ARCHER_DRIVE" 
+  sgdisk -n 2:0:+512M -t 2:8300 /dev/"$ARCHER_DRIVE" 
+  sgdisk -n 3:0:0 -t 3:8300 /dev/"$ARCHER_DRIVE"
 }
 
 function format_and_mount_bios() {
-    mkswap -L SWAP /dev/"${ARCHER_DRIVE}1"
-    mkfs.ext4 -L ROOT /dev/"${ARCHER_DRIVE}2"
-    swapon /dev/"${ARCHER_DRIVE}1"
-    mount /dev/"${ARCHER_DRIVE}2" /mnt
-    sync
+  mkswap -L SWAP /dev/"${ARCHER_DRIVE}1"
+  mkfs.ext4 -L ROOT /dev/"${ARCHER_DRIVE}2"
+  swapon /dev/"${ARCHER_DRIVE}1"
+  mount /dev/"${ARCHER_DRIVE}2" /mnt
 }
 
 function format_and_mount_bios_encrypted() {
-    modprobe dm-crypt && modprobe dm-mod 
-    ( echo "$ARCHER_ENCRYPTED_PASSWORD"; ) | cryptsetup luksFormat -v -s 512 -h sha512 /dev/"${ARCHER_DRIVE}2"
-    ( echo "$ARCHER_ENCRYPTED_PASSWORD"; ) | cryptsetup open /dev/"${ARCHER_DRIVE}2" cr_root
-    mkfs.ext4 -L BOOT /dev/"${drive}1"
-    mkfs.ext4 /dev/mapper/cr_root
-    mount /dev/mapper/cr_root /mnt
-    mkdir -p /mnt/boot
-    mount /dev/"${ARCHER_DRIVE}1" /mnt/boot
-    sync
+  modprobe dm-crypt && modprobe dm-mod 
+  ( echo "$ARCHER_ENCRYPTED_PASSWORD"; ) | cryptsetup luksFormat -v -s 512 -h sha512 /dev/"${ARCHER_DRIVE}2"
+  ( echo "$ARCHER_ENCRYPTED_PASSWORD"; ) | cryptsetup open /dev/"${ARCHER_DRIVE}2" cr_root
+  mkfs.ext4 -L BOOT /dev/"${drive}1"
+  mkfs.ext4 /dev/mapper/cr_root
+  mount /dev/mapper/cr_root /mnt
+  mkdir -p /mnt/boot
+  mount /dev/"${ARCHER_DRIVE}1" /mnt/boot
 }
 
 function format_and_mount_uefi() {
-    mkfs.fat -F32 /dev/"${ARCHER_DRIVE}1"
-    mkswap -L SWAP /dev/"${ARCHER_DRIVE}2"
-    mkfs.ext4 -L ROOT /dev/"${ARCHER_DRIVE}3"
-    swapon /dev/"${ARCHER_DRIVE}2"
-    mount /dev/"${ARCHER_DRIVE}3" /mnt
-    mkdir -p /mnt/boot 
-    mkdir -p /mnt/boot/efi 
-    mount /dev/"${ARCHER_DRIVE}1" /mnt/boot/efi  
-    sync
+  mkfs.fat -F32 /dev/"${ARCHER_DRIVE}1"
+  mkswap -L SWAP /dev/"${ARCHER_DRIVE}2"
+  mkfs.ext4 -L ROOT /dev/"${ARCHER_DRIVE}3"
+  swapon /dev/"${ARCHER_DRIVE}2"
+  mount /dev/"${ARCHER_DRIVE}3" /mnt
+  mkdir -p /mnt/boot 
+  mkdir -p /mnt/boot/efi 
+  mount /dev/"${ARCHER_DRIVE}1" /mnt/boot/efi  
 }
 
 function format_and_mount_uefi_encrypted() {
-    modprobe dm-crypt && modprobe dm-mod 
-    ( echo "$ARCHER_ENCRYPTED_PASSWORD"; ) | cryptsetup luksFormat -v -s 512 -h sha512 /dev/"${ARCHER_DRIVE}3"
-    ( echo "$ARCHER_ENCRYPTED_PASSWORD"; ) | cryptsetup open /dev/"${ARCHER_DRIVE}3" cr_root
-    mkfs.fat -F32 /dev/"${ARCHER_DRIVE}1"
-    mkfs.ext4 -L BOOT /dev/"${ARCHER_DRIVE}2"
-    mkfs.ext4 -L ROOT /dev/mapper/cr_root
-    mount /dev/mapper/cr_root /mnt
-    mkdir -p /mnt/boot 
-    mount /dev/"${ARCHER_DRIVE}2" /mnt/boot
-    mkdir -p /mnt/boot/efi 
-    mount /dev/"${ARCHER_DRIVE}1" /mnt/boot/efi
-    sync
+  modprobe dm-crypt && modprobe dm-mod 
+  ( echo "$ARCHER_ENCRYPTED_PASSWORD"; ) | cryptsetup luksFormat -v -s 512 -h sha512 /dev/"${ARCHER_DRIVE}3"
+  ( echo "$ARCHER_ENCRYPTED_PASSWORD"; ) | cryptsetup open /dev/"${ARCHER_DRIVE}3" cr_root
+  mkfs.fat -F32 /dev/"${ARCHER_DRIVE}1"
+  mkfs.ext4 -L BOOT /dev/"${ARCHER_DRIVE}2"
+  mkfs.ext4 -L ROOT /dev/mapper/cr_root
+  mount /dev/mapper/cr_root /mnt
+  mkdir -p /mnt/boot 
+  mount /dev/"${ARCHER_DRIVE}2" /mnt/boot
+  mkdir -p /mnt/boot/efi 
+  mount /dev/"${ARCHER_DRIVE}1" /mnt/boot/efi
 }
 
 function format_and_mount(){
   case "$ARCHER_SYSTEM $ARCHER_ENCRYPTED" in 
-       "BIOS NO") partition_bios; format_and_mount_bios;;
-       "BIOS YES") partition_bios_encrypted; format_and_mount_bios_encrypted;;
-       "UEFI NO") partition_uefi; format_and_mount_uefi;;
-       "UEFI YES") partition_uefi_encrypted; format_and_mount_uefi_encrypted;;
+    "BIOS NO") partition_bios; format_and_mount_bios;;
+    "BIOS YES") partition_bios_encrypted; format_and_mount_bios_encrypted;;
+    "UEFI NO") partition_uefi; format_and_mount_uefi;;
+    "UEFI YES") partition_uefi_encrypted; format_and_mount_uefi_encrypted;;
   esac 
 }
 
