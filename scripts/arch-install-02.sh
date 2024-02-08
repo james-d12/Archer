@@ -89,6 +89,10 @@ function check_network_connection(){
     fi
 }
 
+function check_repositories() {
+    sed -i 's/#[multilib]/[multilib]/' filename
+}
+
 pacman_packages=()
 aur_packages=()
 pip_packages=()
@@ -254,6 +258,11 @@ echo -e  "Setting up Localisation:               ####################  (100%)\r"
 echo -ne "Setting up Network:                    #                     (0%)\r"
 setup_network 
 echo -e  "Setting up Network:                    ####################  (100%)\r"
+
+echo -ne "Setting up Repositories:                    #                     (0%)\r"
+check_repositories
+echo -e  "Setting up Repositories:                    ####################  (100%)\r"
+
 
 echo -ne "Setting up Grub Bootloader:            #                     (0%)\r"
 setup_grub 
