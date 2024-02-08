@@ -117,7 +117,7 @@ setup
 echo -e  "Setting up requirements:                 ####################  (100%)\r"
 
 echo -ne "Wiping Drive /dev/$ARCHER_DRIVE:                 #                     (0%)\r"
-wipe_drive > 1
+wipe_drive 
 echo -e  "Wiping Drive /dev/$ARCHER_DRIVE:                 ####################  (100%)\r"
 
 echo -ne "Formating and Mounting Partitions:     #                     (0%)\r"
