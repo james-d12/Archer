@@ -61,7 +61,7 @@ function format_and_mount_bios_encrypted() {
   modprobe dm-crypt && modprobe dm-mod 
   ( echo "$ARCHER_ENCRYPTED_PASSWORD"; ) | cryptsetup luksFormat -v -s 512 -h sha512 /dev/"${ARCHER_DRIVE}2"
   ( echo "$ARCHER_ENCRYPTED_PASSWORD"; ) | cryptsetup open /dev/"${ARCHER_DRIVE}2" cr_root
-  mkfs.ext4 -L BOOT /dev/"${drive}1"
+  mkfs.ext4 -L BOOT /dev/"${ARCHER_DRIVE}1"
   mkfs.ext4 /dev/mapper/cr_root
   mount /dev/mapper/cr_root /mnt
   mkdir -p /mnt/boot
