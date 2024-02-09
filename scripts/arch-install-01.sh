@@ -27,11 +27,10 @@ function partition_bios() {
 }
 
 function partition_bios_encrypted() {
-  local archer_drive="/dev/$ARCHER_DRIVE"
-  parted -s "$archer_drive" mklabel msdos
-  parted -s "$archer_drive" mkpart primary ext2 0% 512M
-  parted -s "$archer_drive" mkpart primary ext2 512M 100%
-  parted -s "$archer_drive" set 1 boot on
+  parted -s "/dev/$ARCHER_DRIVE" mklabel msdos
+  parted -s "/dev/$ARCHER_DRIVE" mkpart primary ext2 0% 512M
+  parted -s "/dev/$ARCHER_DRIVE" mkpart primary ext2 512M 100%
+  parted -s "/dev/$ARCHER_DRIVE" set 1 boot on
 }
 
 function partition_uefi(){
